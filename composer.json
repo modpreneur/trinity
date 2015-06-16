@@ -1,7 +1,7 @@
 {
     "name": "trinity/framework",
     "description": "Trinity Framework",
-    "type": "bundle",
+    "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
         {
@@ -14,7 +14,24 @@
       "symfony/symfony": "~2"
     },
 
+    "require-dev": {
+      "sensio/generator-bundle": "~2.3"
+    },
+
     "autoload": {
       "classmap": ["FrameworkBundle/"]
+    },
+
+    "repositories": [
+      {"type": "composer", "url": "https://tp.corp.modpreneur.com/repo/private/"},
+      {"type": "composer", "url": "https://tp.corp.modpreneur.com/repo/packagist/"},
+      {"packagist": false}
+    ],
+
+    "minimum-stability": "dev",
+    "extra": {
+      "branch-alias": {
+        "dev-master": "1.0-dev"
+      }
     }
 }
