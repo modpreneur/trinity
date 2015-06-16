@@ -1,0 +1,4 @@
+bundles:
+    - Trinity\Test\ABundle\TrinityTestABundle
+    - BBundle
+    - DBundle

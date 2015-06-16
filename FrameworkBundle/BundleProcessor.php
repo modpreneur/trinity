@@ -10,7 +10,18 @@
     //@todo
     class BundleProcessor
     {
+        private static function endsWith($haystack, $needle) {
+            return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle, $temp) !== FALSE);
+        }
 
+
+
+        /**
+         * Return array [bundles][...]
+         *
+         * @param $ymlPath
+         * @return array
+         */
         private static function parseYML($ymlPath){
             $yml = new Parser();
             $values = $yml->parse(file_get_contents($ymlPath));
@@ -21,6 +32,7 @@
 
 
         /**
+         * @param array $sources
          * @return Finder
          */
         private static function getFinder(array $sources){
@@ -42,9 +54,10 @@
          *
          * Return names of bundle without namespace (File name)
          *
+         * @param $sources
          * @return array
          */
-        private static function getInstalledBundles($ymlDir, $sources){
+        public static function getInstalledBundles($sources){
             $installedBundles = [];
             foreach(self::getFinder($sources) as $file){
                 /** @var $file \Symfony\Component\Finder\SplFileInfo */
@@ -62,7 +75,7 @@
          * @param $ymlPath
          * @return array
          */
-        private static function getActiveBundles($ymlPath){
+        public static function getActivedBundles($ymlPath){
             $activeBundles = [];
             $values = self::parseYML($ymlPath);
 
@@ -78,22 +91,24 @@
         /**
          * Return bundles classes
          * @param $ymlPath
+         * @param $sources
          * @return array
          */
         public static function loadBundles($ymlPath, $sources){
-            return self::prepareBundlesList(self::getActiveBundles($ymlPath), self::getFinder($sources), $ymlPath);
+            return self::prepareBundlesList(self::getActivedBundles($ymlPath), self::getFinder($sources), $ymlPath);
         }
 
 
 
         /**
          * @param $ymlPath
+         * @param $sources
          * @return array [id, name, status]
          */
         public static function getBundleList($ymlPath, $sources){
             $bundles = [];
-            $activeBundles    = self::getActiveBundles($ymlPath);
-            $installedBundles = self::getInstalledBundles($ymlPath, $sources);
+            $activeBundles    = self::getActivedBundles($ymlPath);
+            $installedBundles = self::getInstalledBundles($sources);
 
             $id = 0;
 
@@ -104,7 +119,7 @@
 
                 foreach($activeBundles as $ab){
                     $ex = explode("\\", $ab);
-                    if($ib == $ex[count($ex) - 1] || "Necktie" . $ib == $ex[count($ex) - 1] ){
+                    if( self::endsWith($ex[count($ex) - 1], $ib) ){
                         $status = "Active";
                         $path = $ab;
                     }
@@ -144,9 +159,9 @@
          */
         private static function prepareBundlesList($activeBundles, $finder, $ymlPath){
             $bundles = [];
-            $ac = self::getActiveBundles($ymlPath, $ymlPath);
-            foreach($ac as $b){
-                $bundles[] = new $b();
+            $ac = self::getActivedBundles($ymlPath);
+            foreach($ac as $bundle){
+                $bundles[] = new $bundle();
             }
             return $bundles;
         }

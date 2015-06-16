@@ -11,7 +11,8 @@
     ],
     "require": {
       "php": ">=5.3.3",
-      "symfony/symfony": "~2"
+      "symfony/symfony": "~2",
+        "phpunit/phpunit": "4.7.*"
     },
 
     "require-dev": {
