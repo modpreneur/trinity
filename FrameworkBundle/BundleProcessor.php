@@ -7,16 +7,13 @@
     use Symfony\Component\Yaml\Parser;
 
     // rename
+    //@todo
     class BundleProcessor
     {
-        const ROOT            = __DIR__ . '/../../..';
-        const TRINITY_BUNDLES = self::ROOT . '/trinity/bundles.yml';
-        const SOURCE          = self::ROOT . '/src';
 
-
-        private static function parseYML(){
+        private static function parseYML($ymlPath){
             $yml = new Parser();
-            $values = $yml->parse(file_get_contents(self::TRINITY_BUNDLES));
+            $values = $yml->parse(file_get_contents($ymlPath));
 
             return $values;
         }
@@ -26,13 +23,16 @@
         /**
          * @return Finder
          */
-        private static function getFinder(){
+        private static function getFinder(array $sources){
             $finder     = new Finder();
-            $finder->files()
-                ->in(self::SOURCE . "/Necktie")
-                ->in(self::SOURCE . "/Trinity")
-                ->name('*Bundle.php');
 
+            $finder = $finder->files();
+
+            foreach($sources as $source){
+                $finder = $finder->in($source);
+            }
+
+            $finder->name('*Bundle.php');
             return $finder;
         }
 
@@ -44,9 +44,9 @@
          *
          * @return array
          */
-        private static function getInstalledBundles(){
+        private static function getInstalledBundles($ymlDir, $sources){
             $installedBundles = [];
-            foreach(self::getFinder() as $file){
+            foreach(self::getFinder($sources) as $file){
                 /** @var $file \Symfony\Component\Finder\SplFileInfo */
                 $installedBundles[] = $file->getRelativePath();
             }
@@ -59,11 +59,12 @@
          * Return names of bundle with namespace
          * load from trinity/bundles.yml
          *
+         * @param $ymlPath
          * @return array
          */
-        private static function getActiveBundles(){
+        private static function getActiveBundles($ymlPath){
             $activeBundles = [];
-            $values = self::parseYML();
+            $values = self::parseYML($ymlPath);
 
             if(isset($values["bundles"])){
                 $activeBundles = $values["bundles"];
@@ -76,22 +77,23 @@
 
         /**
          * Return bundles classes
-         *
+         * @param $ymlPath
          * @return array
          */
-        public static function loadBundles(){
-            return self::prepareBundlesList(self::getActiveBundles(), self::getFinder());
+        public static function loadBundles($ymlPath, $sources){
+            return self::prepareBundlesList(self::getActiveBundles($ymlPath), self::getFinder($sources), $ymlPath);
         }
 
 
 
         /**
-         * @return array[id, name, status]
+         * @param $ymlPath
+         * @return array [id, name, status]
          */
-        public static function getBundleList(){
+        public static function getBundleList($ymlPath, $sources){
             $bundles = [];
-            $activeBundles    = self::getActiveBundles();
-            $installedBundles = self::getInstalledBundles();
+            $activeBundles    = self::getActiveBundles($ymlPath);
+            $installedBundles = self::getInstalledBundles($ymlPath, $sources);
 
             $id = 0;
 
@@ -121,26 +123,28 @@
         }
 
 
-        public static function disableBundle($bundlePath){
-            $values  = self::parseYML();
+        public static function disableBundle($bundlePath, $ymlPath){
+            $values  = self::parseYML($ymlPath);
             if(($key = array_search($bundlePath, $values["bundles"])) !== false) {
                 unset($values["bundles"][$key]);
             }
 
             $dumper = new Dumper();
             $dump = $dumper->dump($values, 2);
-            file_put_contents(self::TRINITY_BUNDLES, $dump);
+            file_put_contents($ymlPath, $dump);
         }
+
 
 
         /**
          * @param $activeBundles
          * @param $finder
+         * @param $ymlPath
          * @return array
          */
-        private static function prepareBundlesList($activeBundles, $finder){
+        private static function prepareBundlesList($activeBundles, $finder, $ymlPath){
             $bundles = [];
-            $ac = self::getActiveBundles();
+            $ac = self::getActiveBundles($ymlPath, $ymlPath);
             foreach($ac as $b){
                 $bundles[] = new $b();
             }
@@ -149,14 +153,14 @@
 
 
 
-        public static function activeBundle($bundlePath)
+        public static function activeBundle($bundlePath, $ymlPath)
         {
-            $values  = self::parseYML();
+            $values  = self::parseYML($ymlPath);
             $values["bundles"][] = $bundlePath;
 
             $dumper = new Dumper();
             $dump = $dumper->dump($values, 2);
-            file_put_contents(self::TRINITY_BUNDLES, $dump);
+            file_put_contents($ymlPath, $dump);
         }
 
     }
