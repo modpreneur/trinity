@@ -15,6 +15,7 @@
         /** @var  string */
         public $resource;
 
+        /** @var bool */
         private $loaded = false;
 
 
@@ -31,7 +32,7 @@
         {
 
             if (true === $this->loaded) {
-                throw new \RuntimeException('Do not add the "extra" loader twice');
+                throw new \RuntimeException('Do not add the "extra" loader twice.');
             }
 
             $collection = new RouteCollection();

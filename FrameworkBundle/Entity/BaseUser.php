@@ -2,13 +2,14 @@
 
     namespace Trinity\FrameworkBundle\Entity;
 
+    use Dmishh\Bundle\SettingsBundle\Entity\SettingsOwnerInterface;
     use Doctrine\ORM\Mapping as ORM;
     use FOS\UserBundle\Model\User;
     use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 
 
-    class BaseUser extends User
+    class BaseUser extends User implements SettingsOwnerInterface
     {
         /**
          * @ORM\Id
@@ -119,7 +120,7 @@
          * Set firstName
          *
          * @param string $firstName
-         * @return User
+         * @return $this
          */
         public function setFirstName($firstName)
         {
@@ -146,7 +147,7 @@
          * Set lastName
          *
          * @param string $lastName
-         * @return User
+         * @return $this
          */
         public function setLastName($lastName)
         {
@@ -194,7 +195,7 @@
          * Set phoneNumber
          *
          * @param string $phoneNumber
-         * @return User
+         * @return $this
          */
         public function setPhoneNumber($phoneNumber)
         {
@@ -233,7 +234,7 @@
          * Set website
          *
          * @param string $website
-         * @return User
+         * @return $this
          */
         public function setWebsite($website)
         {
@@ -260,7 +261,7 @@
          * Set avatar
          *
          * @param string $avatar
-         * @return User
+         * @return $this
          */
         public function setAvatar($avatar)
         {
@@ -460,9 +461,21 @@
 
 
 
+        /**
+         * @return string
+         */
         public function __toString()
         {
-            return $this->username;
+            return $this->getFullName();
         }
 
+
+
+        /**
+         * @return int
+         */
+        public function getSettingIdentifier()
+        {
+            return $this->getId();
+        }
     }
