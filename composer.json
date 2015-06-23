@@ -12,7 +12,11 @@
     "require": {
       "php": ">=5.3.3",
       "symfony/symfony": "~2",
-        "phpunit/phpunit": "4.7.*"
+      "phpunit/phpunit": "4.7.*",
+      "dmishh/settings-bundle": "2.0.*@dev",
+      "friendsofsymfony/user-bundle": "dev-master",
+      "knplabs/doctrine-behaviors": "~1.1",
+      "dmishh/settings-bundle": "2.0.*@dev"
     },
 
     "require-dev": {
