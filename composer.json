@@ -14,7 +14,8 @@
       "symfony/symfony": "~2.7",
       "phpunit/phpunit": "4.7.*",
       "friendsofsymfony/user-bundle": "dev-master",
-      "knplabs/doctrine-behaviors": "~1.1"
+      "knplabs/doctrine-behaviors": "~1.1",
+      "dmishh/settings-bundle": "2.0.*@dev"
     },
 
     "require-dev": {
