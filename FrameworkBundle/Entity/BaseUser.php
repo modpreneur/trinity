@@ -184,7 +184,7 @@
             } elseif ($this->lastName) {
                 return $this->lastName;
             } else {
-                return null;
+                return '';
             }
 
         }
@@ -466,7 +466,7 @@
          */
         public function __toString()
         {
-            return $this->getFullName();
+            return $this->username;
         }
 
 
