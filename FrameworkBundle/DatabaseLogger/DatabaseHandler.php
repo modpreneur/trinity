@@ -60,6 +60,7 @@
             }
 
             if ((int)$record['level'] == Logger::ERROR) {
+
                 try {
                     $url = ($this->_container->get("request")->getUri());
                     $ip  = ($this->_container->get("request")->getClientIp());
@@ -77,11 +78,13 @@
                     $created = date('Y-m-d H:i:s');
                     $serverData = $record['extra']['serverData'];
 
+                    $conn->beginTransaction();
+
                     $stmt = $conn->prepare(
                         'INSERT INTO System_log(log, level, serverData, modified, created, url, ip, user_id)
                          VALUES(' . $conn->quote($record['message']) . ', \'' . $record['level'] . '\', ' . $conn->quote($serverData) . ', \'' . $created . '\', \'' . $created . '\', \'' . $url .  '\' , \'' . $ip .  '\' , \'' . $user . '\');');
                     $stmt->execute();
-                    
+
                     if(isset($record['context']['notification']) && isset($record['context']['notificationService']))
                     {
                         $notification = $record['context']['notification'];
@@ -92,12 +95,13 @@
                             throw new \Exception('Service or entity is not valid object in DatabaseHandler');
                         }
 
-                        //TODO: check if is it secure
                         $errorLogId = $conn->lastInsertId();
 
                         //call service, which is responsible for pairing notification and system_log
                         $notificationService->pairLogWithEntity($errorLogId, $notification);
                     }
+
+                    $conn->commit();
 
                 } catch (\Exception $e) {
                     // php logs
