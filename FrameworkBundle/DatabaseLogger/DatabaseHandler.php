@@ -81,6 +81,23 @@
                         'INSERT INTO System_log(log, level, serverData, modified, created, url, ip, user_id)
                          VALUES(' . $conn->quote($record['message']) . ', \'' . $record['level'] . '\', ' . $conn->quote($serverData) . ', \'' . $created . '\', \'' . $created . '\', \'' . $url .  '\' , \'' . $ip .  '\' , \'' . $user . '\');');
                     $stmt->execute();
+                    
+                    if(isset($record['context']['notification']) && isset($record['context']['notificationService']))
+                    {
+                        $notification = $record['context']['notification'];
+                        $notificationService = $record['context']['notificationService'];
+
+                        if(!is_object($notification) || !is_object($notificationService))
+                        {
+                            throw new \Exception('Service or entity is not valid object in DatabaseHandler');
+                        }
+
+                        //TODO: check if is it secure
+                        $errorLogId = $conn->lastInsertId();
+
+                        //call service, which is responsible for pairing notification and system_log
+                        $notificationService->pairLogWithEntity($errorLogId, $notification);
+                    }
 
                 } catch (\Exception $e) {
                     // php logs
