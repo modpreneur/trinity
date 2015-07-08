@@ -23,13 +23,13 @@
     },
 
     "autoload": {
-      "classmap": ["FrameworkBundle/"]
+      "psr-4": {
+        "Trinity\\FrameworkBundle\\": ""
+      }
     },
 
     "repositories": [
-      {"type": "composer", "url": "https://tp.corp.modpreneur.com/repo/private/"},
-      {"type": "composer", "url": "https://tp.corp.modpreneur.com/repo/packagist/"},
-      {"packagist": false}
+      {"type": "composer", "url": "https://tp.corp.modpreneur.com/repo/private/"}
     ],
 
     "minimum-stability": "dev",
