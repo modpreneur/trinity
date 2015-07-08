@@ -23,7 +23,9 @@
     },
 
     "autoload": {
-      "classmap": ["FrameworkBundle/"]
+      "psr-4": {
+        "Trinity\\FrameworkBundle\\" : ""
+      }
     },
 
     "repositories": [
