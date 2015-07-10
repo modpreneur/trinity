@@ -80,7 +80,8 @@
             foreach($a as $item) $aa[] = $item;
             foreach($b as $item) $bb[] = $item;
 
-            $this->assertEquals(json_encode($aa), json_encode($bb));
+
+            $this->assertEquals(json_encode(arsort($aa)), json_encode(arsort($bb)));
         }
 
     }
