@@ -2,7 +2,7 @@
 
 <project name="Necktie" default="build">
     <property name="workspace" value="${basedir}"/>
-    <property name="sourcedir" value="${basedir}/NotificationBundle"/>
+    <property name="sourcedir" value="${basedir}/FrameworkBundle"/>
     <property name="builddir" value="${workspace}/build"/>
 
     <target name="build" depends="prepare,composerget,vendors,lint,phpunit,phpcb,pdepend,phpdoc,phpcpd,phpcs-ci,phpmd"/>
@@ -54,7 +54,7 @@
                 <include name="**/*.php"/>
                 <modified/>
             </fileset>
-            <fileset dir="${basedir}/NotificationBundle/">
+            <fileset dir="${basedir}/FrameworkBundle/">
                 <include name="**/*Test.php"/>
                 <modified/>
             </fileset>
@@ -81,7 +81,7 @@
     <target name="phpmd"
             description="Perform project mess detection using PHPMD and print human readable output. Intended for usage on the command line before committing.">
         <exec executable="phpmd">
-            <arg path="${basedir}/NotificationBundle"/>
+            <arg path="${basedir}/FrameworkBundle"/>
             <arg value="text"/>
             <arg value="${workspace}/phpmd.xml"/>
         </exec>
