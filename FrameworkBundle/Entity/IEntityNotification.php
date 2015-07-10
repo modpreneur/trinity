@@ -1,19 +1,22 @@
 <?php
 
-namespace Trinity\FrameworkBundle\Entity;
-use Necktie\AppBundle\Entity\Client;
+    namespace Trinity\FrameworkBundle\Entity;
 
-
-interface IEntityNotification {
-
-
-    /** @return int */
-    public function getId();
+    use Necktie\AppBundle\Entity\Client;
 
 
 
-    /** @return Client|Client[] */
-    public function getClients();
+    interface IEntityNotification
+    {
 
 
-}
+        /** @return int */
+        public function getId();
+
+
+
+        /** @return Client|Client[] */
+        public function getClients();
+
+
+    }

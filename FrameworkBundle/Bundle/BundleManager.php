@@ -23,6 +23,7 @@
         private $cache;
 
 
+
         function __construct(TraceableEventDispatcher $event_dispatcher, Cache $cache)
         {
             $this->event_dispatcher = $event_dispatcher;
@@ -46,6 +47,7 @@
         }
 
 
+
         /**
          * @param $bundlePath string
          * $bundlePath is Bundle name with namespace
@@ -67,7 +69,8 @@
          *
          * @return array
          */
-        public function getBundleList(){
+        public function getBundleList()
+        {
             return [
                 "Necktie\\AppBundle\\NecktieAppBundle",
                 "Necktie\\ClickBankBundle\\NecktieClickBankBundle",

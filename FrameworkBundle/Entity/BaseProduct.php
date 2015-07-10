@@ -16,9 +16,8 @@
      */
     class BaseProduct
     {
-	    use
-		    ORMBehaviors\Timestampable\Timestampable
-		    ;
+        use
+            ORMBehaviors\Timestampable\Timestampable;
 
         /**
          * @var integer
@@ -97,6 +96,7 @@
 
             return $this;
         }
+
 
 
         /**

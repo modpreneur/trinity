@@ -1,5 +1,7 @@
 <?php
 
-class ABundle {
 
-}
+    class ABundle
+    {
+
+    }

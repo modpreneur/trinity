@@ -1,10 +1,11 @@
 <?php
 
-namespace Trinity\FrameworkBundle\Event;
+    namespace Trinity\FrameworkBundle\Event;
 
 
-class TrinityEvents {
+    class TrinityEvents
+    {
 
-    const STATUS_BUNDLE_EVENT = "trinity.status";
+        const STATUS_BUNDLE_EVENT = "trinity.status";
 
-}
+    }

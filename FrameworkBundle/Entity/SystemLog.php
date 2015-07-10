@@ -2,9 +2,10 @@
 
     namespace Trinity\FrameworkBundle\Entity;
 
-    use Doctrine\ORM\Mapping as ORM;
     use APY\DataGridBundle\Grid\Mapping as GRID;
+    use Doctrine\ORM\Mapping as ORM;
     use Necktie\AppBundle\Entity\User;
+
 
 
     /**

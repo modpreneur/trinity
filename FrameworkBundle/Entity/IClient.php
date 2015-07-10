@@ -1,11 +1,12 @@
 <?php
 
-namespace Trinity\FrameworkBundle\Entity;
+    namespace Trinity\FrameworkBundle\Entity;
 
 
-interface IClient {
+    interface IClient
+    {
 
-    /** @return string */
-    public function getNotifyUrl();
+        /** @return string */
+        public function getNotifyUrl();
 
-}
+    }

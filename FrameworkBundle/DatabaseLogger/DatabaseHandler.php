@@ -63,13 +63,14 @@
 
                 try {
                     $url = ($this->_container->get("request")->getUri());
-                    $ip  = ($this->_container->get("request")->getClientIp());
+                    $ip = ($this->_container->get("request")->getClientIp());
 
                     $token = $this->_container->get("security.token_storage")->getToken();
-                    $user  = NULL;
+                    $user = null;
 
-                    if($token && $token->getUser())
-                        $user  = $token->getUser()->getId();
+                    if ($token && $token->getUser()) {
+                        $user = $token->getUser()->getId();
+                    }
 
                     // Logs are inserted as separate SQL statements, separate to the current transactions that may exist within the entity manager.
                     $em = $this->_container->get('doctrine')->getEntityManager();
@@ -80,18 +81,15 @@
 
                     $conn->beginTransaction();
 
-                    $stmt = $conn->prepare(
-                        'INSERT INTO System_log(log, level, serverData, modified, created, url, ip, user_id)
-                         VALUES(' . $conn->quote($record['message']) . ', \'' . $record['level'] . '\', ' . $conn->quote($serverData) . ', \'' . $created . '\', \'' . $created . '\', \'' . $url .  '\' , \'' . $ip .  '\' , \'' . $user . '\');');
+                    $stmt = $conn->prepare('INSERT INTO System_log(log, level, serverData, modified, created, url, ip, user_id)
+                         VALUES(' . $conn->quote($record['message']) . ', \'' . $record['level'] . '\', ' . $conn->quote($serverData) . ', \'' . $created . '\', \'' . $created . '\', \'' . $url . '\' , \'' . $ip . '\' , \'' . $user . '\');');
                     $stmt->execute();
 
-                    if(isset($record['context']['notification']) && isset($record['context']['notificationService']))
-                    {
+                    if (isset($record['context']['notification']) && isset($record['context']['notificationService'])) {
                         $notification = $record['context']['notification'];
                         $notificationService = $record['context']['notificationService'];
 
-                        if(!is_object($notification) || !is_object($notificationService))
-                        {
+                        if (!is_object($notification) || !is_object($notificationService)) {
                             throw new \Exception('Service or entity is not valid object in DatabaseHandler');
                         }
 

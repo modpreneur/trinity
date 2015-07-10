@@ -1,11 +1,13 @@
 <?php
 
-namespace Trinity\FrameworkBundle;
+    namespace Trinity\FrameworkBundle;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-
-class TrinityFrameworkBundle extends Bundle{
+    use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 
 
-}
+    class TrinityFrameworkBundle extends Bundle
+    {
+
+
+    }
