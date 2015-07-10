@@ -74,9 +74,13 @@
 
         private function assertArray(array $a, array $b)
         {
-            sort($a);
-            sort($b);
-            $this->assertEquals(json_encode($a), json_encode($b));
+            $aa = [];
+            $bb = [];
+
+            foreach($a as $item) $aa[] = $item;
+            foreach($b as $item) $bb[] = $item;
+
+            $this->assertEquals(json_encode($aa), json_encode($bb));
         }
 
     }
