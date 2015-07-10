@@ -25,14 +25,14 @@
     </logging>
 
     <testsuites>
-        <testsuite name="Notification Test Suite">
+        <testsuite name="Framework Test Suite">
             <directory>./FrameworkBundle/Tests/</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>./NotificationBundle</directory>
+            <directory>./FrameworkBundle</directory>
             <exclude>
                 <directory>FrameworkBundle/Tests/</directory>
             </exclude>
