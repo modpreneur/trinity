@@ -68,7 +68,7 @@
                     $token = $this->_container->get("security.token_storage")->getToken();
                     $user = null;
 
-                    if ($token && $token->getUser()) {
+                    if($token && $token->getUser() && !(is_string($token->getUser()))) {
                         $user = $token->getUser()->getId();
                     }
 
