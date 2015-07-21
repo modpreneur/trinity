@@ -27,7 +27,7 @@
         public function removeCache($rename = false)
         {
             if ($rename) {
-                rename($this->cacheDir, $this->cacheDir . "-" . date("Y-m-d_H:i:s"));
+                rename($this->cacheDir, $this->cacheDir."-".date("Y-m-d_H:i:s"));
             } else {
                 $this->rrmdir($this->cacheDir);
             }
@@ -46,10 +46,10 @@
                 $objects = scandir($dir);
                 foreach ($objects as $object) {
                     if ($object != "." && $object != "..") {
-                        if (filetype($dir . DIRECTORY_SEPARATOR . $object) == "dir") {
-                            $this->rrmdir($dir . DIRECTORY_SEPARATOR . $object);
+                        if (filetype($dir.DIRECTORY_SEPARATOR.$object) == "dir") {
+                            $this->rrmdir($dir.DIRECTORY_SEPARATOR.$object);
                         } else {
-                            unlink($dir . DIRECTORY_SEPARATOR . $object);
+                            unlink($dir.DIRECTORY_SEPARATOR.$object);
                         }
                     }
                 }

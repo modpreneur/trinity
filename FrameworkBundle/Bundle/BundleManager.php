@@ -78,7 +78,7 @@
                 "Necktie\\FOSUserFixBundle\\NecktieFOSUserFixBundle",
                 "Necktie\\SSOBundle\\NecktieSSOBundle",
                 "Necktie\\NotificationBundle\\NecktieNotificationBundle",
-                "Necktie\\AdminBundle\\NecktieAdminBundle"
+                "Necktie\\AdminBundle\\NecktieAdminBundle",
             ];
         }
 

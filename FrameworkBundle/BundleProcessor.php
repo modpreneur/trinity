@@ -15,8 +15,11 @@
     {
         private static function endsWith($haystack, $needle)
         {
-            return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos($haystack, $needle,
-                    $temp) !== false);
+            return $needle === "" || (($temp = strlen($haystack) - strlen($needle)) >= 0 && strpos(
+                    $haystack,
+                    $needle,
+                    $temp
+                ) !== false);
         }
 
 
@@ -52,6 +55,7 @@
             }
 
             $finder->name('*Bundle.php');
+
             return $finder;
         }
 
@@ -71,6 +75,7 @@
                 /** @var $file \Symfony\Component\Finder\SplFileInfo */
                 $installedBundles[] = $file->getRelativePath();
             }
+
             return $installedBundles;
         }
 
@@ -109,8 +114,11 @@
             $cache = new PhpFileCache($cacheDir);
 
             if (!$cache->contains("bundles")) {
-                $loadedBundles = self::prepareBundlesList(self::getActivedBundles($ymlPath), self::getFinder($sources),
-                    $ymlPath);
+                $loadedBundles = self::prepareBundlesList(
+                    self::getActivedBundles($ymlPath),
+                    self::getFinder($sources),
+                    $ymlPath
+                );
                 $cache->save("bundles", $loadedBundles);
             } else {
                 $loadedBundles = $cache->fetch("bundles");
@@ -158,7 +166,7 @@
                     "path" => $path,
                     "name" => $ib,
                     "status" => $status,
-                    "active" => ($status == "Active")
+                    "active" => ($status == "Active"),
                 ];
             }
 
@@ -194,6 +202,7 @@
             foreach ($ac as $bundle) {
                 $bundles[] = $bundle; // edit
             }
+
             return $bundles;
         }
 

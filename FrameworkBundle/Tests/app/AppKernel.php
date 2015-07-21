@@ -13,7 +13,7 @@
             return array(
                 new Braincrafted\Bundle\TestingBundle\BraincraftedTestingBundle($this),
                 new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
-                new \Trinity\FrameworkBundle\TrinityFrameworkBundle()
+                new \Trinity\FrameworkBundle\TrinityFrameworkBundle(),
             );
         }
 
@@ -21,7 +21,7 @@
 
         public function registerContainerConfiguration(LoaderInterface $loader)
         {
-            $loader->load(__DIR__ . '/config.yml');
+            $loader->load(__DIR__.'/config.yml');
         }
 
 
@@ -31,7 +31,7 @@
          */
         public function getCacheDir()
         {
-            return sys_get_temp_dir() . '/./cache';
+            return sys_get_temp_dir().'/./cache';
         }
 
 
@@ -41,6 +41,6 @@
          */
         public function getLogDir()
         {
-            return sys_get_temp_dir() . '/./logs';
+            return sys_get_temp_dir().'/./logs';
         }
     }

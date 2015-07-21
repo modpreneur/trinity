@@ -37,7 +37,7 @@
 
             $collection = new RouteCollection();
 
-            $resource = "@" . $this->resource;
+            $resource = "@".$this->resource;
             $type = $this->type;
             $importedRoutes = $this->import($resource, $type);
 

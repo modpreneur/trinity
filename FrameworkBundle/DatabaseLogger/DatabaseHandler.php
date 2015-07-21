@@ -49,17 +49,18 @@
          */
         protected function write(array $record)
         {
-            // Ensure the doctrine channel is ignored (unless its greater than a warning error), otherwise you will create an infinite loop, as doctrine like to log.. a lot..
             if ('doctrine' == $record['channel']) {
-
                 if ((int)$record['level'] >= Logger::WARNING) {
                     error_log($record['message']);
                 }
-
                 return;
             }
 
             if ((int)$record['level'] == Logger::ERROR) {
+
+                $em = $this->_container->get('doctrine')->getEntityManager();
+                $conn = $em->getConnection();
+                $conn->beginTransaction();
 
                 try {
                     $url = ($this->_container->get("request")->getUri());
@@ -72,18 +73,27 @@
                         $user = $token->getUser()->getId();
                     }
 
-                    // Logs are inserted as separate SQL statements, separate to the current transactions that may exist within the entity manager.
-                    $em = $this->_container->get('doctrine')->getEntityManager();
-                    $conn = $em->getConnection();
-
                     $created = date('Y-m-d H:i:s');
                     $serverData = $record['extra']['serverData'];
 
                     $conn->beginTransaction();
+                    $stmt = $conn->prepare("INSERT INTO system_log(log, level, serverData, modified, created, url, ip, user_id)
+                                            VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+                                            RETURNING id;
+                                           ");
 
-                    $stmt = $conn->prepare('INSERT INTO System_log(log, level, serverData, modified, created, url, ip, user_id)
-                         VALUES(' . $conn->quote($record['message']) . ', \'' . $record['level'] . '\', ' . $conn->quote($serverData) . ', \'' . $created . '\', \'' . $created . '\', \'' . $url . '\' , \'' . $ip . '\' , \'' . $user . '\');');
+                    $stmt->bindValue(1, $conn->quote($record['message']));
+                    $stmt->bindValue(2, $record['level']);
+                    $stmt->bindValue(3, $conn->quote($serverData));
+                    $stmt->bindValue(4, $created);
+                    $stmt->bindValue(5, $created);
+                    $stmt->bindValue(6, $url);
+                    $stmt->bindValue(7, $ip);
+                    $stmt->bindValue(8, $user);
+
                     $stmt->execute();
+                    $conn->commit();
+                    $row = $stmt->fetch();
 
                     if (isset($record['context']['notification']) && isset($record['context']['notificationService'])) {
                         $notification = $record['context']['notification'];
@@ -93,15 +103,18 @@
                             throw new \Exception('Service or entity is not valid object in DatabaseHandler');
                         }
 
-                        $errorLogId = $conn->lastInsertId();
+                        if(!isset($row["id"])){
+                            throw new \Exception("No error id.");
+                        }
 
-                        //call service, which is responsible for pairing notification and system_log
-                        $notificationService->pairLogWithEntity($errorLogId, $notification);
+                        $notificationService->pairLogWithEntity($row["id"], $notification);
                     }
 
                     $conn->commit();
 
                 } catch (\Exception $e) {
+                    $conn->rollBack();
+
                     // php logs
                     error_log($record['message']);
                     error_log($e->getMessage());

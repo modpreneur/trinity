@@ -293,6 +293,7 @@
         public function setPublic($public)
         {
             $this->public = $public;
+
             return $this;
         }
 
