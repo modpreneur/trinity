@@ -18,8 +18,10 @@
     class SystemLog
     {
         /**
+         * @var integer
+         *
+         * @ORM\Column(type="integer", options={"default": "nextval('system_log_id_seq')"})
          * @ORM\Id
-         * @ORM\Column(type="integer")
          * @ORM\GeneratedValue(strategy="AUTO")
          */
         private $id;
