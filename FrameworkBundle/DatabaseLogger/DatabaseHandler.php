@@ -56,7 +56,7 @@
                 return;
             }
 
-            if ((int)$record['level'] == Logger::ERROR) {
+            if ((int)$record['level'] >= Logger::ERROR) {
 
                 $em = $this->_container->get('doctrine')->getManager();
                 $conn = $em->getConnection();
