@@ -58,7 +58,7 @@
 
             if ((int)$record['level'] == Logger::ERROR) {
 
-                $em = $this->_container->get('doctrine')->getEntityManager();
+                $em = $this->_container->get('doctrine')->getManager();
                 $conn = $em->getConnection();
                 $conn->beginTransaction();
 
