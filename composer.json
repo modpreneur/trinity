@@ -11,7 +11,6 @@
     ],
     "require": {
       "php": ">=5.6.6",
-      "trinity/annotations" : "0.0.*",
       "symfony/symfony": "~2.7",
       "friendsofsymfony/user-bundle": "dev-master",
       "knplabs/doctrine-behaviors": "~1.1",
