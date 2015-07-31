@@ -26,6 +26,7 @@
 
     "autoload": {
       "classmap": ["FrameworkBundle/"]
+
     },
 
     "repositories": [
