@@ -1,29 +1,22 @@
 <?php
 
-    namespace Trinity\FrameworkBundle\Event;
+namespace Trinity\FrameworkBundle\Event;
 
-    use Symfony\Component\EventDispatcher\Event;
-
-
+use Symfony\Component\EventDispatcher\Event;
 
     class StatusBundleEvent extends Event
     {
-
         /** @var  string */
         protected $state;
 
         /** @var  string */
         protected $name;
 
-
-
-        function __construct($state, $name)
+        public function __construct($state, $name)
         {
             $this->state = $state;
             $this->name = $name;
         }
-
-
 
         /**
          * @return string
@@ -33,8 +26,6 @@
             return $this->state;
         }
 
-
-
         /**
          * @return string
          */
@@ -42,5 +33,4 @@
         {
             return $this->name;
         }
-
     }

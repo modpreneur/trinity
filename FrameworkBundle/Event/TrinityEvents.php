@@ -1,11 +1,8 @@
 <?php
 
-    namespace Trinity\FrameworkBundle\Event;
+namespace Trinity\FrameworkBundle\Event;
 
-
-    class TrinityEvents
-    {
-
-        const STATUS_BUNDLE_EVENT = "trinity.status";
-
-    }
+class TrinityEvents
+{
+    const STATUS_BUNDLE_EVENT = 'trinity.status';
+}
