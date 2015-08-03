@@ -9,12 +9,12 @@ namespace Trinity\FrameworkBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Session.
+ * Class Sessions.
  *
  * @ORM\Entity()
- * @ORM\Table(name="session")
+ * @ORM\Table(name="sessions")
  */
-class Session
+class Sessions
 {
     /**
      * @var int
