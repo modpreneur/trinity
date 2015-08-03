@@ -10,9 +10,6 @@ use FOS\UserBundle\Model\User;
 /**
  * Class BaseUser.
  *
- * @ORM\Entity()
- * @ORM\Table(name="base_user")
- * @InheritanceType("SINGLE_TABLE")
  */
 class BaseUser extends User implements SettingsOwnerInterface
 {
