@@ -4,6 +4,7 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use Dmishh\Bundle\SettingsBundle\Entity\SettingsOwnerInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\InheritanceType;
 use FOS\UserBundle\Model\User;
 
 /**
@@ -11,6 +12,7 @@ use FOS\UserBundle\Model\User;
  *
  * @ORM\Entity()
  * @ORM\Table(name="base_user")
+ * @InheritanceType("SINGLE_TABLE")
  */
 class BaseUser extends User implements SettingsOwnerInterface
 {
