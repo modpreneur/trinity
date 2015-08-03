@@ -1,15 +1,12 @@
 <?php
 
-    namespace Trinity\FrameworkBundle\Entity;
+namespace Trinity\FrameworkBundle\Entity;
 
-    use APY\DataGridBundle\Grid\Mapping as GRID;
+use APY\DataGridBundle\Grid\Mapping as GRID;
     use Doctrine\ORM\Mapping as ORM;
     use Necktie\AppBundle\Entity\User;
 
-
-
     /**
-     *
      * @GRID\Source(columns="id, url, log, created, ip")
      *
      * @ORM\Entity(repositoryClass="Trinity\FrameworkBundle\Entity\SystemLogRepository")
@@ -18,7 +15,7 @@
     class SystemLog
     {
         /**
-         * @var integer
+         * @var int
          *
          * @ORM\Column(type="integer", options={"default": "nextval('system_log_id_seq')"})
          * @ORM\Id
@@ -61,18 +58,13 @@
          */
         private $ip;
 
-
         /**
+         * @var BaseUser
          *
-         * @var User
-         *
-         * @ORM\ManyToOne(targetEntity="Necktie\AppBundle\Entity\User")
+         * @ORM\ManyToOne(targetEntity="Trinity\FrameworkBundle\Entity\BaseUser")
          * @ORM\JoinColumn(referencedColumnName="id", nullable=true, onDelete="SET NULL")
-         *
          */
         private $user;
-
-
 
         /**
          * @ORM\PreUpdate
@@ -81,8 +73,6 @@
         {
             $this->modified = new \DateTime();
         }
-
-
 
         /**
          * @ORM\PrePersist
@@ -94,24 +84,21 @@
             $this->created = new \DateTime();
         }
 
-
-
         /**
-         * Get id
+         * Get id.
          *
-         * @return integer
+         * @return int
          */
         public function getId()
         {
             return $this->id;
         }
 
-
-
         /**
-         * Set log
+         * Set log.
          *
          * @param string $log
+         *
          * @return SystemLog
          */
         public function setLog($log)
@@ -121,10 +108,8 @@
             return $this;
         }
 
-
-
         /**
-         * Get log
+         * Get log.
          *
          * @return string
          */
@@ -133,12 +118,11 @@
             return $this->log;
         }
 
-
-
         /**
-         * Set serverData
+         * Set serverData.
          *
          * @param string $serverData
+         *
          * @return SystemLog
          */
         public function setServerData($serverData)
@@ -148,10 +132,8 @@
             return $this;
         }
 
-
-
         /**
-         * Get serverData
+         * Get serverData.
          *
          * @return string
          */
@@ -160,12 +142,11 @@
             return $this->serverData;
         }
 
-
-
         /**
-         * Set level
+         * Set level.
          *
          * @param string $level
+         *
          * @return SystemLog
          */
         public function setLevel($level)
@@ -175,10 +156,8 @@
             return $this;
         }
 
-
-
         /**
-         * Get level
+         * Get level.
          *
          * @return string
          */
@@ -187,12 +166,11 @@
             return $this->level;
         }
 
-
-
         /**
-         * Set modified
+         * Set modified.
          *
          * @param \DateTime $modified
+         *
          * @return SystemLog
          */
         public function setModified($modified)
@@ -202,10 +180,8 @@
             return $this;
         }
 
-
-
         /**
-         * Get modified
+         * Get modified.
          *
          * @return \DateTime
          */
@@ -214,12 +190,11 @@
             return $this->modified;
         }
 
-
-
         /**
-         * Set created
+         * Set created.
          *
          * @param \DateTime $created
+         *
          * @return SystemLog
          */
         public function setCreated($created)
@@ -229,10 +204,8 @@
             return $this;
         }
 
-
-
         /**
-         * Get created
+         * Get created.
          *
          * @return \DateTime
          */
@@ -240,8 +213,6 @@
         {
             return $this->created;
         }
-
-
 
         /**
          * @return mixed
@@ -251,8 +222,6 @@
             return $this->url;
         }
 
-
-
         /**
          * @param mixed $url
          */
@@ -260,8 +229,6 @@
         {
             $this->url = $url;
         }
-
-
 
         /**
          * @return mixed
@@ -271,8 +238,6 @@
             return $this->ip;
         }
 
-
-
         /**
          * @param mixed $ip
          */
@@ -280,8 +245,6 @@
         {
             $this->ip = $ip;
         }
-
-
 
         /**
          * @return User
@@ -291,8 +254,6 @@
             return $this->user;
         }
 
-
-
         /**
          * @param User $user
          */
@@ -300,5 +261,4 @@
         {
             $this->user = $user;
         }
-
     }

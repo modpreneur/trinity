@@ -1,3 +1,0 @@
-- menu register - how?
-  - 1 navigation = 1 service with tag
-

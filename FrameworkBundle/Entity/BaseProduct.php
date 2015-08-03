@@ -1,38 +1,30 @@
 <?php
 
-    namespace Trinity\FrameworkBundle\Entity;
 
-    use Doctrine\ORM\Mapping as ORM;
-    use JMS\Serializer\Annotation\SerializedName;
+namespace Trinity\FrameworkBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
     use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-    use Trinity\FrameworkBundle\Notification\Annotations as Notify;
-
-
 
     /**
-     * BaseProduct
-     *
-     *
+     * BaseProduct.
      */
     class BaseProduct
     {
-        use
-            ORMBehaviors\Timestampable\Timestampable;
+        use ORMBehaviors\Timestampable\Timestampable;
 
         /**
-         * @var integer
+         * @var int
          *
          * @ORM\Column(type="integer")
          * @ORM\Id
          * @ORM\GeneratedValue(strategy="AUTO")
-         *
          */
         protected $id;
 
         /**
          * @var string Name of the product
          * @ORM\Column(type="string", unique=true)
-         *
          */
         protected $name;
 
@@ -42,25 +34,21 @@
          */
         protected $description;
 
-
-
         /**
-         * Get id
+         * Get id.
          *
-         * @return integer
-         *
+         * @return int
          */
         public function getId()
         {
             return $this->id;
         }
 
-
-
         /**
-         * Set name
+         * Set name.
          *
          * @param string $name
+         *
          * @return BaseProduct
          */
         public function setName($name)
@@ -70,10 +58,8 @@
             return $this;
         }
 
-
-
         /**
-         * Get name
+         * Get name.
          *
          * @return string
          */
@@ -82,12 +68,11 @@
             return $this->name;
         }
 
-
-
         /**
-         * Set description
+         * Set description.
          *
          * @param string $description
+         *
          * @return BaseProduct
          */
         public function setDescription($description)
@@ -97,10 +82,8 @@
             return $this;
         }
 
-
-
         /**
-         * Get description
+         * Get description.
          *
          * @return string
          */
@@ -109,11 +92,8 @@
             return $this->description;
         }
 
-
-
         public function __toString()
         {
-            return (string)$this->getName();
+            return (string) $this->getName();
         }
-
     }

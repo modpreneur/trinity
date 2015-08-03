@@ -1,10 +1,7 @@
 <?php
 
-    namespace Trinity\FrameworkBundle\Entity;
+namespace Trinity\FrameworkBundle\Entity;
 
-
-    class FrameworkClient
-    {
-
-
-    }
+class FrameworkClient
+{
+}
