@@ -6,11 +6,8 @@ use Dmishh\Bundle\SettingsBundle\Entity\SettingsOwnerInterface;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User;
 
-
-
 /**
- * Class BaseUser
- * @package Trinity\FrameworkBundle\Entity
+ * Class BaseUser.
  *
  * @ORM\Entity()
  * @ORM\Table(name="base_user")
@@ -96,16 +93,12 @@ class BaseUser extends User implements SettingsOwnerInterface
      */
     protected $postalCode;
 
-
-
     public function __construct()
     {
         parent::__construct();
         $this->roles = array('ROLE_USER');
         $this->enabled = true;
     }
-
-
 
     /**
      * Set firstName.
@@ -121,8 +114,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this;
     }
 
-
-
     /**
      * Get firstName.
      *
@@ -132,8 +123,6 @@ class BaseUser extends User implements SettingsOwnerInterface
     {
         return $this->firstName;
     }
-
-
 
     /**
      * Set lastName.
@@ -149,8 +138,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this;
     }
 
-
-
     /**
      * Get lastName.
      *
@@ -160,8 +147,6 @@ class BaseUser extends User implements SettingsOwnerInterface
     {
         return $this->lastName;
     }
-
-
 
     /**
      * Get fullName.
@@ -181,8 +166,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         }
     }
 
-
-
     /**
      * Set phoneNumber.
      *
@@ -197,8 +180,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this;
     }
 
-
-
     /**
      * Get phoneNumber.
      *
@@ -209,8 +190,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this->phoneNumber;
     }
 
-
-
     /**
      * Get id.
      *
@@ -220,8 +199,6 @@ class BaseUser extends User implements SettingsOwnerInterface
     {
         return $this->id;
     }
-
-
 
     /**
      * Set website.
@@ -237,8 +214,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this;
     }
 
-
-
     /**
      * Get website.
      *
@@ -248,8 +223,6 @@ class BaseUser extends User implements SettingsOwnerInterface
     {
         return $this->website;
     }
-
-
 
     /**
      * Set avatar.
@@ -265,8 +238,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this;
     }
 
-
-
     /**
      * Get avatar.
      *
@@ -276,8 +247,6 @@ class BaseUser extends User implements SettingsOwnerInterface
     {
         return $this->avatar;
     }
-
-
 
     /**
      * Set public.
@@ -293,8 +262,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this;
     }
 
-
-
     /**
      * Get public.
      *
@@ -305,8 +272,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this->public;
     }
 
-
-
     /**
      * Is Admin.
      *
@@ -316,8 +281,6 @@ class BaseUser extends User implements SettingsOwnerInterface
     {
         return $this->hasRole('ROLE_ADMIN');
     }
-
-
 
     /**
      * Set Admin.
@@ -337,8 +300,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this;
     }
 
-
-
     /**
      * @param string $addressLine1
      */
@@ -346,8 +307,6 @@ class BaseUser extends User implements SettingsOwnerInterface
     {
         $this->addressLine1 = $addressLine1;
     }
-
-
 
     /**
      * @return string
@@ -357,8 +316,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this->addressLine1;
     }
 
-
-
     /**
      * @param string $addressLine2
      */
@@ -366,8 +323,6 @@ class BaseUser extends User implements SettingsOwnerInterface
     {
         $this->addressLine2 = $addressLine2;
     }
-
-
 
     /**
      * @return string
@@ -377,8 +332,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this->addressLine2;
     }
 
-
-
     /**
      * @param string $city
      */
@@ -386,8 +339,6 @@ class BaseUser extends User implements SettingsOwnerInterface
     {
         $this->city = $city;
     }
-
-
 
     /**
      * @return string
@@ -397,8 +348,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this->city;
     }
 
-
-
     /**
      * @param string $country
      */
@@ -406,8 +355,6 @@ class BaseUser extends User implements SettingsOwnerInterface
     {
         $this->country = $country;
     }
-
-
 
     /**
      * @return string
@@ -417,8 +364,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this->country;
     }
 
-
-
     /**
      * @param string $postalCode
      */
@@ -426,8 +371,6 @@ class BaseUser extends User implements SettingsOwnerInterface
     {
         $this->postalCode = $postalCode;
     }
-
-
 
     /**
      * @return string
@@ -437,8 +380,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this->postalCode;
     }
 
-
-
     /**
      * @param string $region
      */
@@ -446,8 +387,6 @@ class BaseUser extends User implements SettingsOwnerInterface
     {
         $this->region = $region;
     }
-
-
 
     /**
      * @return string
@@ -457,8 +396,6 @@ class BaseUser extends User implements SettingsOwnerInterface
         return $this->region;
     }
 
-
-
     /**
      * @return string
      */
@@ -466,8 +403,6 @@ class BaseUser extends User implements SettingsOwnerInterface
     {
         return $this->username;
     }
-
-
 
     /**
      * @return int

@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Trinity project.
  */
@@ -8,15 +9,13 @@ namespace Trinity\FrameworkBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Session
- * @package Trinity\FrameworkBundle\Entity
+ * Class Session.
  *
  * @ORM\Entity()
  * @ORM\Table(name="session")
  */
 class Session
 {
-
     /**
      * @var int
      *
@@ -39,5 +38,4 @@ class Session
      * @ORM\Column(type="integer")
      */
     private $sess_lifetime;
-
 }

@@ -1,8 +1,9 @@
 <?php
-    $loader = require __DIR__.'/../../../vendor/autoload.php';
 
-    use Doctrine\Common\Annotations\AnnotationRegistry;
+$loader = require __DIR__.'/../../../vendor/autoload.php';
 
-    AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
+use Doctrine\Common\Annotations\AnnotationRegistry;
 
-    require __DIR__.'/AppKernel.php';
+AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
+
+require __DIR__.'/AppKernel.php';

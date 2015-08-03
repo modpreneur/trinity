@@ -1,6 +1,6 @@
 <?php
 
 
-    class DBundle
-    {
-    }
+class DBundle
+{
+}

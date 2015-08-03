@@ -3,11 +3,11 @@
 namespace Trinity\FrameworkBundle\Bundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-    use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-    class TrinityBundle extends Bundle
+class TrinityBundle extends Bundle
+{
+    public function build(ContainerBuilder $container)
     {
-        public function build(ContainerBuilder $container)
-        {
-        }
     }
+}

@@ -4,11 +4,11 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use Necktie\AppBundle\Entity\Client;
 
-    interface IEntityNotification
-    {
-        /** @return int */
-        public function getId();
+interface IEntityNotification
+{
+    /** @return int */
+    public function getId();
 
-        /** @return Client|Client[] */
-        public function getClients();
-    }
+    /** @return Client|Client[] */
+    public function getClients();
+}
