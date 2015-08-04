@@ -4,14 +4,8 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\ORM\Mapping as ORM;
-use Necktie\AppBundle\Entity\User;
 
-/**
- * @GRID\Source(columns="id, url, log, created, ip")
- *
- * @ORM\Entity(repositoryClass="Trinity\FrameworkBundle\Entity\SystemLogRepository")
- * @ORM\Table(name="System_log")
- */
+/** @ORM\MappedSuperclass */
 class SystemLog
 {
     /**
@@ -21,50 +15,43 @@ class SystemLog
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $log;
+    protected $log;
 
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $serverData;
+    protected $serverData;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $level;
+    protected $level;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $modified;
+    protected $modified;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $created;
+    protected $created;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $url;
+    protected $url;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
      */
-    private $ip;
+    protected $ip;
 
-    /**
-     * @var BaseUser
-     *
-     * @ORM\ManyToOne(targetEntity="Trinity\FrameworkBundle\Entity\BaseUser")
-     * @ORM\JoinColumn(referencedColumnName="id", nullable=true, onDelete="SET NULL")
-     */
-    private $user;
 
     /**
      * @ORM\PreUpdate
@@ -244,21 +231,5 @@ class SystemLog
     public function setIp($ip)
     {
         $this->ip = $ip;
-    }
-
-    /**
-     * @return User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * @param User $user
-     */
-    public function setUser($user)
-    {
-        $this->user = $user;
     }
 }
