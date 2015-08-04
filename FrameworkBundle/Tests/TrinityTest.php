@@ -1,13 +1,18 @@
 <?php
 
+/*
+ * This file is part of the Trinity project.
+ */
+
+namespace Trinity\FrameworkBundle\Tests;
 
 /**
- * Class TrinityTest
+ * Class TrinityTest.
  */
-class TrinityTest extends \Braincrafted\Bundle\TestingBundle\Test\WebTestCase
+class TrinityTest extends BaseTest
 {
-    public function testEmptyTest(){
-        $this->assertTrue(TRUE);
+    public function testEmptyTest()
+    {
+        $this->assertTrue(true);
     }
-
 }

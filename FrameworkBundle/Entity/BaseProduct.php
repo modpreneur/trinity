@@ -1,12 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Trinity project.
+ */
+
 namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
 /**
- * BaseProduct.
+ * Class BaseProduct.
  */
 class BaseProduct
 {
@@ -91,6 +95,9 @@ class BaseProduct
         return $this->description;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return (string) $this->getName();

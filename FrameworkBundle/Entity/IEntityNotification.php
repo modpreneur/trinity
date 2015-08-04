@@ -1,14 +1,19 @@
 <?php
 
+/*
+ * This file is part of the Trinity project.
+ */
+
 namespace Trinity\FrameworkBundle\Entity;
 
-use Necktie\AppBundle\Entity\Client;
-
+/**
+ * Interface IEntityNotification.
+ */
 interface IEntityNotification
 {
     /** @return int */
     public function getId();
 
-    /** @return Client|Client[] */
+    /** @return IClient|IClient[] */
     public function getClients();
 }

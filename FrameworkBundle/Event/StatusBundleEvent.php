@@ -1,9 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Trinity project.
+ */
+
 namespace Trinity\FrameworkBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 
+/**
+ * Class StatusBundleEvent.
+ */
 class StatusBundleEvent extends Event
 {
     /** @var  string */

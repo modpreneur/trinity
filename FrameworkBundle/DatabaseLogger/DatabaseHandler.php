@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * This file is part of the Trinity project.
+ */
+
 namespace Trinity\FrameworkBundle\DatabaseLogger;
 
 use Monolog\Handler\AbstractProcessingHandler;
@@ -17,8 +21,6 @@ class DatabaseHandler extends AbstractProcessingHandler
     /**
      * @param int     $level  The minimum logging level at which this handler will be triggered
      * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
-     *
-     * @internal param string $stream
      */
     public function __construct($level = Logger::DEBUG, $bubble = true)
     {
@@ -34,7 +36,7 @@ class DatabaseHandler extends AbstractProcessingHandler
     }
 
     /**
-     * {@inheritdoc}
+     * @param array $record
      */
     protected function write(array $record)
     {

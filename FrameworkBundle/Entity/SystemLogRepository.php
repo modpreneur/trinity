@@ -1,9 +1,16 @@
 <?php
 
+/*
+ * This file is part of the Trinity project.
+ */
+
 namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
+/**
+ * Class SystemLogRepository.
+ */
 class SystemLogRepository extends EntityRepository
 {
     /**
@@ -24,6 +31,9 @@ class SystemLogRepository extends EntityRepository
         return $q->getResult();
     }
 
+    /**
+     * @return array
+     */
     public function getLast()
     {
         return $this->findBy([], ['created' => 'DESC'], 10);

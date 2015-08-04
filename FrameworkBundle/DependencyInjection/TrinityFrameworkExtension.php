@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * This file is part of the Trinity project.
+ */
+
 namespace Trinity\FrameworkBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;

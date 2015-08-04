@@ -1,8 +1,11 @@
 <?php
 
+/*
+ * This file is part of the Trinity project.
+ */
+
 namespace Trinity\FrameworkBundle\Entity;
 
-use APY\DataGridBundle\Grid\Mapping as GRID;
 use Doctrine\ORM\Mapping as ORM;
 
 /** @ORM\MappedSuperclass */
@@ -51,7 +54,6 @@ class SystemLog
      * @ORM\Column(type="string", length=50, nullable=true)
      */
     protected $ip;
-
 
     /**
      * @ORM\PreUpdate
