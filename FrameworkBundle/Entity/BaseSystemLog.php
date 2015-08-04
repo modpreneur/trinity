@@ -8,15 +8,17 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+
 /** @ORM\MappedSuperclass */
-class SystemLog
+class BaseSystemLog
 {
     /**
      * @var int
      *
-     * @ORM\Column(type="integer", options={"default": "nextval('system_log_id_seq')"})
+     * @ORM\Column(type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     protected $id;
 
@@ -55,6 +57,8 @@ class SystemLog
      */
     protected $ip;
 
+
+
     /**
      * @ORM\PreUpdate
      */
@@ -62,6 +66,8 @@ class SystemLog
     {
         $this->modified = new \DateTime();
     }
+
+
 
     /**
      * @ORM\PrePersist
@@ -73,6 +79,8 @@ class SystemLog
         $this->created = new \DateTime();
     }
 
+
+
     /**
      * Get id.
      *
@@ -83,12 +91,14 @@ class SystemLog
         return $this->id;
     }
 
+
+
     /**
      * Set log.
      *
      * @param string $log
      *
-     * @return SystemLog
+     * @return BaseSystemLog
      */
     public function setLog($log)
     {
@@ -96,6 +106,8 @@ class SystemLog
 
         return $this;
     }
+
+
 
     /**
      * Get log.
@@ -107,12 +119,14 @@ class SystemLog
         return $this->log;
     }
 
+
+
     /**
      * Set serverData.
      *
      * @param string $serverData
      *
-     * @return SystemLog
+     * @return BaseSystemLog
      */
     public function setServerData($serverData)
     {
@@ -120,6 +134,8 @@ class SystemLog
 
         return $this;
     }
+
+
 
     /**
      * Get serverData.
@@ -131,12 +147,14 @@ class SystemLog
         return $this->serverData;
     }
 
+
+
     /**
      * Set level.
      *
      * @param string $level
      *
-     * @return SystemLog
+     * @return BaseSystemLog
      */
     public function setLevel($level)
     {
@@ -144,6 +162,8 @@ class SystemLog
 
         return $this;
     }
+
+
 
     /**
      * Get level.
@@ -155,12 +175,14 @@ class SystemLog
         return $this->level;
     }
 
+
+
     /**
      * Set modified.
      *
      * @param \DateTime $modified
      *
-     * @return SystemLog
+     * @return BaseSystemLog
      */
     public function setModified($modified)
     {
@@ -168,6 +190,8 @@ class SystemLog
 
         return $this;
     }
+
+
 
     /**
      * Get modified.
@@ -179,12 +203,14 @@ class SystemLog
         return $this->modified;
     }
 
+
+
     /**
      * Set created.
      *
      * @param \DateTime $created
      *
-     * @return SystemLog
+     * @return BaseSystemLog
      */
     public function setCreated($created)
     {
@@ -192,6 +218,8 @@ class SystemLog
 
         return $this;
     }
+
+
 
     /**
      * Get created.
@@ -203,6 +231,8 @@ class SystemLog
         return $this->created;
     }
 
+
+
     /**
      * @return mixed
      */
@@ -210,6 +240,8 @@ class SystemLog
     {
         return $this->url;
     }
+
+
 
     /**
      * @param mixed $url
@@ -219,6 +251,8 @@ class SystemLog
         $this->url = $url;
     }
 
+
+
     /**
      * @return mixed
      */
@@ -226,6 +260,8 @@ class SystemLog
     {
         return $this->ip;
     }
+
+
 
     /**
      * @param mixed $ip

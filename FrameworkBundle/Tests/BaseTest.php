@@ -9,6 +9,8 @@ namespace Trinity\FrameworkBundle\Tests;
 use Braincrafted\Bundle\TestingBundle\Test\WebTestCase;
 use ReflectionClass;
 
+
+
 /**
  * Class BaseTest.
  */
@@ -16,7 +18,7 @@ abstract class BaseTest extends WebTestCase
 {
     /**
      * @param string|object $class
-     * @param string        $name
+     * @param string $name
      *
      * @return \ReflectionMethod
      */
@@ -28,6 +30,8 @@ abstract class BaseTest extends WebTestCase
 
         return $method;
     }
+
+
 
     /**
      * @param object $class

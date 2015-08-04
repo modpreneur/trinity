@@ -14,6 +14,8 @@ interface IEntityNotification
     /** @return int */
     public function getId();
 
+
+
     /** @return IClient|IClient[] */
     public function getClients();
 }

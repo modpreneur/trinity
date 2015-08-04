@@ -9,6 +9,8 @@ namespace Trinity\FrameworkBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
+
+
 /**
  * Class BaseProduct.
  */
@@ -37,6 +39,8 @@ class BaseProduct
      */
     protected $description;
 
+
+
     /**
      * Get id.
      *
@@ -46,6 +50,8 @@ class BaseProduct
     {
         return $this->id;
     }
+
+
 
     /**
      * Set name.
@@ -61,6 +67,8 @@ class BaseProduct
         return $this;
     }
 
+
+
     /**
      * Get name.
      *
@@ -70,6 +78,8 @@ class BaseProduct
     {
         return $this->name;
     }
+
+
 
     /**
      * Set description.
@@ -85,6 +95,8 @@ class BaseProduct
         return $this;
     }
 
+
+
     /**
      * Get description.
      *
@@ -95,11 +107,13 @@ class BaseProduct
         return $this->description;
     }
 
+
+
     /**
      * @return string
      */
     public function __toString()
     {
-        return (string) $this->getName();
+        return (string)$this->getName();
     }
 }

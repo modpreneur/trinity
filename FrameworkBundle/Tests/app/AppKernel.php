@@ -7,6 +7,8 @@
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
+
+
 /**
  * Class AppKernel.
  */
@@ -22,6 +24,8 @@ class AppKernel extends Kernel
         );
     }
 
+
+
     /**
      * @param LoaderInterface $loader
      */
@@ -30,6 +34,8 @@ class AppKernel extends Kernel
         $loader->load(__DIR__.'/config.yml');
     }
 
+
+
     /**
      * @return string
      */
@@ -37,6 +43,8 @@ class AppKernel extends Kernel
     {
         return sys_get_temp_dir().'/./cache';
     }
+
+
 
     /**
      * @return string

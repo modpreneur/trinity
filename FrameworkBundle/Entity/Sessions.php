@@ -8,6 +8,8 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
+
 /**
  * Class Sessions.
  *
@@ -39,6 +41,8 @@ class Sessions
      */
     protected $sess_lifetime;
 
+
+
     /**
      * @return int
      */
@@ -46,6 +50,8 @@ class Sessions
     {
         return $this->sess_id;
     }
+
+
 
     /**
      * @param int $sess_id
@@ -55,6 +61,8 @@ class Sessions
         $this->sess_id = $sess_id;
     }
 
+
+
     /**
      * @return mixed
      */
@@ -62,6 +70,8 @@ class Sessions
     {
         return $this->sess_data;
     }
+
+
 
     /**
      * @param mixed $sess_data
@@ -71,6 +81,8 @@ class Sessions
         $this->sess_data = $sess_data;
     }
 
+
+
     /**
      * @return mixed
      */
@@ -78,6 +90,8 @@ class Sessions
     {
         return $this->sess_time;
     }
+
+
 
     /**
      * @param mixed $sess_time
@@ -87,6 +101,8 @@ class Sessions
         $this->sess_time = $sess_time;
     }
 
+
+
     /**
      * @return mixed
      */
@@ -94,6 +110,8 @@ class Sessions
     {
         return $this->sess_lifetime;
     }
+
+
 
     /**
      * @param mixed $sess_lifetime

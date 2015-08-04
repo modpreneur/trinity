@@ -8,6 +8,8 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
+
+
 /**
  * Class SystemLogRepository.
  */
@@ -30,6 +32,8 @@ class SystemLogRepository extends EntityRepository
         //Return result
         return $q->getResult();
     }
+
+
 
     /**
      * @return array

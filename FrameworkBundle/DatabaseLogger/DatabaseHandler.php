@@ -10,22 +10,29 @@ use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+
+
 /**
- * Stores to database.
+ * Class DatabaseHandler
+ * @package Trinity\FrameworkBundle\DatabaseLogger
  */
 class DatabaseHandler extends AbstractProcessingHandler
 {
     /** @var  ContainerInterface */
     protected $_container;
 
+
+
     /**
-     * @param int     $level  The minimum logging level at which this handler will be triggered
+     * @param int $level The minimum logging level at which this handler will be triggered
      * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
      */
     public function __construct($level = Logger::DEBUG, $bubble = true)
     {
         parent::__construct($level, $bubble);
     }
+
+
 
     /**
      * @param $container
@@ -35,20 +42,22 @@ class DatabaseHandler extends AbstractProcessingHandler
         $this->_container = $container;
     }
 
+
+
     /**
      * @param array $record
      */
     protected function write(array $record)
     {
         if ('doctrine' == $record['channel']) {
-            if ((int) $record['level'] >= Logger::WARNING) {
+            if ((int)$record['level'] >= Logger::WARNING) {
                 error_log($record['message']);
             }
 
             return;
         }
 
-        if ((int) $record['level'] >= Logger::ERROR) {
+        if ((int)$record['level'] >= Logger::ERROR) {
             $em = $this->_container->get('doctrine')->getManager();
             $conn = $em->getConnection();
             $conn->beginTransaction();
