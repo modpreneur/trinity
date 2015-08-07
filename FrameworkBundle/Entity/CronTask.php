@@ -1,9 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: IVO
- * Date: 3.8.2015
- * Time: 14:49
+/*
+ * This file is part of the Trinity project.
  */
 
 namespace Trinity\FrameworkBundle\Entity;

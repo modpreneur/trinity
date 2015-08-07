@@ -1,9 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: IVO
- * Date: 3.8.2015
- * Time: 16:03
+/*
+ * This file is part of the Trinity project.
  */
 
 namespace Trinity\FrameworkBundle\Entity;
@@ -14,7 +11,7 @@ class CronTaskRepository extends EntityRepository
 {
 
     /**
-     * Get array of all CronTasks with Processingtime is null.
+     * Get array of all CronTasks with processingtime is null.
      *
      * @return CronTask[]
      */
@@ -31,9 +28,9 @@ class CronTaskRepository extends EntityRepository
     /**
      * Get array of all CronTasks where command is command.
      *
-     * @param int $command
+     * @param array $command
      *
-     * @return array
+     * @return CronTask
      */
     public function findByCommand($command)
     {
