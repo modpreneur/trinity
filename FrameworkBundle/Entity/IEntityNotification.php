@@ -12,10 +12,10 @@ namespace Trinity\FrameworkBundle\Entity;
 interface IEntityNotification
 {
     /** @return int */
-    public function getId();
+    public function getId ();
 
 
 
     /** @return IClient|IClient[] */
-    public function getClients();
+    public function getClients ();
 }

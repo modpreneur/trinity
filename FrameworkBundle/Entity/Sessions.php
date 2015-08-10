@@ -8,8 +8,6 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
-
 /**
  * Class Sessions.
  *
@@ -46,7 +44,7 @@ class Sessions
     /**
      * @return int
      */
-    public function getSessId()
+    public function getSessId ()
     {
         return $this->sess_id;
     }
@@ -56,7 +54,7 @@ class Sessions
     /**
      * @param int $sess_id
      */
-    public function setSessId($sess_id)
+    public function setSessId ($sess_id)
     {
         $this->sess_id = $sess_id;
     }
@@ -66,7 +64,7 @@ class Sessions
     /**
      * @return mixed
      */
-    public function getSessData()
+    public function getSessData ()
     {
         return $this->sess_data;
     }
@@ -76,7 +74,7 @@ class Sessions
     /**
      * @param mixed $sess_data
      */
-    public function setSessData($sess_data)
+    public function setSessData ($sess_data)
     {
         $this->sess_data = $sess_data;
     }
@@ -86,7 +84,7 @@ class Sessions
     /**
      * @return mixed
      */
-    public function getSessTime()
+    public function getSessTime ()
     {
         return $this->sess_time;
     }
@@ -96,7 +94,7 @@ class Sessions
     /**
      * @param mixed $sess_time
      */
-    public function setSessTime($sess_time)
+    public function setSessTime ($sess_time)
     {
         $this->sess_time = $sess_time;
     }
@@ -106,7 +104,7 @@ class Sessions
     /**
      * @return mixed
      */
-    public function getSessLifetime()
+    public function getSessLifetime ()
     {
         return $this->sess_lifetime;
     }
@@ -116,7 +114,7 @@ class Sessions
     /**
      * @param mixed $sess_lifetime
      */
-    public function setSessLifetime($sess_lifetime)
+    public function setSessLifetime ($sess_lifetime)
     {
         $this->sess_lifetime = $sess_lifetime;
     }
