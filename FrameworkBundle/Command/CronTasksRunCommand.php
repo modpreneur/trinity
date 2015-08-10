@@ -1,7 +1,9 @@
 <?php
+
 /*
  * This file is part of the Trinity project.
  */
+
 namespace Trinity\FrameworkBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -11,8 +13,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Trinity\FrameworkBundle\Entity\CronTask;
 
 /**
- * Class CronTasksRunCommand
- * @package Trinity\FrameworkBundle\Command
+ * Class CronTasksRunCommand.
  */
 class CronTasksRunCommand extends ContainerAwareCommand
 {
@@ -20,7 +21,8 @@ class CronTasksRunCommand extends ContainerAwareCommand
     private $output;
 
 
-    protected function configure()
+
+    protected function configure ()
     {
         $this
             ->setName('crontasks:run')
@@ -28,13 +30,14 @@ class CronTasksRunCommand extends ContainerAwareCommand
     }
 
 
+
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
      *
-     * @return int|null|void
+     * @return void
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute (InputInterface $input, OutputInterface $output)
     {
         $output->writeln('<comment>Running Cron Tasks...</comment>');
         $this->output = $output;
@@ -51,21 +54,21 @@ class CronTasksRunCommand extends ContainerAwareCommand
                 foreach ($cronTasks as $cronTask) {
                     $command = $cronTask->getCommand();
                     foreach ($command as $key => $value) {
-                        if($value !== null)$output->writeln(sprintf('Executing command: <comment>'.$value.'</comment>'));
+                        if ($value !== null) {
+                            $output->writeln(sprintf('Executing command: <comment>' . $value . '</comment>'));
+                        }
                     }
                     // Run the command
                     $returnCode = $this->runCommand($command, $output);
-                    if($returnCode==0){
+                    if ($returnCode == 0) {
                         $output->writeln('<info>SUCCESS!</info>');
-                        $cronTask->setProcessingTime(new \DateTime("now"));
+                        $cronTask->setProcessingTime(new \DateTime('now'));
                         $em->persist($cronTask);
-                    }else{
+                    } else {
                         $output->writeln('<error>ERROR!</error>');
                     }
-
                 }
                 $em->flush();
-
             } catch (\Exception $e) {
                 $message = $e->getMessage();
                 $output->writeln("<error>ERROR! $message </error>");
@@ -74,16 +77,20 @@ class CronTasksRunCommand extends ContainerAwareCommand
     }
 
 
+
     /**
      * Run command in console.
      *
-     * @param array $command
-     *
+     * @param array $command - Input field must be in the form $key => $value.
+     *                                 First $key must be string "command" and first $value must be starting command.
+     *                                 Next $keys are arguments.Example: Array('command' => 'swiftmailer:spool:send', '--message-limit' => '10')
      * @param OutputInterface $output
+     *
      * @return int $returnCode
+     *
      * @throws \Exception
      */
-    private function runCommand($command, OutputInterface $output)
+    private function runCommand ($command, OutputInterface $output)
     {
         $application = $this->getApplication();
         $application->setAutoExit(false);

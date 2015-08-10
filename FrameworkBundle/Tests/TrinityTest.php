@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Trinity project.
  */
@@ -12,7 +13,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\StreamOutput;
 
 /**
- * Class TrinityTest
+ * Class TrinityTest.
  */
 class TrinityTest extends BaseTest
 {
@@ -20,14 +21,15 @@ class TrinityTest extends BaseTest
      * @var array Test command
      */
     private $command = array(
-        'command' => "cache:clear",
-        '-q' => "");
+        'command' => 'cache:clear',
+        '-q' => '',);
+
 
 
     /**
-     * Test clear database
+     * Test clear database.
      */
-    public function testDropCreateDatabase()
+    public function testDropCreateDatabase ()
     {
         $kernel = $this->kernel;
         $application = new Application($kernel);
@@ -40,29 +42,33 @@ class TrinityTest extends BaseTest
     }
 
 
+
     /**
-     * Insert Test
+     * Insert Test.
+     *
      * @depends testDropCreateDatabase
      */
-    public function testInsertToDatabase()
+    public function testInsertToDatabase ()
     {
         $cronTask = new CronTask();
 
         $cronTask->setCommand($this->command);
-        $creationTime = new \DateTime("now");
+        $creationTime = new \DateTime('now');
         $cronTask->setCreationTime($creationTime);
         $em = $this->getContainer()->get('doctrine')->getManager();
         $em->persist($cronTask);
         $em->flush();
-        $this->assertEquals($cronTask->getCreationTime(),$creationTime);
+        $this->assertEquals($cronTask->getCreationTime(), $creationTime);
     }
 
 
+
     /**
-     * Chceck data in database Test
+     * Chceck data in database Test.
+     *
      * @depends testDropCreateDatabase
      */
-    public function testCheckDataInDatabase()
+    public function testCheckDataInDatabase ()
     {
         $this->testInsertToDatabase();
         $repository = $this->getContainer()->get('doctrine')->getRepository('TrinityFrameworkBundle:CronTask');
@@ -72,11 +78,13 @@ class TrinityTest extends BaseTest
     }
 
 
+
     /**
-     * Test null processing time
+     * Test null processing time.
+     *
      * @depends testDropCreateDatabase
      */
-    public function testNullProcessingtime()
+    public function testNullProcessingtime ()
     {
         $this->testInsertToDatabase();
         $repository = $this->getContainer()->get('doctrine')->getRepository('TrinityFrameworkBundle:CronTask');
@@ -85,11 +93,13 @@ class TrinityTest extends BaseTest
     }
 
 
+
     /**
-     * Test find all null processing time
+     * Test find all null processing time.
+     *
      * @depends testDropCreateDatabase
      */
-    public function testfindAllNullProcessingtime()
+    public function testfindAllNullProcessingtime ()
     {
         $this->testInsertToDatabase();
         $repository = $this->getContainer()->get('doctrine')->getRepository('TrinityFrameworkBundle:CronTask');
@@ -98,11 +108,13 @@ class TrinityTest extends BaseTest
     }
 
 
+
     /**
-     * Test find by command
+     * Test find by command.
+     *
      * @depends testDropCreateDatabase
      */
-    public function testCreationTime()
+    public function testCreationTime ()
     {
         $this->testInsertToDatabase();
         $repository = $this->getContainer()->get('doctrine')->getRepository('TrinityFrameworkBundle:CronTask');
@@ -110,6 +122,6 @@ class TrinityTest extends BaseTest
         /** @var CronTask $cronTask */
         $cronTask = $repository->findByCommand($this->command);
         $this->assertNotEmpty($cronTask->getCreationTime());
-        $this->assertEquals($this->command,$cronTask->getCommand());
+        $this->assertEquals($this->command, $cronTask->getCommand());
     }
 }

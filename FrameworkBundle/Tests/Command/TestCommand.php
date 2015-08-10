@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Trinity project.
  */
@@ -12,13 +13,11 @@ use Trinity\FrameworkBundle\Entity\CronTask;
 use Symfony\Component\Console\Input\InputArgument;
 
 /**
- * Class TestCommand
- * @package Trinity\FrameworkBundle\Tests\Command
+ * Class TestCommand.
  */
 class TestCommand extends ContainerAwareCommand
 {
-
-    protected function configure()
+    protected function configure ()
     {
         $this
             ->setName('test:run')
@@ -31,7 +30,8 @@ class TestCommand extends ContainerAwareCommand
     }
 
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+
+    protected function execute (InputInterface $input, OutputInterface $output)
     {
         $cronTask = new CronTask();
 
@@ -39,18 +39,18 @@ class TestCommand extends ContainerAwareCommand
         $pole = preg_split('/ /', $string);
         if (count($pole) === 1) {
             $cronTask->setCommand(array(
-                'command' => $pole[0]));
+                'command' => $pole[0],));
         } else {
             $cronTask->setCommand(array(
                 'command' => $pole[0],
-                $pole[1] => ""));
+                $pole[1] => '',));
         }
-        $cronTask->setCreationTime(new \DateTime("now"));
+        $cronTask->setCreationTime(new \DateTime('now'));
 
         $em = $this->getContainer()->get('doctrine')->getManager();
         $em->persist($cronTask);
         $em->flush();
 
-        $output->writeln("Insert to database is complete!");
+        $output->writeln('Insert to database is complete!');
     }
 }

@@ -8,8 +8,6 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
-
 /** @ORM\MappedSuperclass */
 class BaseSystemLog
 {
@@ -62,7 +60,7 @@ class BaseSystemLog
     /**
      * @ORM\PreUpdate
      */
-    public function setModifiedValue()
+    public function setModifiedValue ()
     {
         $this->modified = new \DateTime();
     }
@@ -72,7 +70,7 @@ class BaseSystemLog
     /**
      * @ORM\PrePersist
      */
-    public function setCreatedValue()
+    public function setCreatedValue ()
     {
         $this->modified = new \DateTime();
 
@@ -86,7 +84,7 @@ class BaseSystemLog
      *
      * @return int
      */
-    public function getId()
+    public function getId ()
     {
         return $this->id;
     }
@@ -100,7 +98,7 @@ class BaseSystemLog
      *
      * @return BaseSystemLog
      */
-    public function setLog($log)
+    public function setLog ($log)
     {
         $this->log = $log;
 
@@ -114,7 +112,7 @@ class BaseSystemLog
      *
      * @return string
      */
-    public function getLog()
+    public function getLog ()
     {
         return $this->log;
     }
@@ -128,7 +126,7 @@ class BaseSystemLog
      *
      * @return BaseSystemLog
      */
-    public function setServerData($serverData)
+    public function setServerData ($serverData)
     {
         $this->serverData = $serverData;
 
@@ -142,7 +140,7 @@ class BaseSystemLog
      *
      * @return string
      */
-    public function getServerData()
+    public function getServerData ()
     {
         return $this->serverData;
     }
@@ -156,7 +154,7 @@ class BaseSystemLog
      *
      * @return BaseSystemLog
      */
-    public function setLevel($level)
+    public function setLevel ($level)
     {
         $this->level = $level;
 
@@ -170,7 +168,7 @@ class BaseSystemLog
      *
      * @return string
      */
-    public function getLevel()
+    public function getLevel ()
     {
         return $this->level;
     }
@@ -184,7 +182,7 @@ class BaseSystemLog
      *
      * @return BaseSystemLog
      */
-    public function setModified($modified)
+    public function setModified ($modified)
     {
         $this->modified = $modified;
 
@@ -198,7 +196,7 @@ class BaseSystemLog
      *
      * @return \DateTime
      */
-    public function getModified()
+    public function getModified ()
     {
         return $this->modified;
     }
@@ -212,7 +210,7 @@ class BaseSystemLog
      *
      * @return BaseSystemLog
      */
-    public function setCreated($created)
+    public function setCreated ($created)
     {
         $this->created = $created;
 
@@ -226,7 +224,7 @@ class BaseSystemLog
      *
      * @return \DateTime
      */
-    public function getCreated()
+    public function getCreated ()
     {
         return $this->created;
     }
@@ -236,7 +234,7 @@ class BaseSystemLog
     /**
      * @return mixed
      */
-    public function getUrl()
+    public function getUrl ()
     {
         return $this->url;
     }
@@ -246,7 +244,7 @@ class BaseSystemLog
     /**
      * @param mixed $url
      */
-    public function setUrl($url)
+    public function setUrl ($url)
     {
         $this->url = $url;
     }
@@ -256,7 +254,7 @@ class BaseSystemLog
     /**
      * @return mixed
      */
-    public function getIp()
+    public function getIp ()
     {
         return $this->ip;
     }
@@ -266,7 +264,7 @@ class BaseSystemLog
     /**
      * @param mixed $ip
      */
-    public function setIp($ip)
+    public function setIp ($ip)
     {
         $this->ip = $ip;
     }

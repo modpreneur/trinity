@@ -1,4 +1,5 @@
 <?php
+
 /*
  * This file is part of the Trinity project.
  */
@@ -6,15 +7,13 @@
 namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Trinity\FrameworkBundle\Entity\CronTaskRepository")
  */
-class CronTask  {
-
+class CronTask
+{
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -27,7 +26,6 @@ class CronTask  {
      */
     private $Command;
 
-
     /**
      * @ORM\Column(type="datetime")
      */
@@ -38,58 +36,70 @@ class CronTask  {
      */
     private $ProcessingTime;
 
+
+
     /**
      * @return mixed
      */
-    public function getProcessingTime()
+    public function getProcessingTime ()
     {
         return $this->ProcessingTime;
     }
 
+
+
     /**
      * @param mixed $ProcessingTime
      */
-    public function setProcessingTime($ProcessingTime)
+    public function setProcessingTime ($ProcessingTime)
     {
         $this->ProcessingTime = $ProcessingTime;
     }
 
 
-    public function getId()
+
+    public function getId ()
     {
         return $this->Id;
     }
 
+
+
     /**
      * @return mixed
      */
-    public function getCommand()
+    public function getCommand ()
     {
         return $this->Command;
     }
 
+
+
     /**
      * @param mixed $Command
      */
-    public function setCommand($Command)
+    public function setCommand ($Command)
     {
         $this->Command = $Command;
     }
+
+
+
     /**
      * @return mixed
      */
-    public function getCreationTime()
+    public function getCreationTime ()
     {
         return $this->CreationTime;
     }
 
+
+
     /**
      * @param mixed $CreationTime
      */
-    public function setCreationTime($CreationTime)
+    public function setCreationTime ($CreationTime)
     {
         $this->CreationTime = $CreationTime;
     }
-
-
 }

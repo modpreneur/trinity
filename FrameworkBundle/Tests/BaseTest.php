@@ -9,8 +9,6 @@ namespace Trinity\FrameworkBundle\Tests;
 use Braincrafted\Bundle\TestingBundle\Test\WebTestCase;
 use ReflectionClass;
 
-
-
 /**
  * Class BaseTest.
  */
@@ -22,7 +20,7 @@ abstract class BaseTest extends WebTestCase
      *
      * @return \ReflectionMethod
      */
-    protected static function getMethod($class, $name)
+    protected static function getMethod ($class, $name)
     {
         $class = new ReflectionClass($class);
         $method = $class->getMethod($name);
@@ -38,7 +36,7 @@ abstract class BaseTest extends WebTestCase
      * @param string $property
      * @param $value
      */
-    protected function setPropertyValue($class, $property, $value)
+    protected function setPropertyValue ($class, $property, $value)
     {
         $property = new \ReflectionProperty($class, $property);
         $property->setAccessible(true);
