@@ -7,12 +7,14 @@
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\Kernel;
 
+
+
 /**
  * Class AppKernel.
  */
 class AppKernel extends Kernel
 {
-    public function registerBundles ()
+    public function registerBundles()
     {
         return array(
             new Braincrafted\Bundle\TestingBundle\BraincraftedTestingBundle($this),
@@ -27,9 +29,9 @@ class AppKernel extends Kernel
     /**
      * @param LoaderInterface $loader
      */
-    public function registerContainerConfiguration (LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__ . '/config.yml');
+        $loader->load(__DIR__.'/config.yml');
     }
 
 
@@ -37,9 +39,9 @@ class AppKernel extends Kernel
     /**
      * @return string
      */
-    public function getCacheDir ()
+    public function getCacheDir()
     {
-        return sys_get_temp_dir() . '/./cache';
+        return __DIR__.'/./cache';
     }
 
 
@@ -47,8 +49,8 @@ class AppKernel extends Kernel
     /**
      * @return string
      */
-    public function getLogDir ()
+    public function getLogDir()
     {
-        return sys_get_temp_dir() . '/./logs';
+        return __DIR__.'/./logs';
     }
 }
