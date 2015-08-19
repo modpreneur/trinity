@@ -122,7 +122,7 @@ class TrinityTest extends BaseTest
 
 
     /**
-     * Test set command with parse
+     * Test set command with parse.
      *
      * @depends testDropCreateDatabase
      */

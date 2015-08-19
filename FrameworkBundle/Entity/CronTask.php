@@ -90,7 +90,7 @@ class CronTask
 
     /**
      *
-     * @param string $command Parse the Input string (from form) into an array needed for run in console.
+     * @param string $command Parse the Input string (from form) into an array needed for run in console
      */
     public function setCommandWithParse ($command)
     {
