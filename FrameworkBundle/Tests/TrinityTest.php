@@ -22,8 +22,8 @@ class TrinityTest extends BaseTest
      */
     private $command = array(
         'command' => 'cache:clear',
-        '-q' => '',);
-
+        '-p' => null,
+        '--r' => 8);
 
 
     /**
@@ -40,7 +40,6 @@ class TrinityTest extends BaseTest
         $returnCode = $application->run($input, $output);
         $this->assertEquals(1, $returnCode);
     }
-
 
 
     /**
@@ -62,9 +61,8 @@ class TrinityTest extends BaseTest
     }
 
 
-
     /**
-     * Chceck data in database Test.
+     * Check data in database Test.
      *
      * @depends testDropCreateDatabase
      */
@@ -76,7 +74,6 @@ class TrinityTest extends BaseTest
 
         $this->assertEquals($this->command, $cronTask->getCommand());
     }
-
 
 
     /**
@@ -93,7 +90,6 @@ class TrinityTest extends BaseTest
     }
 
 
-
     /**
      * Test find all null processing time.
      *
@@ -108,9 +104,8 @@ class TrinityTest extends BaseTest
     }
 
 
-
     /**
-     * Test find by command.
+     * Test find by command and NotEmpty creation time.
      *
      * @depends testDropCreateDatabase
      */
@@ -124,4 +119,21 @@ class TrinityTest extends BaseTest
         $this->assertNotEmpty($cronTask->getCreationTime());
         $this->assertEquals($this->command, $cronTask->getCommand());
     }
+
+
+    /**
+     * Test set command with parse.
+     *
+     * @depends testDropCreateDatabase
+     */
+    public function testSetCommandWithParse ()
+    {
+        $newCronTask = new CronTask();
+
+        $newCronTask->setCommandWithParse('cache:clear -p --r 8');
+        $creationTime = new \DateTime('now');
+        $newCronTask->setCreationTime($creationTime);
+        $this->assertEquals($this->command, $newCronTask->getCommand());
+    }
+
 }
