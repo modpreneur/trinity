@@ -33,10 +33,6 @@
 
     },
 
-    "repositories": [
-      {"type": "composer", "url": "https://tp.corp.modpreneur.com/repo/private/"}
-    ],
-
     "minimum-stability": "dev",
     "extra": {
       "branch-alias": {
