@@ -129,11 +129,23 @@ class TrinityTest extends BaseTest
     public function testSetCommandWithParse ()
     {
         $newCronTask = new CronTask();
-
         $newCronTask->setCommandWithParse('cache:clear -p --r 8');
-        $creationTime = new \DateTime('now');
-        $newCronTask->setCreationTime($creationTime);
         $this->assertEquals($this->command, $newCronTask->getCommand());
+    }
+
+
+    /**
+     * Test get command as string.
+     *
+     * @depends testDropCreateDatabase
+     * @depends testSetCommandWithParse
+     */
+    public function testGetCommandAsString()
+    {
+        $stringCommand = 'cache:clear -g --s 8 -l';
+        $newCronTask = new CronTask();
+        $newCronTask->setCommandWithParse($stringCommand);
+        $this->assertEquals($stringCommand, $newCronTask->getCommandAsString());
     }
 
 }
