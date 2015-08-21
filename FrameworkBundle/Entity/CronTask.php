@@ -105,7 +105,11 @@ class CronTask
             for ($i = 1; $i < count($array); $i++) {
                 if ((substr($array[$i], 0, 1) === "-") || (substr($array[$i], 0, 2) === "--")) {
                     $arrayKeys[] = $array[$i];
-                    if ((substr($array[$i + 1], 0, 1) === "-") || (substr($array[$i + 1], 0, 2) === "--")) {
+                    if ($i + 1 != count($array)) {
+                        if (((substr($array[$i + 1], 0, 1) === "-") || (substr($array[$i + 1], 0, 2) === "--"))) {
+                            $arrayValues[] = null;
+                        }
+                    } else {
                         $arrayValues[] = null;
                     }
                 } else {
@@ -114,6 +118,29 @@ class CronTask
             }
             $this->Command = array_combine($arrayKeys, $arrayValues);
         }
+    }
+
+
+    /**
+     *
+     * @return string
+     */
+    public function getCommandAsString ()
+    {
+        $stringCommand = "";
+        foreach ($this->getCommand() as $key => $value) {
+            if ($key == 'command') {
+                $stringCommand .= $value;
+            } else {
+                $stringCommand .= ' ';
+                $stringCommand .= $key;
+                if ($value != null) {
+                    $stringCommand .= ' ';
+                    $stringCommand .= $value;
+                }
+            }
+        }
+        return $stringCommand;
     }
 
 
