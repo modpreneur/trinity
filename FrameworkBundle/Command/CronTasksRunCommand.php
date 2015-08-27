@@ -6,11 +6,15 @@
 
 namespace Trinity\FrameworkBundle\Command;
 
+
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Console\Output\OutputInterface;
 use Trinity\FrameworkBundle\Entity\CronTask;
+use Symfony\Component\Console\Input\StringInput;
+use Symfony\Component\Console\Output\ConsoleOutputInterface;
 
 /**
  * Class CronTasksRunCommand.
@@ -21,14 +25,15 @@ class CronTasksRunCommand extends ContainerAwareCommand
     private $output;
 
 
-
+    /**
+     * Set up command.
+     */
     protected function configure ()
     {
         $this
-            ->setName('crontasks:run')
+            ->setName('trinity:jobs:run')
             ->setDescription('Runs Cron Tasks');
     }
-
 
 
     /**
@@ -39,7 +44,12 @@ class CronTasksRunCommand extends ContainerAwareCommand
      */
     protected function execute (InputInterface $input, OutputInterface $output)
     {
+        $output = $output instanceof ConsoleOutputInterface
+            ? $output->getErrorOutput()
+            : $output;
+
         $output->writeln('<comment>Running Cron Tasks...</comment>');
+
         $this->output = $output;
         $repository = $this->getContainer()->get('doctrine')->getRepository('TrinityFrameworkBundle:CronTask');
 
@@ -47,19 +57,22 @@ class CronTasksRunCommand extends ContainerAwareCommand
         $cronTasks = $repository->findAllNullProcessingtime();
 
         if ($cronTasks === null) {
-            $output->writeln('<comment>No data to procesing...</comment>');
+            $output
+                ->writeln('<comment>No data to procesing...</comment>');
         } else {
             try {
-                $em = $this->getContainer()->get('doctrine')->getManager();
+                /** @var EntityManager $em */
+                $em = $this
+                    ->getContainer()
+                    ->get('doctrine')
+                    ->getManager();
+
                 foreach ($cronTasks as $cronTask) {
                     $command = $cronTask->getCommand();
-                    foreach ($command as $key => $value) {
-                        if ($value !== null) {
-                            $output->writeln(sprintf('Executing command: <comment>' . $value . '</comment>'));
-                        }
-                    }
+
                     // Run the command
                     $returnCode = $this->runCommand($command, $output);
+
                     if ($returnCode == 0) {
                         $output->writeln('<info>SUCCESS!</info>');
                         $cronTask->setProcessingTime(new \DateTime('now'));
@@ -69,13 +82,18 @@ class CronTasksRunCommand extends ContainerAwareCommand
                     }
                 }
                 $em->flush();
+
             } catch (\Exception $e) {
+                $this
+                    ->getContainer()
+                    ->get('logger')
+                    ->addError($e);
+
                 $message = $e->getMessage();
                 $output->writeln("<error>ERROR! $message </error>");
             }
         }
     }
-
 
 
     /**
@@ -95,7 +113,7 @@ class CronTasksRunCommand extends ContainerAwareCommand
         $application = $this->getApplication();
         $application->setAutoExit(false);
 
-        $input = new ArrayInput($command);
+        $input = new StringInput($command);
         $returnCode = $application->run($input, $output);
 
         return $returnCode;
