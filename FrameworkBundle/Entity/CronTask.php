@@ -23,7 +23,7 @@ class CronTask
 
     /**
      * @var string Command Cron Task
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="string")
      */
     private $Command;
 
