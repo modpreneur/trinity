@@ -20,7 +20,7 @@ class CronTaskRepository extends EntityRepository
         $query = $this->getEntityManager()->createQuery('
             SELECT cronTask
             FROM TrinityFrameworkBundle:CronTask AS cronTask
-            WHERE cronTask.ProcessingTime IS NULL');
+            WHERE cronTask.processingTime IS NULL');
 
         return $query->getResult();
     }
@@ -39,7 +39,7 @@ class CronTaskRepository extends EntityRepository
         $query = $this->getEntityManager()->createQuery('
             SELECT cronTask
             FROM TrinityFrameworkBundle:CronTask AS cronTask
-            WHERE cronTask.Command = :command
+            WHERE cronTask.command = :command
             ')->setParameter('command', serialize($command));
 
         $result = $query->getResult();
