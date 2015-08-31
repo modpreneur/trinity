@@ -80,7 +80,7 @@ class CronTask
 
 
     /**
-     * @param mixed $Command
+     * @param mixed $command
      */
     public function setCommand ($command)
     {
