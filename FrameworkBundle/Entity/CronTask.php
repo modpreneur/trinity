@@ -19,25 +19,25 @@ class CronTask
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $Id;
+    private $id;
 
     /**
      * @var string Command Cron Task
      * @ORM\Column(type="string")
      */
-    private $Command;
+    private $command;
 
     /**
      * @var \DateTime Creation time of Cron Task
      * @ORM\Column(type="datetime")
      */
-    private $CreationTime;
+    private $creationTime;
 
     /**
      * @var \DateTime Processing time of Cron Task
      * @ORM\Column(type="datetime", nullable = true)
      */
-    private $ProcessingTime;
+    private $processingTime;
 
     /**
      * @var int Priority of Cron task
@@ -51,22 +51,22 @@ class CronTask
      */
     public function getProcessingTime ()
     {
-        return $this->ProcessingTime;
+        return $this->processingTime;
     }
 
 
     /**
-     * @param mixed $ProcessingTime
+     * @param mixed $processingTime
      */
-    public function setProcessingTime ($ProcessingTime)
+    public function setProcessingTime ($processingTime)
     {
-        $this->ProcessingTime = $ProcessingTime;
+        $this->processingTime = $processingTime;
     }
 
 
     public function getId ()
     {
-        return $this->Id;
+        return $this->id;
     }
 
 
@@ -75,72 +75,16 @@ class CronTask
      */
     public function getCommand ()
     {
-        return $this->Command;
+        return $this->command;
     }
 
 
     /**
      * @param mixed $Command
      */
-    public function setCommand ($Command)
+    public function setCommand ($command)
     {
-        $this->Command = $Command;
-    }
-
-
-    /**
-     *
-     * @param string $command Parse the Input string (from form) into an array needed for run in console
-     */
-    public function setCommandWithParse ($command)
-    {
-        $array = preg_split('/ /', $command);
-
-        if (count($array) === 1) {
-            $this->Command = array(
-                'command' => $array[0]);
-        } else {
-            $arrayKeys[] = 'command';
-            $arrayValues[] = $array[0];
-            for ($i = 1; $i < count($array); $i++) {
-                if ((substr($array[$i], 0, 1) === "-") || (substr($array[$i], 0, 2) === "--")) {
-                    $arrayKeys[] = $array[$i];
-                    if ($i + 1 != count($array)) {
-                        if (((substr($array[$i + 1], 0, 1) === "-") || (substr($array[$i + 1], 0, 2) === "--"))) {
-                            $arrayValues[] = null;
-                        }
-                    } else {
-                        $arrayValues[] = null;
-                    }
-                } else {
-                    $arrayValues[] = $array[$i];
-                }
-            }
-            $this->Command = array_combine($arrayKeys, $arrayValues);
-        }
-    }
-
-
-    /**
-     *
-     * @return string
-     */
-    public function getCommandAsString ()
-    {
-        $stringCommand = "";
-        foreach ($this->getCommand() as $key => $value) {
-            if ($key == 'command') {
-                $stringCommand .= $value;
-            } else {
-                $stringCommand .= ' ';
-                $stringCommand .= $key;
-                if ($value != null) {
-                    $stringCommand .= ' ';
-                    $stringCommand .= $value;
-                }
-            }
-        }
-        return $stringCommand;
+        $this->command = $command;
     }
 
 
@@ -149,16 +93,16 @@ class CronTask
      */
     public function getCreationTime ()
     {
-        return $this->CreationTime;
+        return $this->creationTime;
     }
 
 
     /**
-     * @param mixed $CreationTime
+     * @param mixed $creationTime
      */
-    public function setCreationTime ($CreationTime)
+    public function setCreationTime ($creationTime)
     {
-        $this->CreationTime = $CreationTime;
+        $this->creationTime = $creationTime;
     }
 
 
