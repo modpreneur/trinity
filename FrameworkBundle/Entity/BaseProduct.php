@@ -6,6 +6,7 @@
 
 namespace Trinity\FrameworkBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 
@@ -27,6 +28,7 @@ class BaseProduct
     /**
      * @var string Name of the product
      * @ORM\Column(type="string", unique=true)
+     * @Assert\NotBlank()
      */
     protected $name;
 
