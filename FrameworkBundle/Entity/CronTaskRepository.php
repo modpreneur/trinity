@@ -7,6 +7,7 @@
 namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Tests\Form\ChoiceList\AbstractEntityChoiceListCompositeIdTest;
 
 class CronTaskRepository extends EntityRepository
 {
@@ -20,7 +21,7 @@ class CronTaskRepository extends EntityRepository
         $query = $this->getEntityManager()->createQuery('
             SELECT cronTask
             FROM TrinityFrameworkBundle:CronTask AS cronTask
-            WHERE cronTask.processingTime IS NULL');
+            WHERE cronTask.processingTime IS NULL ORDER BY cronTask.creationTime DESC');
 
         return $query->getResult();
     }
@@ -49,4 +50,39 @@ class CronTaskRepository extends EntityRepository
             return $result;
         }
     }
+    /**
+     * Insert unique Job to db
+     *
+     * @param array $command
+     *
+     * @return Job
+     */
+
+    public function addJob($command)
+    {
+        $query = $this->getEntityManager()->createQuery('
+			SELECT j.id
+			FROM TrinityFrameworkBundle:CronTask AS j
+			WHERE j.command = :command
+			AND j.processingTime IS NULL
+		')
+            ->setParameter('command', $command);
+
+        $result = $query->getResult();
+
+        if(count($result) == '0') {
+            $newJob = new CronTask();
+            $newJob->setCreationTime(new \DateTime('now'));
+            $newJob->setCommand($command);
+
+            $em = $this->getEntityManager();
+            $em->persist($newJob);
+            $em->flush();
+            return $newJob;
+        }else{
+            return;
+        }
+    }
+
+
 }
