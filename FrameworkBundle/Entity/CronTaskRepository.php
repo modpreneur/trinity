@@ -8,6 +8,7 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Tests\Form\ChoiceList\AbstractEntityChoiceListCompositeIdTest;
+use Symfony\Component\Config\Definition\BooleanNode;
 
 class CronTaskRepository extends EntityRepository
 {
@@ -16,7 +17,7 @@ class CronTaskRepository extends EntityRepository
      *
      * @return CronTask[]
      */
-    public function findAllNullProcessingtime ()
+    public function findAllNullProcessingtime()
     {
         $query = $this->getEntityManager()->createQuery('
             SELECT cronTask
@@ -27,7 +28,6 @@ class CronTaskRepository extends EntityRepository
     }
 
 
-
     /**
      * Get array of all CronTasks where command is command.
      *
@@ -35,7 +35,7 @@ class CronTaskRepository extends EntityRepository
      *
      * @return CronTask
      */
-    public function findByCommand ($command)
+    public function findByCommand($command)
     {
         $query = $this->getEntityManager()->createQuery('
             SELECT cronTask
@@ -50,27 +50,39 @@ class CronTaskRepository extends EntityRepository
             return $result;
         }
     }
+
     /**
      * Insert unique Job to db
      *
      * @param array $command
      *
+     * @param Boolean $procesTime
+     *
      * @return Job
      */
 
-    public function addJob($command)
+    public function addJob($command, $procesTime = false)
     {
-        $query = $this->getEntityManager()->createQuery('
+        if ($procesTime == false) {
+            $query = $this->getEntityManager()->createQuery('
+			SELECT j.id
+			FROM TrinityFrameworkBundle:CronTask AS j
+			WHERE j.command = :command
+		')
+                ->setParameter('command', $command);
+        } else {
+            $query = $this->getEntityManager()->createQuery('
 			SELECT j.id
 			FROM TrinityFrameworkBundle:CronTask AS j
 			WHERE j.command = :command
 			AND j.processingTime IS NULL
 		')
-            ->setParameter('command', $command);
+                ->setParameter('command', $command);
+        }
 
         $result = $query->getResult();
 
-        if(count($result) == '0') {
+        if (count($result) == '0') {
             $newJob = new CronTask();
             $newJob->setCreationTime(new \DateTime('now'));
             $newJob->setCommand($command);
@@ -79,7 +91,7 @@ class CronTaskRepository extends EntityRepository
             $em->persist($newJob);
             $em->flush();
             return $newJob;
-        }else{
+        } else {
             return;
         }
     }
