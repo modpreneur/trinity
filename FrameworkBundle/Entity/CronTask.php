@@ -45,6 +45,12 @@ class CronTask
      */
     private $priority = 0;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $status;
+
 
     /**
      * @return mixed
@@ -122,4 +128,25 @@ class CronTask
     {
         $this->priority = $priority;
     }
+
+
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+    }
+
 }
