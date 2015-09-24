@@ -1,22 +1,21 @@
 <?php
 
-    namespace Trinity\FrameworkBundle\Entity;
+/*
+ * This file is part of the Trinity project.
+ */
 
-    use Necktie\AppBundle\Entity\Client;
+namespace Trinity\FrameworkBundle\Entity;
 
-
-
-    interface IEntityNotification
-    {
-
-
-        /** @return int */
-        public function getId();
-
-
-
-        /** @return Client|Client[] */
-        public function getClients();
+/**
+ * Interface IEntityNotification.
+ */
+interface IEntityNotification
+{
+    /** @return int */
+    public function getId ();
 
 
-    }
+
+    /** @return IClient|IClient[] */
+    public function getClients ();
+}

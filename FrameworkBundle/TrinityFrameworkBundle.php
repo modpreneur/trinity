@@ -1,13 +1,16 @@
 <?php
 
-    namespace Trinity\FrameworkBundle;
+/*
+ * This file is part of the Trinity project.
+ */
 
-    use Symfony\Component\HttpKernel\Bundle\Bundle;
+namespace Trinity\FrameworkBundle;
 
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-
-    class TrinityFrameworkBundle extends Bundle
-    {
-
-
-    }
+/**
+ * Class TrinityFrameworkBundle.
+ */
+class TrinityFrameworkBundle extends Bundle
+{
+}

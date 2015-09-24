@@ -1,12 +1,16 @@
 <?php
 
-    namespace Trinity\FrameworkBundle\Entity;
+/*
+ * This file is part of the Trinity project.
+ */
 
+namespace Trinity\FrameworkBundle\Entity;
 
-    interface IClient
-    {
-
-        /** @return string */
-        public function getNotifyUrl();
-
-    }
+/**
+ * Interface IClient.
+ */
+interface IClient
+{
+    /** @return string */
+    public function getNotifyUrl ();
+}

@@ -1,10 +1,14 @@
 <?php
 
-    namespace Trinity\FrameworkBundle\Entity;
+/*
+ * This file is part of the Trinity project.
+ */
 
+namespace Trinity\FrameworkBundle\Entity;
 
-    class FrameworkClient
-    {
-
-
-    }
+/**
+ * Class FrameworkClient.
+ */
+class FrameworkClient
+{
+}

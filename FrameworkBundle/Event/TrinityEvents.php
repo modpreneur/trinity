@@ -1,11 +1,15 @@
 <?php
 
-    namespace Trinity\FrameworkBundle\Event;
+/*
+ * This file is part of the Trinity project.
+ */
 
+namespace Trinity\FrameworkBundle\Event;
 
-    class TrinityEvents
-    {
-
-        const STATUS_BUNDLE_EVENT = "trinity.status";
-
-    }
+/**
+ * Class TrinityEvents.
+ */
+class TrinityEvents
+{
+    const STATUS_BUNDLE_EVENT = 'trinity.status';
+}

@@ -1,119 +1,118 @@
 <?php
 
-    namespace Trinity\FrameworkBundle\Entity;
+/*
+ * This file is part of the Trinity project.
+ */
 
-    use Doctrine\ORM\Mapping as ORM;
-    use JMS\Serializer\Annotation\SerializedName;
-    use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-    use Trinity\FrameworkBundle\Notification\Annotations as Notify;
+namespace Trinity\FrameworkBundle\Entity;
+
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+
+/**
+ * Class BaseProduct.
+ */
+class BaseProduct
+{
+    use ORMBehaviors\Timestampable\Timestampable;
+    /**
+     * @var int
+     *
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    protected $id;
+
+    /**
+     * @var string Name of the product
+     * @ORM\Column(type="string", unique=true)
+     * @Assert\NotBlank()
+     */
+    protected $name;
+
+    /**
+     * @var string Description of the product
+     * @ORM\Column(type="string", nullable = true)
+     */
+    protected $description;
 
 
 
     /**
-     * BaseProduct
+     * Get id.
      *
-     *
+     * @return int
      */
-    class BaseProduct
+    public function getId ()
     {
-        use
-            ORMBehaviors\Timestampable\Timestampable;
-
-        /**
-         * @var integer
-         *
-         * @ORM\Column(type="integer")
-         * @ORM\Id
-         * @ORM\GeneratedValue(strategy="AUTO")
-         *
-         */
-        protected $id;
-
-        /**
-         * @var string Name of the product
-         * @ORM\Column(type="string", unique=true)
-         *
-         */
-        protected $name;
-
-        /**
-         * @var string Description of the product
-         * @ORM\Column(type="string", nullable = true)
-         */
-        protected $description;
-
-
-
-        /**
-         * Get id
-         *
-         * @return integer
-         *
-         */
-        public function getId()
-        {
-            return $this->id;
-        }
-
-
-
-        /**
-         * Set name
-         *
-         * @param string $name
-         * @return BaseProduct
-         */
-        public function setName($name)
-        {
-            $this->name = $name;
-
-            return $this;
-        }
-
-
-
-        /**
-         * Get name
-         *
-         * @return string
-         */
-        public function getName()
-        {
-            return $this->name;
-        }
-
-
-
-        /**
-         * Set description
-         *
-         * @param string $description
-         * @return BaseProduct
-         */
-        public function setDescription($description)
-        {
-            $this->description = $description;
-
-            return $this;
-        }
-
-
-
-        /**
-         * Get description
-         *
-         * @return string
-         */
-        public function getDescription()
-        {
-            return $this->description;
-        }
-
-
-
-        public function __toString()
-        {
-            return (string)$this->getName();
-        }
-
+        return $this->id;
     }
+
+
+
+    /**
+     * Set name.
+     *
+     * @param string $name
+     *
+     * @return BaseProduct
+     */
+    public function setName ($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+
+
+    /**
+     * Get name.
+     *
+     * @return string
+     */
+    public function getName ()
+    {
+        return $this->name;
+    }
+
+
+
+    /**
+     * Set description.
+     *
+     * @param string $description
+     *
+     * @return BaseProduct
+     */
+    public function setDescription ($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+
+
+    /**
+     * Get description.
+     *
+     * @return string
+     */
+    public function getDescription ()
+    {
+        return $this->description;
+    }
+
+
+
+    /**
+     * @return string
+     */
+    public function __toString ()
+    {
+        return (string)$this->getName();
+    }
+}

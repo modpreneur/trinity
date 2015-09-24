@@ -1,46 +1,49 @@
 <?php
 
-    namespace Trinity\FrameworkBundle\Event;
+/*
+ * This file is part of the Trinity project.
+ */
 
-    use Symfony\Component\EventDispatcher\Event;
+namespace Trinity\FrameworkBundle\Event;
+
+use Symfony\Component\EventDispatcher\Event;
+
+/**
+ * Class StatusBundleEvent.
+ */
+class StatusBundleEvent extends Event
+{
+    /** @var  string */
+    protected $state;
+
+    /** @var  string */
+    protected $name;
 
 
 
-    class StatusBundleEvent extends Event
+    public function __construct ($state, $name)
     {
-
-        /** @var  string */
-        protected $state;
-
-        /** @var  string */
-        protected $name;
-
-
-
-        function __construct($state, $name)
-        {
-            $this->state = $state;
-            $this->name = $name;
-        }
-
-
-
-        /**
-         * @return string
-         */
-        public function getState()
-        {
-            return $this->state;
-        }
-
-
-
-        /**
-         * @return string
-         */
-        public function getName()
-        {
-            return $this->name;
-        }
-
+        $this->state = $state;
+        $this->name = $name;
     }
+
+
+
+    /**
+     * @return string
+     */
+    public function getState ()
+    {
+        return $this->state;
+    }
+
+
+
+    /**
+     * @return string
+     */
+    public function getName ()
+    {
+        return $this->name;
+    }
+}
