@@ -41,7 +41,7 @@ class CronTaskRepository extends EntityRepository
             SELECT cronTask
             FROM TrinityFrameworkBundle:CronTask AS cronTask
             WHERE cronTask.command = :command
-            ')->setParameter('command', serialize($command));
+            ')->setParameter('command', $command);
 
         $result = $query->getResult();
         if (is_array($result)) {

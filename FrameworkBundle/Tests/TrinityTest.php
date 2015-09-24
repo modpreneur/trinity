@@ -18,12 +18,9 @@ use Symfony\Component\Console\Output\StreamOutput;
 class TrinityTest extends BaseTest
 {
     /**
-     * @var array Test command
+     * @var string Test command
      */
-    private $command = array(
-        'command' => 'cache:clear',
-        '-p' => null,
-        '--r' => 8);
+    private $command = 'cache:clear -p --r 8';
 
 
     /**
@@ -55,6 +52,7 @@ class TrinityTest extends BaseTest
         $creationTime = new \DateTime('now');
         $cronTask->setCreationTime($creationTime);
         $em = $this->getContainer()->get('doctrine')->getManager();
+
         $em->persist($cronTask);
         $em->flush();
         $this->assertEquals($cronTask->getCreationTime(), $creationTime);
@@ -129,7 +127,7 @@ class TrinityTest extends BaseTest
     public function testSetCommandWithParse ()
     {
         $newCronTask = new CronTask();
-        $newCronTask->setCommandWithParse('cache:clear -p --r 8');
+        $newCronTask->setCommand('cache:clear -p --r 8');
         $this->assertEquals($this->command, $newCronTask->getCommand());
     }
 
@@ -144,8 +142,8 @@ class TrinityTest extends BaseTest
     {
         $stringCommand = 'cache:clear -g --s 8 -l';
         $newCronTask = new CronTask();
-        $newCronTask->setCommandWithParse($stringCommand);
-        $this->assertEquals($stringCommand, $newCronTask->getCommandAsString());
+        $newCronTask->setCommand($stringCommand);
+        $this->assertEquals($stringCommand, $newCronTask->getCommand());
     }
 
 }
