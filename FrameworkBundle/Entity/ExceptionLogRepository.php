@@ -11,7 +11,7 @@ use Doctrine\ORM\EntityRepository;
 /**
  * Class SystemLogRepository.
  */
-class SystemLogRepository extends EntityRepository
+class ExceptionLogRepository extends EntityRepository
 {
     /**
      * Find the latest logs.
