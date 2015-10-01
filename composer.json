@@ -16,7 +16,7 @@
       "dmishh/settings-bundle": "2.0.*@dev",
       "symfony/monolog-bundle": "dev-master",
       "doctrine/orm": "~2.5",
-      "doctrine/doctrine-bundle": "dev-master",
+      "doctrine/doctrine-bundle": "~1.5",
       "apy/datagrid-bundle": "~2.2",
       "friendsofsymfony/user-bundle": "dev-master"
     },
