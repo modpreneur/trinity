@@ -7,7 +7,9 @@
 namespace Trinity\FrameworkBundle\Tests\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Trinity\FrameworkBundle\Entity\CronTask;
 use Symfony\Component\Console\Input\InputArgument;
@@ -35,8 +37,17 @@ class TestCommand extends ContainerAwareCommand
     {
         $cronTask = new CronTask();
 
-        $string = $input->getArgument('InsertCommand');
+        dump($input->getArguments()['InsertCommand']);
+        $input = new StringInput($input->getArguments()['InsertCommand']);
+
+        $input->bind(new InputDefinition());
+
+       // dump($input->getArguments());
+
+
+        exit;
         $pole = preg_split('/ /', $string);
+
         if (count($pole) === 1) {
             $cronTask->setCommand(array(
                 'command' => $pole[0],));

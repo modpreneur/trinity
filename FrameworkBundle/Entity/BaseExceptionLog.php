@@ -9,7 +9,7 @@ namespace Trinity\FrameworkBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /** @ORM\MappedSuperclass */
-class BaseSystemLog
+class BaseExceptionLog
 {
     /**
      * @var int

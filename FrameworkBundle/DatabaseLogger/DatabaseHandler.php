@@ -55,6 +55,11 @@ class DatabaseHandler extends AbstractProcessingHandler
         }
 
         if ((int)$record['level'] >= Logger::ERROR) {
+                //exception is logged twice, get rid of 'Uncaught...' version
+            if(strncmp($record['message'],'Uncaught',8 )==0){
+                return;
+            };
+
             $em = $this->_container->get('doctrine')->getManager();
             $conn = $em->getConnection();
             $conn->beginTransaction();
@@ -75,7 +80,7 @@ class DatabaseHandler extends AbstractProcessingHandler
 
                 $conn->beginTransaction();
                 $stmt = $conn->prepare(
-                    'INSERT INTO system_log(log, level, serverData, modified, created, url, ip, user_id)
+                    'INSERT INTO exception_log(log, level, serverData, modified, created, url, ip, user_id)
                                             VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
                                             RETURNING id;
                                            '
