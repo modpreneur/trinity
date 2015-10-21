@@ -92,7 +92,7 @@ class BaseUser extends User implements SettingsOwnerInterface
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=6, nullable=true)N
+     * @ORM\Column(type="string", length=10, nullable=true)
      */
     protected $postalCode;
 
