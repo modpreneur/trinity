@@ -38,11 +38,6 @@ class BaseExceptionLog
     /**
      * @ORM\Column(type="datetime")
      */
-    protected $modified;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
     protected $created;
 
     /**
@@ -58,22 +53,10 @@ class BaseExceptionLog
 
 
     /**
-     * @ORM\PreUpdate
-     */
-    public function setModifiedValue ()
-    {
-        $this->modified = new \DateTime();
-    }
-
-
-
-    /**
      * @ORM\PrePersist
      */
     public function setCreatedValue ()
     {
-        $this->modified = new \DateTime();
-
         $this->created = new \DateTime();
     }
 
@@ -171,34 +154,6 @@ class BaseExceptionLog
     public function getLevel ()
     {
         return $this->level;
-    }
-
-
-
-    /**
-     * Set modified.
-     *
-     * @param \DateTime $modified
-     *
-     * @return BaseSystemLog
-     */
-    public function setModified ($modified)
-    {
-        $this->modified = $modified;
-
-        return $this;
-    }
-
-
-
-    /**
-     * Get modified.
-     *
-     * @return \DateTime
-     */
-    public function getModified ()
-    {
-        return $this->modified;
     }
 
 
