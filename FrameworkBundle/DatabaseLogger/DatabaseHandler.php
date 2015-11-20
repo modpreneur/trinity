@@ -80,8 +80,8 @@ class DatabaseHandler extends AbstractProcessingHandler
 
                 $conn->beginTransaction();
                 $stmt = $conn->prepare(
-                    'INSERT INTO exception_log(log, level, serverData, modified, created, url, ip, user_id)
-                                            VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )
+                    'INSERT INTO exception_log(log, level, serverData, created, url, ip, user_id)
+                                            VALUES ( ?, ?, ?, ?, ?, ?, ?)
                                             RETURNING id;
                                            '
                 );
@@ -90,10 +90,9 @@ class DatabaseHandler extends AbstractProcessingHandler
                 $stmt->bindValue(2, $record['level']);
                 $stmt->bindValue(3, $conn->quote($serverData));
                 $stmt->bindValue(4, $created);
-                $stmt->bindValue(5, $created);
-                $stmt->bindValue(6, $url);
-                $stmt->bindValue(7, $ip);
-                $stmt->bindValue(8, $user);
+                $stmt->bindValue(5, $url);
+                $stmt->bindValue(6, $ip);
+                $stmt->bindValue(7, $user);
 
                 $stmt->execute();
                 $conn->commit();
