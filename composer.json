@@ -23,7 +23,7 @@
 
     "require-dev": {
       "sensio/generator-bundle": "~3.0",
-      "phpunit/phpunit": "~5.0*",
+      "phpunit/phpunit": "~5.0",
       "braincrafted/testing-bundle": "@stable"
     },
 
