@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e35a0ede07541a420296173ae2066d3e",
-    "content-hash": "33cf9f62e7b37f2aa418386b8c97c924",
+    "hash": "307e74ac8bda773c7a719f204dc36dd3",
+    "content-hash": "aaed34fa2000deb7d31df55d2df72ff4",
     "packages": [
         {
             "name": "apy/datagrid-bundle",
@@ -458,16 +458,16 @@
         },
         {
             "name": "doctrine/data-fixtures",
-            "version": "dev-master",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "b4213c21f138c96c29ba2f57349d6fca5b2878a9"
+                "reference": "bd44f6b6e40247b6530bc8abe802e4e4d914976a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/b4213c21f138c96c29ba2f57349d6fca5b2878a9",
-                "reference": "b4213c21f138c96c29ba2f57349d6fca5b2878a9",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/bd44f6b6e40247b6530bc8abe802e4e4d914976a",
+                "reference": "bd44f6b6e40247b6530bc8abe802e4e4d914976a",
                 "shasum": ""
             },
             "require": {
@@ -511,7 +511,7 @@
             "keywords": [
                 "database"
             ],
-            "time": "2015-11-02 22:38:12"
+            "time": "2015-03-30 12:14:13"
         },
         {
             "name": "doctrine/dbal",
@@ -751,7 +751,7 @@
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
-            "version": "dev-master",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineFixturesBundle.git",
@@ -3219,10 +3219,8 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "dmishh/settings-bundle": 20,
-        "doctrine/data-fixtures": 20,
-        "doctrine/doctrine-fixtures-bundle": 20,
         "friendsofsymfony/user-bundle": 20,
+        "dmishh/settings-bundle": 20,
         "braincrafted/testing-bundle": 0
     },
     "prefer-stable": false,

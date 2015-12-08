@@ -11,7 +11,10 @@
     ],
     "require": {
       "php": ">=5.6",
-      "symfony/symfony": "~2.8",
+      "symfony/symfony": ">=2.8",
+
+      "friendsofsymfony/user-bundle": "dev-master",
+
       "knplabs/doctrine-behaviors": "~1.2",
       "dmishh/settings-bundle": "2.0.*@dev",
       "doctrine/orm": "~2.5",
@@ -19,7 +22,6 @@
       "doctrine/data-fixtures": "~1",
       "doctrine/doctrine-fixtures-bundle": "~2",
       "apy/datagrid-bundle": "~2.2",
-      "friendsofsymfony/user-bundle": "~1",
       "symfony/monolog-bundle": "~2.8"
     },
 
