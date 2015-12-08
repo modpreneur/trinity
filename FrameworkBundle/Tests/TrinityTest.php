@@ -13,9 +13,9 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\StreamOutput;
 
 /**
- * Class TrinityTest.
+ * Class TrinityWebTest.
  */
-class TrinityTest extends BaseTest
+class TrinityWebTest extends BaseWebTest
 {
     /**
      * @var string Test command

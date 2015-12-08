@@ -10,9 +10,9 @@ use Braincrafted\Bundle\TestingBundle\Test\WebTestCase;
 use ReflectionClass;
 
 /**
- * Class BaseTest.
+ * Class BaseWebTest.
  */
-abstract class BaseTest extends WebTestCase
+abstract class BaseWebTest extends WebTestCase
 {
     /**
      * @param string|object $class
@@ -28,7 +28,6 @@ abstract class BaseTest extends WebTestCase
 
         return $method;
     }
-
 
 
     /**

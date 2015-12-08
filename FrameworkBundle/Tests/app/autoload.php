@@ -10,4 +10,6 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 
 AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 
+
+
 require __DIR__ . '/AppKernel.php';

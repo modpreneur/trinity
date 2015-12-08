@@ -1,5 +1,5 @@
 parameters:
-    database_driver: pdo_pgsql
+    database_driver: pdo_sqlite
     database_host: 127.0.0.1
     database_port: 5432
     database_name: trinity
@@ -24,19 +24,9 @@ framework:
 doctrine:
     dbal:
       driver:   "%database_driver%"
+      path:     "%kernel.cache_dir%/test.db"
       host:     "%database_host%"
-      port:     "%database_port%"
-      dbname:   "%database_name%"
-      user:     "%database_user%"
-      password: "%database_password%"
-      charset:  UTF8
-      mapping_types:
-        enum: string
 
-
-        # if using pdo_sqlite as your database driver, add the path in parameters.yml
-        # e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        # path:     "%database_path%"
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
