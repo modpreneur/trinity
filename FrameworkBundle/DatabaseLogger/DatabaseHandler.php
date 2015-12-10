@@ -72,14 +72,14 @@ class DatabaseHandler extends AbstractProcessingHandler
                 if ($token && $token->getUser() && !(is_string($token->getUser()))) {
                     $user = $token->getUser()->getId();
                 }
-
+                $readable = $this->getReadable();
                 $created = date('Y-m-d H:i:s');
                 $serverData = $record['extra']['serverData'];
 
                 $conn->beginTransaction();
                 $stmt = $conn->prepare(
-                    'INSERT INTO exception_log(log, level, serverData, created, url, ip, user_id)
-                                            VALUES ( ?, ?, ?, ?, ?, ?, ?)
+                    'INSERT INTO exception_log(log, level, serverData, created, url, ip, user_id, readable)
+                                            VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)
                                             RETURNING id;
                                            '
                 );
@@ -91,6 +91,7 @@ class DatabaseHandler extends AbstractProcessingHandler
                 $stmt->bindValue(5, $url);
                 $stmt->bindValue(6, $ip);
                 $stmt->bindValue(7, $user);
+                $stmt->bindValue(8, $readable);
 
                 $stmt->execute();
                 $conn->commit();
@@ -120,5 +121,9 @@ class DatabaseHandler extends AbstractProcessingHandler
                 error_log($e->getMessage());
             }
         }
+    }
+
+    protected function getReadable(){
+        return "in progress";
     }
 }
