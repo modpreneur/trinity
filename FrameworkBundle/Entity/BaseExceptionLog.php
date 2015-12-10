@@ -29,6 +29,11 @@ class BaseExceptionLog
     /**
      * @ORM\Column(type="text", nullable=true)
      */
+    protected $readable;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
     protected $serverData;
 
     /**
@@ -97,6 +102,21 @@ class BaseExceptionLog
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getReadable()
+    {
+        return $this->readable;
+    }
+
+    /**
+     * @param mixed $readable
+     */
+    public function setReadable($readable)
+    {
+        $this->readable = $readable;
+    }
 
     /**
      * Get serverData.
