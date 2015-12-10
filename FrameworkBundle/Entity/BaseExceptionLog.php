@@ -8,6 +8,7 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /** @ORM\MappedSuperclass */
 class BaseExceptionLog
 {
@@ -51,15 +52,13 @@ class BaseExceptionLog
     protected $ip;
 
 
-
     /**
      * @ORM\PrePersist
      */
-    public function setCreatedValue ()
+    public function setCreatedValue()
     {
         $this->created = new \DateTime();
     }
-
 
 
     /**
@@ -67,11 +66,21 @@ class BaseExceptionLog
      *
      * @return int
      */
-    public function getId ()
+    public function getId()
     {
         return $this->id;
     }
 
+
+    /**
+     * Get log.
+     *
+     * @return string
+     */
+    public function getLog()
+    {
+        return $this->log;
+    }
 
 
     /**
@@ -81,7 +90,7 @@ class BaseExceptionLog
      *
      * @return BaseSystemLog
      */
-    public function setLog ($log)
+    public function setLog($log)
     {
         $this->log = $log;
 
@@ -89,17 +98,15 @@ class BaseExceptionLog
     }
 
 
-
     /**
-     * Get log.
+     * Get serverData.
      *
      * @return string
      */
-    public function getLog ()
+    public function getServerData()
     {
-        return $this->log;
+        return $this->serverData;
     }
-
 
 
     /**
@@ -109,7 +116,7 @@ class BaseExceptionLog
      *
      * @return BaseSystemLog
      */
-    public function setServerData ($serverData)
+    public function setServerData($serverData)
     {
         $this->serverData = $serverData;
 
@@ -117,17 +124,15 @@ class BaseExceptionLog
     }
 
 
-
     /**
-     * Get serverData.
+     * Get level.
      *
      * @return string
      */
-    public function getServerData ()
+    public function getLevel()
     {
-        return $this->serverData;
+        return $this->level;
     }
-
 
 
     /**
@@ -137,7 +142,7 @@ class BaseExceptionLog
      *
      * @return BaseSystemLog
      */
-    public function setLevel ($level)
+    public function setLevel($level)
     {
         $this->level = $level;
 
@@ -145,17 +150,15 @@ class BaseExceptionLog
     }
 
 
-
     /**
-     * Get level.
+     * Get created.
      *
-     * @return string
+     * @return \DateTime
      */
-    public function getLevel ()
+    public function getCreated()
     {
-        return $this->level;
+        return $this->created;
     }
-
 
 
     /**
@@ -165,7 +168,7 @@ class BaseExceptionLog
      *
      * @return BaseSystemLog
      */
-    public function setCreated ($created)
+    public function setCreated($created)
     {
         $this->created = $created;
 
@@ -173,53 +176,37 @@ class BaseExceptionLog
     }
 
 
-
-    /**
-     * Get created.
-     *
-     * @return \DateTime
-     */
-    public function getCreated ()
-    {
-        return $this->created;
-    }
-
-
-
     /**
      * @return mixed
      */
-    public function getUrl ()
+    public function getUrl()
     {
         return $this->url;
     }
 
 
-
     /**
      * @param mixed $url
      */
-    public function setUrl ($url)
+    public function setUrl($url)
     {
         $this->url = $url;
     }
 
 
-
     /**
      * @return mixed
      */
-    public function getIp ()
+    public function getIp()
     {
         return $this->ip;
     }
 
 
-
     /**
      * @param mixed $ip
      */
-    public function setIp ($ip)
+    public function setIp($ip)
     {
         $this->ip = $ip;
     }

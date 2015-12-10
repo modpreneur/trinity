@@ -10,6 +10,7 @@ use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
+
 /**
  * Class DatabaseHandler.
  */
@@ -19,32 +20,29 @@ class DatabaseHandler extends AbstractProcessingHandler
     protected $_container;
 
 
-
     /**
      * @param int $level The minimum logging level at which this handler will be triggered
      * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct ($level = Logger::DEBUG, $bubble = true)
+    public function __construct($level = Logger::DEBUG, $bubble = true)
     {
         parent::__construct($level, $bubble);
     }
 
 
-
     /**
      * @param $container
      */
-    public function setContainer ($container)
+    public function setContainer($container)
     {
         $this->_container = $container;
     }
 
 
-
     /**
      * @param array $record
      */
-    protected function write (array $record)
+    protected function write(array $record)
     {
         if ('doctrine' == $record['channel']) {
             if ((int)$record['level'] >= Logger::WARNING) {
@@ -55,8 +53,8 @@ class DatabaseHandler extends AbstractProcessingHandler
         }
 
         if ((int)$record['level'] >= Logger::ERROR) {
-                //exception is logged twice, get rid of 'Uncaught...' version
-            if(strncmp($record['message'],'Uncaught',8 )==0){
+            //exception is logged twice, get rid of 'Uncaught...' version
+            if (strncmp($record['message'], 'Uncaught', 8) == 0) {
                 return;
             };
 

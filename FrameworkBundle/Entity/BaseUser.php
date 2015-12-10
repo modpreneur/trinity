@@ -10,6 +10,7 @@ use Dmishh\Bundle\SettingsBundle\Entity\SettingsOwnerInterface;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User;
 
+
 /**
  * Class BaseUser.
  *
@@ -97,17 +98,15 @@ class BaseUser extends User implements SettingsOwnerInterface
     protected $postalCode;
 
 
-
     /**
      * BaseUser constructor.
      */
-    public function __construct ()
+    public function __construct()
     {
         parent::__construct();
         $this->roles = array('ROLE_USER');
         $this->enabled = true;
     }
-
 
 
     /**
@@ -117,7 +116,7 @@ class BaseUser extends User implements SettingsOwnerInterface
      *
      * @return $this
      */
-    public function setFirstName ($firstName)
+    public function setFirstName($firstName)
     {
         $this->firstName = $firstName;
 
@@ -125,17 +124,15 @@ class BaseUser extends User implements SettingsOwnerInterface
     }
 
 
-
     /**
      * Get firstName.
      *
      * @return string
      */
-    public function getFirstName ()
+    public function getFirstName()
     {
         return $this->firstName;
     }
-
 
 
     /**
@@ -145,7 +142,7 @@ class BaseUser extends User implements SettingsOwnerInterface
      *
      * @return $this
      */
-    public function setLastName ($lastName)
+    public function setLastName($lastName)
     {
         $this->lastName = $lastName;
 
@@ -153,17 +150,15 @@ class BaseUser extends User implements SettingsOwnerInterface
     }
 
 
-
     /**
      * Get lastName.
      *
      * @return string
      */
-    public function getLastName ()
+    public function getLastName()
     {
         return $this->lastName;
     }
-
 
 
     /**
@@ -171,7 +166,7 @@ class BaseUser extends User implements SettingsOwnerInterface
      *
      * @return string
      */
-    public function getFullName ()
+    public function getFullName()
     {
         if ($this->firstName && $this->lastName) {
             return "{$this->firstName} {$this->lastName}";
@@ -185,7 +180,6 @@ class BaseUser extends User implements SettingsOwnerInterface
     }
 
 
-
     /**
      * Set phoneNumber.
      *
@@ -193,7 +187,7 @@ class BaseUser extends User implements SettingsOwnerInterface
      *
      * @return $this
      */
-    public function setPhoneNumber ($phoneNumber)
+    public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
 
@@ -201,17 +195,15 @@ class BaseUser extends User implements SettingsOwnerInterface
     }
 
 
-
     /**
      * Get phoneNumber.
      *
      * @return string
      */
-    public function getPhoneNumber ()
+    public function getPhoneNumber()
     {
         return $this->phoneNumber;
     }
-
 
 
     /**
@@ -219,11 +211,10 @@ class BaseUser extends User implements SettingsOwnerInterface
      *
      * @return int
      */
-    public function getId ()
+    public function getId()
     {
         return $this->id;
     }
-
 
 
     /**
@@ -233,7 +224,7 @@ class BaseUser extends User implements SettingsOwnerInterface
      *
      * @return $this
      */
-    public function setWebsite ($website)
+    public function setWebsite($website)
     {
         $this->website = $website;
 
@@ -241,17 +232,15 @@ class BaseUser extends User implements SettingsOwnerInterface
     }
 
 
-
     /**
      * Get website.
      *
      * @return string
      */
-    public function getWebsite ()
+    public function getWebsite()
     {
         return $this->website;
     }
-
 
 
     /**
@@ -261,7 +250,7 @@ class BaseUser extends User implements SettingsOwnerInterface
      *
      * @return $this
      */
-    public function setAvatar ($avatar)
+    public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
 
@@ -269,17 +258,15 @@ class BaseUser extends User implements SettingsOwnerInterface
     }
 
 
-
     /**
      * Get avatar.
      *
      * @return string
      */
-    public function getAvatar ()
+    public function getAvatar()
     {
         return $this->avatar;
     }
-
 
 
     /**
@@ -289,7 +276,7 @@ class BaseUser extends User implements SettingsOwnerInterface
      *
      * @return User
      */
-    public function setPublic ($public)
+    public function setPublic($public)
     {
         $this->public = $public;
 
@@ -297,17 +284,15 @@ class BaseUser extends User implements SettingsOwnerInterface
     }
 
 
-
     /**
      * Get public.
      *
      * @return bool
      */
-    public function getPublic ()
+    public function getPublic()
     {
         return $this->public;
     }
-
 
 
     /**
@@ -315,11 +300,10 @@ class BaseUser extends User implements SettingsOwnerInterface
      *
      * @return bool
      */
-    public function isAdmin ()
+    public function isAdmin()
     {
         return $this->hasRole('ROLE_ADMIN');
     }
-
 
 
     /**
@@ -329,7 +313,7 @@ class BaseUser extends User implements SettingsOwnerInterface
      *
      * @return User
      */
-    public function setAdmin ($admin)
+    public function setAdmin($admin)
     {
         if ($admin) {
             $this->addRole('ROLE_ADMIN');
@@ -341,141 +325,127 @@ class BaseUser extends User implements SettingsOwnerInterface
     }
 
 
-
     /**
      * @param string $addressLine1
      */
-    public function setAddressLine1 ($addressLine1)
+    public function setAddressLine1($addressLine1)
     {
         $this->addressLine1 = $addressLine1;
     }
 
 
-
     /**
      * @return string
      */
-    public function getAddressLine1 ()
+    public function getAddressLine1()
     {
         return $this->addressLine1;
     }
 
 
-
     /**
      * @param string $addressLine2
      */
-    public function setAddressLine2 ($addressLine2)
+    public function setAddressLine2($addressLine2)
     {
         $this->addressLine2 = $addressLine2;
     }
 
 
-
     /**
      * @return string
      */
-    public function getAddressLine2 ()
+    public function getAddressLine2()
     {
         return $this->addressLine2;
     }
 
 
-
     /**
      * @param string $city
      */
-    public function setCity ($city)
+    public function setCity($city)
     {
         $this->city = $city;
     }
 
 
-
     /**
      * @return string
      */
-    public function getCity ()
+    public function getCity()
     {
         return $this->city;
     }
 
 
-
     /**
      * @param string $country
      */
-    public function setCountry ($country)
+    public function setCountry($country)
     {
         $this->country = $country;
     }
 
 
-
     /**
      * @return string
      */
-    public function getCountry ()
+    public function getCountry()
     {
         return $this->country;
     }
 
 
-
     /**
      * @param string $postalCode
      */
-    public function setPostalCode ($postalCode)
+    public function setPostalCode($postalCode)
     {
         $this->postalCode = $postalCode;
     }
 
 
-
     /**
      * @return string
      */
-    public function getPostalCode ()
+    public function getPostalCode()
     {
         return $this->postalCode;
     }
 
 
-
     /**
      * @param string $region
      */
-    public function setRegion ($region)
+    public function setRegion($region)
     {
         $this->region = $region;
     }
 
 
-
     /**
      * @return string
      */
-    public function getRegion ()
+    public function getRegion()
     {
         return $this->region;
     }
 
 
-
     /**
      * @return string
      */
-    public function __toString ()
+    public function __toString()
     {
         return $this->username;
     }
 
 
-
     /**
      * @return int
      */
-    public function getSettingIdentifier ()
+    public function getSettingIdentifier()
     {
         return $this->getId();
     }

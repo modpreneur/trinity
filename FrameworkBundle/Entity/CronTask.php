@@ -8,6 +8,7 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Trinity\FrameworkBundle\Entity\CronTaskRepository")
@@ -55,7 +56,7 @@ class CronTask
     /**
      * @return mixed
      */
-    public function getProcessingTime ()
+    public function getProcessingTime()
     {
         return $this->processingTime;
     }
@@ -64,13 +65,13 @@ class CronTask
     /**
      * @param mixed $processingTime
      */
-    public function setProcessingTime ($processingTime)
+    public function setProcessingTime($processingTime)
     {
         $this->processingTime = $processingTime;
     }
 
 
-    public function getId ()
+    public function getId()
     {
         return $this->id;
     }
@@ -79,7 +80,7 @@ class CronTask
     /**
      * @return mixed
      */
-    public function getCommand ()
+    public function getCommand()
     {
         return $this->command;
     }
@@ -88,7 +89,7 @@ class CronTask
     /**
      * @param mixed $command
      */
-    public function setCommand ($command)
+    public function setCommand($command)
     {
         $this->command = $command;
     }
@@ -97,7 +98,7 @@ class CronTask
     /**
      * @return mixed
      */
-    public function getCreationTime ()
+    public function getCreationTime()
     {
         return $this->creationTime;
     }
@@ -106,7 +107,7 @@ class CronTask
     /**
      * @param mixed $creationTime
      */
-    public function setCreationTime ($creationTime)
+    public function setCreationTime($creationTime)
     {
         $this->creationTime = $creationTime;
     }
@@ -115,7 +116,7 @@ class CronTask
     /**
      * @return int
      */
-    public function getPriority ()
+    public function getPriority()
     {
         return $this->priority;
     }
@@ -124,11 +125,10 @@ class CronTask
     /**
      * @param int $priority
      */
-    public function setPriority ($priority)
+    public function setPriority($priority)
     {
         $this->priority = $priority;
     }
-
 
 
     /**
@@ -138,7 +138,6 @@ class CronTask
     {
         return $this->status;
     }
-
 
 
     /**

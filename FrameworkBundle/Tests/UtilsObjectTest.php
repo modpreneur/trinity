@@ -1,17 +1,19 @@
 <?php
-
-
 namespace Trinity\FrameworkBundle\Tests;
-
 
 use Trinity\FrameworkBundle\Tests\data\EntityObject;
 use Trinity\FrameworkBundle\Utils\ObjectMixin;
 
 
-class UtilsObjectTest extends  \PHPUnit_Framework_TestCase
+/**
+ * Class UtilsObjectTest
+ * @package Trinity\FrameworkBundle\Tests
+ */
+class UtilsObjectTest extends \PHPUnit_Framework_TestCase
 {
 
-    public function testMixins(){
+    public function testMixins()
+    {
         $e = new EntityObject();
 
         $this->assertEquals('11', ObjectMixin::get($e, 'id'));
@@ -28,7 +30,8 @@ class UtilsObjectTest extends  \PHPUnit_Framework_TestCase
      * @expectedException \Trinity\FrameworkBundle\Exception\MemberAccessException
      * @throws \Trinity\FrameworkBundle\Exception\MemberAccessException
      */
-    public function testFunctionWithoutParams(){
+    public function testFunctionWithoutParams()
+    {
         $e = new EntityObject();
         $this->assertEquals(10, ObjectMixin::get($e, 'add()'));
     }
@@ -39,7 +42,8 @@ class UtilsObjectTest extends  \PHPUnit_Framework_TestCase
      * @expectedExceptionMessage Cannot read an undeclared property Trinity\FrameworkBundle\Tests\data\EntityObject::$names or method Trinity\FrameworkBundle\Tests\data\EntityObject::names(), did you mean name?
      * @throws \Trinity\FrameworkBundle\Exception\MemberAccessException
      */
-    public function testHing(){
+    public function testHing()
+    {
         $e = new EntityObject();
         $this->assertEquals(10, ObjectMixin::get($e, 'names'));
     }
@@ -50,7 +54,8 @@ class UtilsObjectTest extends  \PHPUnit_Framework_TestCase
      * @expectedExceptionMessage Cannot read an undeclared property Trinity\FrameworkBundle\Tests\data\EntityObject::$jhvjjv or method Trinity\FrameworkBundle\Tests\data\EntityObject::jhvjjv()
      * @throws \Trinity\FrameworkBundle\Exception\MemberAccessException
      */
-    public function testHing2(){
+    public function testHing2()
+    {
         $e = new EntityObject();
         $this->assertEquals(10, ObjectMixin::get($e, 'jhvjjv'));
     }

@@ -7,8 +7,7 @@
 namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Symfony\Bridge\Doctrine\Tests\Form\ChoiceList\AbstractEntityChoiceListCompositeIdTest;
-use Symfony\Component\Config\Definition\BooleanNode;
+
 
 class CronTaskRepository extends EntityRepository
 {
@@ -19,10 +18,12 @@ class CronTaskRepository extends EntityRepository
      */
     public function findAllNullProcessingtime()
     {
-        $query = $this->getEntityManager()->createQuery('
+        $query = $this->getEntityManager()->createQuery(
+            '
             SELECT cronTask
             FROM TrinityFrameworkBundle:CronTask AS cronTask
-            WHERE cronTask.processingTime IS NULL ORDER BY cronTask.creationTime DESC');
+            WHERE cronTask.processingTime IS NULL ORDER BY cronTask.creationTime DESC'
+        );
 
         return $query->getResult();
     }
@@ -37,11 +38,13 @@ class CronTaskRepository extends EntityRepository
      */
     public function findByCommand($command)
     {
-        $query = $this->getEntityManager()->createQuery('
+        $query = $this->getEntityManager()->createQuery(
+            '
             SELECT cronTask
             FROM TrinityFrameworkBundle:CronTask AS cronTask
             WHERE cronTask.command = :command
-            ')->setParameter('command', $command);
+            '
+        )->setParameter('command', $command);
 
         $result = $query->getResult();
         if (is_array($result)) {
@@ -50,6 +53,7 @@ class CronTaskRepository extends EntityRepository
             return $result;
         }
     }
+
 
     /**
      * Insert unique Job to db
@@ -64,20 +68,22 @@ class CronTaskRepository extends EntityRepository
     public function addJob($command, $procesTime = false)
     {
         if ($procesTime == false) {
-            $query = $this->getEntityManager()->createQuery('
+            $query = $this->getEntityManager()->createQuery(
+                '
 			SELECT j.id
 			FROM TrinityFrameworkBundle:CronTask AS j
 			WHERE j.command = :command
-		')
-                ->setParameter('command', $command);
+		'
+            )->setParameter('command', $command);
         } else {
-            $query = $this->getEntityManager()->createQuery('
+            $query = $this->getEntityManager()->createQuery(
+                '
 			SELECT j.id
 			FROM TrinityFrameworkBundle:CronTask AS j
 			WHERE j.command = :command
 			AND j.processingTime IS NULL
-		')
-                ->setParameter('command', $command);
+		'
+            )->setParameter('command', $command);
         }
 
         $result = $query->getResult();
@@ -90,6 +96,7 @@ class CronTaskRepository extends EntityRepository
             $em = $this->getEntityManager();
             $em->persist($newJob);
             $em->flush();
+
             return $newJob;
         } else {
             return;

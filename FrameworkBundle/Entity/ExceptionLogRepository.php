@@ -8,6 +8,7 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
+
 /**
  * Class SystemLogRepository.
  */
@@ -16,7 +17,7 @@ class ExceptionLogRepository extends EntityRepository
     /**
      * Find the latest logs.
      */
-    public function findLatest ()
+    public function findLatest()
     {
         $qb = $this->createQueryBuilder('l');
 
@@ -32,11 +33,10 @@ class ExceptionLogRepository extends EntityRepository
     }
 
 
-
     /**
      * @return array
      */
-    public function getLast ()
+    public function getLast()
     {
         return $this->findBy([], ['created' => 'DESC'], 10);
     }

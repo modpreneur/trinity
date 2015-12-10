@@ -6,11 +6,13 @@
 
 namespace Trinity\FrameworkBundle\Tests;
 
-use Trinity\FrameworkBundle\Entity\CronTask;
-use Trinity\FrameworkBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\StreamOutput;
+use Trinity\FrameworkBundle\Command;
+use Trinity\FrameworkBundle\Entity\CronTask;
+use Trinity\FrameworkBundle\Utils\BaseWebTest;
+
 
 /**
  * Class TrinityWebTest.
@@ -26,7 +28,7 @@ class TrinityWebTest extends BaseWebTest
     /**
      * Test clear database.
      */
-    public function testDropCreateDatabase ()
+    public function testDropCreateDatabase()
     {
         $kernel = $this->kernel;
         $application = new Application($kernel);
@@ -44,7 +46,7 @@ class TrinityWebTest extends BaseWebTest
      *
      * @depends testDropCreateDatabase
      */
-    public function testInsertToDatabase ()
+    public function testInsertToDatabase()
     {
         $cronTask = new CronTask();
 
@@ -64,7 +66,7 @@ class TrinityWebTest extends BaseWebTest
      *
      * @depends testDropCreateDatabase
      */
-    public function testCheckDataInDatabase ()
+    public function testCheckDataInDatabase()
     {
         $this->testInsertToDatabase();
         $repository = $this->getContainer()->get('doctrine')->getRepository('TrinityFrameworkBundle:CronTask');
@@ -79,7 +81,7 @@ class TrinityWebTest extends BaseWebTest
      *
      * @depends testDropCreateDatabase
      */
-    public function testNullProcessingtime ()
+    public function testNullProcessingtime()
     {
         $this->testInsertToDatabase();
         $repository = $this->getContainer()->get('doctrine')->getRepository('TrinityFrameworkBundle:CronTask');
@@ -93,7 +95,7 @@ class TrinityWebTest extends BaseWebTest
      *
      * @depends testDropCreateDatabase
      */
-    public function testfindAllNullProcessingtime ()
+    public function testfindAllNullProcessingtime()
     {
         $this->testInsertToDatabase();
         $repository = $this->getContainer()->get('doctrine')->getRepository('TrinityFrameworkBundle:CronTask');
@@ -107,7 +109,7 @@ class TrinityWebTest extends BaseWebTest
      *
      * @depends testDropCreateDatabase
      */
-    public function testCreationTime ()
+    public function testCreationTime()
     {
         $this->testInsertToDatabase();
         $repository = $this->getContainer()->get('doctrine')->getRepository('TrinityFrameworkBundle:CronTask');
@@ -124,7 +126,7 @@ class TrinityWebTest extends BaseWebTest
      *
      * @depends testDropCreateDatabase
      */
-    public function testSetCommandWithParse ()
+    public function testSetCommandWithParse()
     {
         $newCronTask = new CronTask();
         $newCronTask->setCommand('cache:clear -p --r 8');

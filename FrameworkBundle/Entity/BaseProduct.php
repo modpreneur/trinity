@@ -6,9 +6,10 @@
 
 namespace Trinity\FrameworkBundle\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Class BaseProduct.
@@ -39,17 +40,15 @@ class BaseProduct
     protected $description;
 
 
-
     /**
      * Get id.
      *
      * @return int
      */
-    public function getId ()
+    public function getId()
     {
         return $this->id;
     }
-
 
 
     /**
@@ -59,7 +58,7 @@ class BaseProduct
      *
      * @return BaseProduct
      */
-    public function setName ($name)
+    public function setName($name)
     {
         $this->name = $name;
 
@@ -67,17 +66,15 @@ class BaseProduct
     }
 
 
-
     /**
      * Get name.
      *
      * @return string
      */
-    public function getName ()
+    public function getName()
     {
         return $this->name;
     }
-
 
 
     /**
@@ -87,7 +84,7 @@ class BaseProduct
      *
      * @return BaseProduct
      */
-    public function setDescription ($description)
+    public function setDescription($description)
     {
         $this->description = $description;
 
@@ -95,23 +92,21 @@ class BaseProduct
     }
 
 
-
     /**
      * Get description.
      *
      * @return string
      */
-    public function getDescription ()
+    public function getDescription()
     {
         return $this->description;
     }
 
 
-
     /**
      * @return string
      */
-    public function __toString ()
+    public function __toString()
     {
         return (string)$this->getName();
     }

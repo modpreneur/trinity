@@ -4,9 +4,6 @@
 namespace Trinity\FrameworkBundle\Tests\data;
 
 
-use Trinity\FrameworkBundle\Utils\ObjectMixin;
-
-
 /**
  * Class EntityObject
  * @package Trinity\FrameworkBundle\Tests\data
@@ -116,7 +113,8 @@ class EntityObject extends EntityParent
     }
 
 
-    public function test($a, $c){
+    public function test($a, $c)
+    {
         return $a + $c;
     }
 

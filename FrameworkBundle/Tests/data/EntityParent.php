@@ -17,12 +17,15 @@ class EntityParent
         return $this->id;
     }
 
-    public function parentFunction(){
+
+    public function parentFunction()
+    {
         return 'parent';
     }
 
 
-    public function add($a, $b){
+    public function add($a, $b)
+    {
         return $a + $b;
     }
 
