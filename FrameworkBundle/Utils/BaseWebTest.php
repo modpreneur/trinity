@@ -4,6 +4,8 @@
 namespace Trinity\FrameworkBundle\Utils;
 
 use Braincrafted\Bundle\TestingBundle\Test\WebTestCase;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\UnitOfWork;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\DependencyInjection\Container;
@@ -90,13 +92,27 @@ abstract class BaseWebTest extends WebTestCase
 
 
     /**
-     * @return \Doctrine\ORM\EntityManager
+     * @param bool $mock
+     * @return EntityManager
      */
-    protected function getEM()
+    protected function getEM($mock = false)
     {
-        $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->setMethods(
-                ['getRepository']
+        if($mock){
+            $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->setMethods(
+                ['getRepository', 'getUnitOfWork']
             )->disableOriginalConstructor()->getMock();
+
+            $uow = $this->getMockBuilder('\Doctrine\ORM\UnitOfWork')
+                ->disableOriginalConstructor()
+                ->getMock();
+
+            $uow->method('getEntityChangeSet')->willReturn(['name' => 'New name']);
+            $em->method('getUnitOfWork')->willReturn($uow);
+
+        }else{
+            return $this->getContainer()
+                ->get('doctrine.orm.default_entity_manager');
+        }
 
         return $em;
     }
