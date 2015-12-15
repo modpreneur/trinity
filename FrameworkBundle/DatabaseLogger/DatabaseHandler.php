@@ -44,6 +44,7 @@ class DatabaseHandler extends AbstractProcessingHandler
      */
     protected function write(array $record)
     {
+
         if ('doctrine' == $record['channel']) {
             if ((int)$record['level'] >= Logger::WARNING) {
                 error_log($record['message']);
@@ -57,6 +58,7 @@ class DatabaseHandler extends AbstractProcessingHandler
             if (strncmp($record['message'], 'Uncaught', 8) == 0) {
                 return;
             };
+
 
             $em = $this->_container->get('doctrine')->getManager();
             $conn = $em->getConnection();
@@ -72,7 +74,7 @@ class DatabaseHandler extends AbstractProcessingHandler
                 if ($token && $token->getUser() && !(is_string($token->getUser()))) {
                     $user = $token->getUser()->getId();
                 }
-                $readable = $this->getReadable();
+                $readable = $this->getReadable($record);
                 $created = date('Y-m-d H:i:s');
                 $serverData = $record['extra']['serverData'];
 
@@ -123,7 +125,25 @@ class DatabaseHandler extends AbstractProcessingHandler
         }
     }
 
-    protected function getReadable(){
-        return "in progress";
+    private function getReadable($e){
+            /*
+             * https://www-304.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/com.ibm.db2z10.doc.codes/src/tpc/db2z_sqlstatevalues.dita
+             * Known SQL codes
+             */
+
+        $SQLTag = "PDOException";
+        if(strncmp($e['message'],$SQLTag,strlen($SQLTag))==0){
+            /*
+             * we got some DBALException
+             */
+            //dump($e);
+            $line = strstr($e['message'],PHP_EOL,true);
+            $short = substr($line,strpos($line,'R: ')+4);
+
+            return ucfirst($short);
+
+        }
+            //readable format not supported yet
+        return "";
     }
 }
