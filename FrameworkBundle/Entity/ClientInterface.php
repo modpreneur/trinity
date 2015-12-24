@@ -7,16 +7,18 @@
 namespace Trinity\FrameworkBundle\Entity;
 
 /**
- * Interface IClient
+ * Interface ClientInterface
  * @package Trinity\FrameworkBundle\Entity
  */
-interface IClient
+interface ClientInterface
 {
     /** @return string */
     public function getNotificationUri();
 
+
     /** @return  boolean */
     public function isNotificationEnabled();
+
 
     /** @return string */
     public function getSecret();

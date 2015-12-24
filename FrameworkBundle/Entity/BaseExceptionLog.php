@@ -102,6 +102,7 @@ class BaseExceptionLog
         return $this;
     }
 
+
     /**
      * @return mixed
      */
@@ -110,6 +111,7 @@ class BaseExceptionLog
         return $this->readable;
     }
 
+
     /**
      * @param mixed $readable
      */
@@ -117,6 +119,7 @@ class BaseExceptionLog
     {
         $this->readable = $readable;
     }
+
 
     /**
      * Get serverData.

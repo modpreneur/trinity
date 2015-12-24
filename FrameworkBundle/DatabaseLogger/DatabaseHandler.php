@@ -125,25 +125,28 @@ class DatabaseHandler extends AbstractProcessingHandler
         }
     }
 
-    private function getReadable($e){
-            /*
-             * https://www-304.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/com.ibm.db2z10.doc.codes/src/tpc/db2z_sqlstatevalues.dita
-             * Known SQL codes
-             */
+
+    private function getReadable($e)
+    {
+        /*
+         * https://www-304.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/com.ibm.db2z10.doc.codes/src/tpc/db2z_sqlstatevalues.dita
+         * Known SQL codes
+         */
 
         $SQLTag = "PDOException";
-        if(strncmp($e['message'],$SQLTag,strlen($SQLTag))==0){
+        if (strncmp($e['message'], $SQLTag, strlen($SQLTag)) == 0) {
             /*
              * we got some DBALException
              */
             //dump($e);
-            $line = strstr($e['message'],PHP_EOL,true);
-            $short = substr($line,strpos($line,'R: ')+4);
+            $line = strstr($e['message'], PHP_EOL, true);
+            $short = substr($line, strpos($line, 'R: ') + 4);
 
             return ucfirst($short);
 
         }
-            //readable format not supported yet
+
+        //readable format not supported yet
         return "";
     }
 }

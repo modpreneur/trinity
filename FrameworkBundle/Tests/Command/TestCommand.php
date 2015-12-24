@@ -22,7 +22,9 @@ class TestCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('test:run')->setDescription('Runs Cron Tasks if needed')->addArgument(
+        $this->setName('test:run')
+            ->setDescription('Runs Cron Tasks if needed')
+            ->addArgument(
                 'InsertCommand',
                 InputArgument::REQUIRED,
                 'Who do you want to greet?'
@@ -34,7 +36,7 @@ class TestCommand extends ContainerAwareCommand
     {
         $cronTask = new CronTask();
 
-        dump($input->getArguments()['InsertCommand']);
+        //dump($input->getArguments()['InsertCommand']);
         $input = new StringInput($input->getArguments()['InsertCommand']);
 
         $input->bind(new InputDefinition());

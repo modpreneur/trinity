@@ -9,6 +9,10 @@ namespace Trinity\FrameworkBundle\Entity;
 use Doctrine\ORM\EntityRepository;
 
 
+/**
+ * Class CronTaskRepository
+ * @package Trinity\FrameworkBundle\Entity
+ */
 class CronTaskRepository extends EntityRepository
 {
     /**
@@ -62,7 +66,7 @@ class CronTaskRepository extends EntityRepository
      *
      * @param Boolean $procesTime
      *
-     * @return Job
+     * @return CronTask|null
      */
 
     public function addJob($command, $procesTime = false)
@@ -102,6 +106,5 @@ class CronTaskRepository extends EntityRepository
             return;
         }
     }
-
 
 }
