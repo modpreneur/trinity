@@ -22,4 +22,8 @@ interface ClientInterface
 
     /** @return string */
     public function getSecret();
+    
+    
+    /** @return string */
+    public function getName();
 }
