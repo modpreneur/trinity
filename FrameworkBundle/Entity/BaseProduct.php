@@ -6,13 +6,17 @@
 
 namespace Trinity\FrameworkBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use Symfony\Component\Validator\Constraints as Assert;
+
 
 
 /**
  * Class BaseProduct.
+ *
+ * @UniqueEntity(fields="name")
  */
 class BaseProduct
 {
