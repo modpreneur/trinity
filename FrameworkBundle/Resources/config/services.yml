@@ -12,3 +12,9 @@ services:
         class: Trinity\FrameworkBundle\DatabaseLogger\DatabaseHandler
         calls:
             - [ setContainer, [ "@service_container" ] ]
+            
+    trinity.twig.extension.full_price:
+      class: Trinity\FrameworkBundle\Twig\FullPriceExtension
+      arguments: [ @settings_manager]
+      tags:
+        - { name: twig.extension }
