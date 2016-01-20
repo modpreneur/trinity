@@ -6,16 +6,19 @@
 namespace Trinity\FrameworkBundle\Twig;
 
 
+
+use Trinity\FrameworkBundle\Services\PriceStringGenerator;
+
 class FullPriceExtension extends \Twig_Extension
 {
-    /** @var  SettingsManager */
-    protected $settingsManager;
+    /** @var PriceStringGenerator */
+    protected $generator;
 
     /**
-     * @param $settingsManager
+     * @param $generator
      */
-    public function __construct($settingsManager) {
-        $this->settingsManager = $settingsManager;
+    public function __construct($generator) {
+        $this->generator = $generator;
     }
 
 
@@ -38,22 +41,7 @@ class FullPriceExtension extends \Twig_Extension
      */
     public function fullPrice($initialPrice, $type, $rebillPrice, $rebillTimes)
     {
-        $currency = $this->settingsManager->get('currency');
-
-        $fullPrice = twig_localized_currency_filter($initialPrice, $currency);
-
-        if ($type === 'recurring'){
-            $fullPrice = $fullPrice.' and ';
-            if ($rebillTimes !== '999')
-                $fullPrice = $fullPrice.($rebillTimes-1).' times ';
-
-            $fullPrice = $fullPrice.twig_localized_currency_filter($rebillPrice, $currency);
-            if($rebillTimes === '999') {
-                $fullPrice = $fullPrice.'lifetime';
-            }
-        }
-
-        return $fullPrice;
+        return $this->generator->generateFullPrice($initialPrice, $type, $rebillPrice, $rebillTimes);
     }
 
 
