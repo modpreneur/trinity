@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jakub Fajkus
- * Date: 20.01.16
- * Time: 16:13
- */
 
 namespace Trinity\FrameworkBundle\Services;
 
@@ -36,12 +30,12 @@ class PriceStringGenerator
 
         if ($type === 'recurring'){
             $fullPrice = $fullPrice.' and ';
-            if ($rebillTimes !== '999')
+            if ($rebillTimes != 999)
                 $fullPrice = $fullPrice.($rebillTimes-1).' times ';
 
             $fullPrice = $fullPrice.twig_localized_currency_filter($rebillPrice, $currency);
-            if($rebillTimes === '999') {
-                $fullPrice = $fullPrice.'lifetime';
+            if($rebillTimes == 999) {
+                $fullPrice = $fullPrice.' lifetime';
             }
         }
 
