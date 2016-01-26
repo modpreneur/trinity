@@ -15,10 +15,10 @@ services:
 
     trinity.services.price_string_generator:
       class: Trinity\FrameworkBundle\Services\PriceStringGenerator
-      arguments: [ @settings_manager]
+      arguments: [ "@settings_manager"]
 
     trinity.twig.extension.full_price:
       class: Trinity\FrameworkBundle\Twig\FullPriceExtension
-      arguments: [ @trinity.services.price_string_generator]
+      arguments: [ "@trinity.services.price_string_generator"]
       tags:
         - { name: twig.extension }
