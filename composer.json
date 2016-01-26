@@ -18,7 +18,8 @@
       "doctrine/doctrine-bundle": "~1.6",
       "doctrine/data-fixtures": "~1",
       "doctrine/doctrine-fixtures-bundle": "~2",
-      "symfony/monolog-bundle": "~2.8"
+      "symfony/monolog-bundle": "~2.8",
+      "trinity/settings": "dev-master"
     },
 
     "require-dev": {
