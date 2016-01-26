@@ -6,7 +6,7 @@
 
 namespace Trinity\FrameworkBundle\Entity;
 
-use Dmishh\Bundle\SettingsBundle\Entity\SettingsOwnerInterface;
+
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User;
 
@@ -16,7 +16,7 @@ use FOS\UserBundle\Model\User;
  *
  * @ORM\MappedSuperclass
  */
-class BaseUser extends User implements SettingsOwnerInterface
+class BaseUser extends User
 {
     /**
      * @ORM\Id
