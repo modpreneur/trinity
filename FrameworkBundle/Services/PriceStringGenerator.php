@@ -3,13 +3,15 @@
 namespace Trinity\FrameworkBundle\Services;
 
 
+use Trinity\Bundle\SettingsBundle\Manager\SettingsManager;
+
 class PriceStringGenerator
 {
     /** @var  SettingsManager */
     protected $settingsManager;
 
     /**
-     * @param $settingsManager
+     * @param SettingsManager $settingsManager
      */
     public function __construct($settingsManager) {
         $this->settingsManager = $settingsManager;
