@@ -1,25 +1,30 @@
 services:
+    trinity.bundle_manager:
+      class: Trinity\FrameworkBundle\Bundle\BundleManager
+      arguments: ["@event_dispatcher", "@trinity.utils.cache"]
 
-    trinity.cache:
-      class: Doctrine\Common\Cache\ApcuCache
-
-    trinity.settings:
-      class: Trinity\Bundle\SettingsBundle\Manager\SettingsManager
+    trinity.utils.cache:
+      class: Trinity\FrameworkBundle\Utils\Cache
       arguments:
-        - "@doctrine.orm.default_entity_manager"
-        - "%settings_manager.defaults%"
-        - "@trinity.cache"
+        - "%kernel.cache_dir%"
 
-    trinity.settings.twig:
-      class: Trinity\Bundle\SettingsBundle\Twig\SettingsExtension
-      arguments:
-        - "@trinity.settings"
-      public: false
+    trinity.logger_database:
+        class: Trinity\FrameworkBundle\DatabaseLogger\DatabaseHandler
+        calls:
+            - [ setContainer, [ "@service_container" ] ]
+
+    trinity.services.price_string_generator:
+      class: Trinity\FrameworkBundle\Services\PriceStringGenerator
+      arguments: [ "@trinity.settings"]
+
+    trinity.twig.extension.full_price:
+      class: Trinity\FrameworkBundle\Twig\FullPriceExtension
+      arguments: [ "@trinity.services.price_string_generator"]
       tags:
-          - { name: twig.extension }
+        - { name: twig.extension }
 
-    admin.form_creator:
-      class: AdminBundle\Services\FormCreator
+    trinity.form_creator:
+      class: Trinity\FrameworkBundle\Services\TrinityFormCreator
       arguments:
         - "@form.factory"
         - "@router"
