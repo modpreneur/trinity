@@ -27,6 +27,11 @@ class TrinityFrameworkExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        if (array_key_exists('locale', $config) && isset($config['locale'])) {
+            $container->setParameter('trinity.framework.locale', $config['locale']);
+        }
+
+
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
     }
