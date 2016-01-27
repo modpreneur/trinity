@@ -28,3 +28,9 @@ services:
       arguments:
         - "@form.factory"
         - "@router"
+
+    trinity.form_creator_syfony_3:
+      class: TrinityFormCreatorSymfony3
+      arguments:
+        - "@form.factory"
+        - "@router"
