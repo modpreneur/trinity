@@ -1,5 +1,8 @@
 <?php
 
+namespace Trinity\FrameworkBundle\Services;
+
+
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
