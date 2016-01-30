@@ -52,8 +52,8 @@ class TrinityFormCreator
         array $formOptions = [],
         string $urlPostfix = "_update",
         string $submitButtonName = "submit",
-        string $submitButtonLabel = "Edit",
-        string $submitButtonClasses = "button edit"
+        string $submitButtonLabel = "Update",
+        string $submitButtonClasses = "button button-success"
 
     ):FormInterface
     {
@@ -111,8 +111,8 @@ class TrinityFormCreator
         array $formOptions = [],
         string $urlPostfix = "_create",
         string $submitButtonName = "submit",
-        string $submitButtonLabel = "Edit",
-        string $submitButtonClasses = "button edit"
+        string $submitButtonLabel = "Create",
+        string $submitButtonClasses = "button button-success"
     ):FormInterface
     {
 
@@ -167,7 +167,7 @@ class TrinityFormCreator
         string $urlPostfix = "_delete",
         string $submitButtonName = "submit",
         string $submitButtonLabel = "Delete",
-        string $submitButtonClasses = "button delete",
+        string $submitButtonClasses = "button button-danger",
         string $submitButtonOnClick = "return confirm('Are you sure?')"
     ):FormInterface
     {
