@@ -1,12 +1,4 @@
 services:
-    trinity.bundle_manager:
-      class: Trinity\FrameworkBundle\Bundle\BundleManager
-      arguments: ["@event_dispatcher", "@trinity.utils.cache"]
-
-    trinity.utils.cache:
-      class: Trinity\FrameworkBundle\Utils\Cache
-      arguments:
-        - "%kernel.cache_dir%"
 
     trinity.logger_database:
         class: Trinity\FrameworkBundle\DatabaseLogger\DatabaseHandler
