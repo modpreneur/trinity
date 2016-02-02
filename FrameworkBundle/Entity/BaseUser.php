@@ -8,6 +8,8 @@ namespace Trinity\FrameworkBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use FOS\UserBundle\Model\User;
 
 
@@ -15,6 +17,9 @@ use FOS\UserBundle\Model\User;
  * Class BaseUser.
  *
  * @ORM\MappedSuperclass
+ *
+ * @UniqueEntity(fields={"username"})
+ * @UniqueEntity(fields={"email"})
  */
 class BaseUser extends User
 {
@@ -27,31 +32,66 @@ class BaseUser extends User
 
     /**
      * @var string
+     * @Assert\Email(
+     *     checkMX = true,
+     *     checkHost = true,
+     *     strict = true
+     * )
+     */
+    protected $email;
+
+    /**
+     * @var string
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "First name cannot be longer than {{ limit }} characters"
+     * )
      */
     protected $firstName;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Last name cannot be longer than {{ limit }} characters"
+     * )
      */
     protected $lastName;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Phone number cannot be longer than {{ limit }} characters"
+     * )
      */
     protected $phoneNumber;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Website cannot be longer than {{ limit }} characters"
+     * )
      */
     protected $website;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Avatar path cannot be longer than {{ limit }} characters"
+     * )
      */
     protected $avatar;
 
@@ -70,32 +110,81 @@ class BaseUser extends User
     /**
      * @var string
      * @ORM\Column(type="string", length=32, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 32,
+     *      maxMessage = "Region cannot be longer than {{ limit }} characters"
+     * )
      */
     protected $region;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=32, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 32,
+     *      maxMessage = "City cannot be longer than {{ limit }} characters"
+     * )
      */
     protected $city;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Adress cannot be longer than {{ limit }} characters"
+     * )
      */
     protected $addressLine1;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 255,
+     *      maxMessage = "Adress cannot be longer than {{ limit }} characters"
+     * )
      */
     protected $addressLine2;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=10, nullable=true)
+     *
+     * @Assert\Length(
+     *      max = 10,
+     *      maxMessage = "Postal code cannot be longer than {{ limit }} characters"
+     * )
      */
     protected $postalCode;
+
+
+    /**
+     * @Assert\Regex(
+     *     pattern="/.{8}/",
+     *     message="Password must contain at least 8 characters."
+     * )
+     * @Assert\Regex(
+     *     pattern="/[a-z]/",
+     *     message="Password must contain at least 1 lowercase."
+     * )
+     * @Assert\Regex(
+     *     pattern="/[A-Z]/",
+     *     message="Password must contain at least 1 uppercase."
+     * )
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     message="Password must contain at least 1 number."
+     * )
+     */
+    protected $plainPassword;
+
+
+
 
 
     /**
