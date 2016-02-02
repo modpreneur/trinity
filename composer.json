@@ -20,7 +20,7 @@
       "doctrine/doctrine-fixtures-bundle": "~2",
       "symfony/monolog-bundle": "~2.8",
       "trinity/settings": "dev-master",
-      "egulias/email-validator": "~1.2",
+      "egulias/email-validator": "~1.2"
     },
 
     "require-dev": {
