@@ -15,6 +15,15 @@ services:
       tags:
         - { name: twig.extension }
 
+    trinity.dynamo.log.service:
+      class: Trinity\FrameworkBundle\Services\DynamoDBService
+      arguments:
+        - "%trinity.framework.dynamo_host%"
+        - "%trinity.framework.dynamo_port%"
+        - "%trinity.aws_region%"
+        - "%trinity.aws_key%"
+        - "%trinity.aws_secret%"
+
     trinity.form_creator:
       class: Trinity\FrameworkBundle\Services\TrinityFormCreator
       arguments:
