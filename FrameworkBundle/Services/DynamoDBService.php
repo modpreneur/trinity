@@ -40,8 +40,6 @@ class DynamoDBService
             ),
         ]);
         $this->connection = $sdk->createDynamoDb();
-
-
         $this->checkLogs();
     }
 
