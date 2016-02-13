@@ -20,6 +20,7 @@
       "doctrine/doctrine-fixtures-bundle": "~2",
       "symfony/monolog-bundle": "~2.8",
       "trinity/settings": "dev-master",
+      "aws/aws-sdk-php": "~3.11",
       "egulias/email-validator": "~1.2"
     },
 
