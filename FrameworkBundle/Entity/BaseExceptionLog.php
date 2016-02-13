@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /** @ORM\MappedSuperclass */
-class BaseExceptionLog
+class BaseExceptionLog extends BaseDynamoLog
 {
     /**
      * @var int
@@ -233,4 +233,6 @@ class BaseExceptionLog
     {
         $this->ip = $ip;
     }
+
+
 }
