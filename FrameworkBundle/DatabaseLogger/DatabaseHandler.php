@@ -115,6 +115,28 @@ class DatabaseHandler extends AbstractProcessingHandler
                 }
 
                 $conn->commit();
+
+                if($this->_container->getParameter('trinity.framework.dynamo_logs')){
+                    dump('Dynamo logs enabled');
+                    $this->_container->get('trinity.dynamo.log.service')->writeIntoExceptionLog(
+                        $this->dynamoFormatException(
+                            $record['message'],
+                            $record['level'],
+                            $serverData,
+                            $url,
+                            $ip,
+                            $user,
+                            $readable
+                        ));
+
+
+                }else{
+                    dump('Dynamo logs are not enabled. Do you have trinity framework configured?');
+                }
+
+
+
+
             } catch (\Exception $e) {
                 $conn->rollBack();
 
@@ -123,6 +145,43 @@ class DatabaseHandler extends AbstractProcessingHandler
                 error_log($e->getMessage());
             }
         }
+    }
+
+
+    /**
+     * @param string $message
+     * @param int $level
+     * @param string $serverData
+     * @param string $url
+     * @param string $ip
+     * @param int $user
+     * @param string $readable
+     * @return array
+     */
+
+
+    private function dynamoFormatException(
+         $message,
+         $level,
+         $serverData,
+         $url,
+         $ip=null,
+         $user=null,
+         $readable=null
+    ){
+
+        $return =[];
+
+        if($message)    $return['log']   = ['S' => "${message}"];
+        if($level)      $return['level']     = ['S' => "${level}"];
+        if($serverData) $return['serverData']= ['S' => "${serverData}"];
+        if($url)        $return['url']       = ['S' => "${url}"];
+        if($ip)         $return['ip']        = ['S' => "${ip}"];
+        if($user)       $return['user']      = ['S' => "${user}"];
+        if($readable)   $return['readable']  = ['S' => "${readable}"];
+
+        return $return;
+
     }
 
 

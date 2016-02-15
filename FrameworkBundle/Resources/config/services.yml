@@ -20,3 +20,12 @@ services:
       arguments:
         - "@form.factory"
         - "@router"
+
+    trinity.dynamo.log.service:
+      class: Trinity\FrameworkBundle\Services\DynamoDBService
+      arguments:
+        - "%trinity.framework.dynamo_host%"
+        - "%trinity.framework.dynamo_port%"
+        - "%trinity.framework.aws_key%"
+        - "%trinity.framework.aws_secret%"
+        - "%trinity.framework.aws_region%"

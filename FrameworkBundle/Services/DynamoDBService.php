@@ -146,13 +146,30 @@ class DynamoDBService
         }
             //fix date format, store key
         $entity->setDynamoKey($entity->getCreated());
+            //this ignores microseconds, they are important in key but not in view
         $entity->setCreated(explode(' ',$entity->getCreated())[1]);
 
 
         return $entity;
     }
 
+    /**
+     * @param BaseDynamoLog $entity
+     * @param $tableName
+     * @return array
+     */
 
-
+    public function scanByTableName(BaseDynamoLog $entity,$tableName){
+//        $entity = new ExceptionLog();
+        $results=$this->connection->scan(['TableName' => $tableName,]);
+        $return =[];
+        foreach($results['Items'] as $result){
+            $entity= $this->decodeDynamoFormat($entity,$result);
+            $return[$entity->getCreated()] = $entity;
+        }
+            //TODO: Try to make dynamo sort it for you
+        ksort($return);
+        return $return;
+    }
 
 }

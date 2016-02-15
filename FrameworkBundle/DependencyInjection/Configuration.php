@@ -26,9 +26,18 @@ class Configuration implements ConfigurationInterface
         $rootNode = $treeBuilder->root('trinity_framework');
         $rootNode
             ->children()
-            ->scalarNode('locale')
-            ->defaultValue('en')
-        ->end();
+                ->scalarNode('locale')
+                    ->defaultValue('en')
+                ->end()->end()//end locale
+            ->children()
+                ->arrayNode('dynamo_logs')
+                ->children()
+                    ->scalarNode('dynamo_host')->isRequired()->cannotBeEmpty()->end()
+                    ->scalarNode('dynamo_port')->isRequired()->cannotBeEmpty()->end()
+                    ->scalarNode('aws_key')->isRequired()->cannotBeEmpty()->end()
+                    ->scalarNode('aws_secret')->isRequired()->cannotBeEmpty()->end()
+                    ->scalarNode('aws_region')->isRequired()->cannotBeEmpty()->end()
+            ->end();
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
