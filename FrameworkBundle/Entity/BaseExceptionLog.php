@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /** @ORM\MappedSuperclass */
-class BaseExceptionLog extends BaseDynamoLog
+class BaseExceptionLog
 {
     /**
      * @var int
