@@ -129,27 +129,27 @@ class DatabaseHandler extends AbstractProcessingHandler
                     error_log($record['message']);
                     error_log($e->getMessage());
                 }
-                try {
-                    if ($this->_container->getParameter('trinity.logger.dynamo_logs')) {
-
-                        dump('Dynamo logs enabled');
-                        $this->_container->get('trinity.dynamo.log.service')->writeIntoExceptionLog(
-                            $this->dynamoFormatException(
-                                $record['message'],
-                                $record['level'],
-                                $serverData,
-                                $url,
-                                $ip,
-                                $user,
-                                $readable
-                            ));
-
-                    } else {
-                      //  dump('Dynamo logs are not enabled. Do you have trinity framework configured?');
-                    }
-                }catch(\Exception $e){
-                    dump($e);
-                }
+//                try {
+//                    if ($this->_container->getParameter('trinity.logger.dynamo_logs')) {
+//
+//                        dump('Dynamo logs enabled');
+//                        $this->_container->get('trinity.dynamo.log.service')->writeIntoExceptionLog(
+//                            $this->dynamoFormatException(
+//                                $record['message'],
+//                                $record['level'],
+//                                $serverData,
+//                                $url,
+//                                $ip,
+//                                $user,
+//                                $readable
+//                            ));
+//
+//                    } else {
+//                      //  dump('Dynamo logs are not enabled. Do you have trinity framework configured?');
+//                    }
+//                }catch(\Exception $e){
+//                    dump($e);
+//                }
 
 
         }
