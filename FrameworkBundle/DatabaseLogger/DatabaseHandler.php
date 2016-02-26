@@ -44,7 +44,7 @@ class DatabaseHandler extends AbstractProcessingHandler
      */
     protected function write(array $record)
     {
-
+        $readable = "";
         if ('doctrine' == $record['channel']) {
             if ((int)$record['level'] >= Logger::WARNING) {
                 error_log($record['message']);
@@ -59,6 +59,9 @@ class DatabaseHandler extends AbstractProcessingHandler
                 return;
             };
 
+            /*
+             * Gabi-TODO: No EM use new entity->to DynamoArray -> write into dynamo
+             */
 
             $em = $this->_container->get('doctrine')->getManager();
             $conn = $em->getConnection();
@@ -77,6 +80,9 @@ class DatabaseHandler extends AbstractProcessingHandler
                 $readable = $this->getReadable($record);
                 $created = date('Y-m-d H:i:s');
                 $serverData = $record['extra']['serverData'];
+
+                    //sending into controller
+                $this->_container->get('session')->set('readable', $readable);
 
                 $conn->beginTransaction();
                 $stmt = $conn->prepare(
@@ -114,36 +120,38 @@ class DatabaseHandler extends AbstractProcessingHandler
                     $notificationService->pairLogWithEntity($row['id'], $notification);
                 }
 
-                $conn->commit();
+                    $conn->commit();
+                } catch (\Exception $e) {
 
-                if($this->_container->getParameter('trinity.framework.dynamo_logs')){
-                    dump('Dynamo logs enabled');
-                    $this->_container->get('trinity.dynamo.log.service')->writeIntoExceptionLog(
-                        $this->dynamoFormatException(
-                            $record['message'],
-                            $record['level'],
-                            $serverData,
-                            $url,
-                            $ip,
-                            $user,
-                            $readable
-                        ));
+                    $conn->rollBack();
 
+                    // php logs
+                    error_log($record['message']);
+                    error_log($e->getMessage());
+                }
+                try {
+                    if ($this->_container->getParameter('trinity.logger.dynamo_logs')) {
 
-                }else{
-                    dump('Dynamo logs are not enabled. Do you have trinity framework configured?');
+                        dump('Dynamo logs enabled');
+                        $this->_container->get('trinity.dynamo.log.service')->writeIntoExceptionLog(
+                            $this->dynamoFormatException(
+                                $record['message'],
+                                $record['level'],
+                                $serverData,
+                                $url,
+                                $ip,
+                                $user,
+                                $readable
+                            ));
+
+                    } else {
+                      //  dump('Dynamo logs are not enabled. Do you have trinity framework configured?');
+                    }
+                }catch(\Exception $e){
+                    dump($e);
                 }
 
 
-
-
-            } catch (\Exception $e) {
-                $conn->rollBack();
-
-                // php logs
-                error_log($record['message']);
-                error_log($e->getMessage());
-            }
         }
     }
 
