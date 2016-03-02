@@ -72,7 +72,7 @@ class PriceStringGenerator
             }
 
             return ($formatter->formatCurrency($initialPrice+0, $currency)).' and '
-            .$rebillTimes.' times'.$formatter->formatCurrency($rebillPrice+0,
+            .$rebillTimes.' times '.$formatter->formatCurrency($rebillPrice+0,
                 $currency).' '.$str;
         }
 
