@@ -8,6 +8,7 @@ namespace Trinity\FrameworkBundle\DatabaseLogger;
 
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
+use Necktie\AppBundle\Entity\ExceptionLog;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
@@ -59,31 +60,36 @@ class DatabaseHandler extends AbstractProcessingHandler
                 return;
             };
 
-            /*
-             * Gabi-TODO: No EM use new entity->to DynamoArray -> write into dynamo
-             */
-
             $em = $this->_container->get('doctrine')->getManager();
             $conn = $em->getConnection();
             $conn->beginTransaction();
 
+            $exception = new \Trinity\FrameworkBundle\Entity\ExceptionLog();
+
+            /*
+             * Data gathering
+             */
+            $url = ($this->_container->get('request')->getUri());
+            $ip = ($this->_container->get('request')->getClientIp());
+
+            $token = $this->_container->get('security.token_storage')->getToken();
+            $user = null;
+
+            if ($token && $token->getUser() && !(is_string($token->getUser()))) {
+                $user = $token->getUser()->getId();
+            }
+            $readable = $this->getReadable($record);
+            $created = date('Y-m-d H:i:s');
+            $serverData = $record['extra']['serverData'];
+
+                //sending into controller
+            $this->_container->get('session')->set('readable', $readable);
+
             try {
-                $url = ($this->_container->get('request')->getUri());
-                $ip = ($this->_container->get('request')->getClientIp());
 
-                $token = $this->_container->get('security.token_storage')->getToken();
-                $user = null;
-
-                if ($token && $token->getUser() && !(is_string($token->getUser()))) {
-                    $user = $token->getUser()->getId();
-                }
-                $readable = $this->getReadable($record);
-                $created = date('Y-m-d H:i:s');
-                $serverData = $record['extra']['serverData'];
-
-                    //sending into controller
-                $this->_container->get('session')->set('readable', $readable);
-
+                /*
+                 * Doctrine
+                 */
                 $conn->beginTransaction();
                 $stmt = $conn->prepare(
                     'INSERT INTO exception_log(log, level, serverData, created, url, ip, user_id, readable)
@@ -120,77 +126,50 @@ class DatabaseHandler extends AbstractProcessingHandler
                     $notificationService->pairLogWithEntity($row['id'], $notification);
                 }
 
-                    $conn->commit();
-                } catch (\Exception $e) {
+                $conn->commit();
+            } catch (\Exception $e) {
 
-                    $conn->rollBack();
+                $conn->rollBack();
 
-                    // php logs
-                    error_log($record['message']);
-                    error_log($e->getMessage());
-                }
-//                try {
-//                    if ($this->_container->getParameter('trinity.logger.dynamo_logs')) {
-//
-//                        dump('Dynamo logs enabled');
-//                        $this->_container->get('trinity.dynamo.log.service')->writeIntoExceptionLog(
-//                            $this->dynamoFormatException(
-//                                $record['message'],
-//                                $record['level'],
-//                                $serverData,
-//                                $url,
-//                                $ip,
-//                                $user,
-//                                $readable
-//                            ));
-//
-//                    } else {
-//                      //  dump('Dynamo logs are not enabled. Do you have trinity framework configured?');
-//                    }
-//                }catch(\Exception $e){
-//                    dump($e);
-//                }
+                // php logs
+                error_log($record['message']);
+                error_log($e->getMessage());
+            }
+
+            /*
+             * Elastic part
+             */
+            //log, level, serverData, created, url, ip, user_id, readable
+
+            $exception->setLog($record['message']);
+            $exception->setLevel($record['level']);
+            $exception->setServerData($serverData);
+            $exception->setCreated(new \DateTime());
+            $exception->setUrl($url);
+            $exception->setIp($ip);
+            if ($token && $token->getUser() && !(is_string($token->getUser()))) {
+                $exception->setUser($token->getUser());
+            }
+            $exception->setReadable($readable);
+
+
+
+            try {
+
+                dump($this->_container->get('trinity.elastic.log.service')
+                    ->writeInto('ExceptionLog',$exception));
+
+            }catch(\InvalidArgumentException $e){
+                //For others projects that may not have trinity logger bundle
+
+                ///('Elastic logs are not enabled. Do you have trinity logger configured?');
+            }
 
 
         }
     }
 
 
-    /**
-     * @param string $message
-     * @param int $level
-     * @param string $serverData
-     * @param string $url
-     * @param string $ip
-     * @param int $user
-     * @param string $readable
-     * @return array
-     */
-
-
-    private function dynamoFormatException(
-         $message,
-         $level,
-         $serverData,
-         $url,
-         $ip=null,
-         $user=null,
-         $readable=null
-    ){
-
-        $return =[];
-
-        if($message)    $return['log']   = ['S' => "${message}"];
-        if($level)      $return['level']     = ['S' => "${level}"];
-        if($serverData) $return['serverData']= ['S' => "${serverData}"];
-        if($url)        $return['url']       = ['S' => "${url}"];
-        if($ip)         $return['ip']        = ['S' => "${ip}"];
-        if($user)       $return['user']      = ['S' => "${user}"];
-        if($readable)   $return['readable']  = ['S' => "${readable}"];
-
-        return $return;
-
-    }
 
 
     private function getReadable($e)

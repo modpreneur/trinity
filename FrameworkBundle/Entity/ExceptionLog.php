@@ -6,18 +6,14 @@
 
 namespace Trinity\FrameworkBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 
 /**
- *
- * @deprecated
- *
- * @ORM\MappedSuperclass
-
-
+ * Class ExceptionLog
+ * @package Trinity\FrameworkBundle\Entity
  */
-class BaseExceptionLog
+
+
+class ExceptionLog
 {
     /**
      * @var int
@@ -250,5 +246,29 @@ class BaseExceptionLog
         $this->ip = $ip;
     }
 
+    /**
+     * @var User
+     */
+    private $user;
 
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    public function __toString()
+    {
+        return (string)$this->id;
+    }
 }
