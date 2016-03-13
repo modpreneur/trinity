@@ -8,8 +8,8 @@ namespace Trinity\FrameworkBundle\DatabaseLogger;
 
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
-use Necktie\AppBundle\Entity\ExceptionLog;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Trinity\FrameworkBundle\Entity\ExceptionLog;
 
 
 /**
@@ -64,7 +64,7 @@ class DatabaseHandler extends AbstractProcessingHandler
             $conn = $em->getConnection();
             $conn->beginTransaction();
 
-            $exception = new \Trinity\FrameworkBundle\Entity\ExceptionLog();
+            $exception = new ExceptionLog();
 
             /*
              * Data gathering
