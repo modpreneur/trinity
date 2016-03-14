@@ -8,10 +8,11 @@ namespace Trinity\FrameworkBundle\DatabaseLogger;
 
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Trinity\Bundle\LoggerBundle\Services\ElasticLogService;
 use Trinity\FrameworkBundle\Entity\ExceptionLog;
-use Symfony\Component\HttpFoundation\Request;
 
 
 /**
@@ -26,19 +27,25 @@ class DatabaseHandler extends AbstractProcessingHandler
     /** @var  Session */
     protected $session;
 
+    /** @var RequestStack */
+    private $requestStack;
+
+    /** @var  ElasticLogService */
     private $esLogger;
 
 
     /**
      * @param int Session $session
      * @param TokenStorageInterface $tokenStorage
-     * @param $esLogger
+     * @param RequestStack $requestStack
+     * @param ElasticLogService $esLogger
      * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct(Session $session, TokenStorageInterface $tokenStorage, $esLogger, $level = Logger::DEBUG, $bubble = true)
+    public function __construct(Session $session, TokenStorageInterface $tokenStorage, RequestStack $requestStack, ElasticLogService $esLogger, $level = Logger::DEBUG, $bubble = true)
     {
         $this->tokenStorage = $tokenStorage;
         $this->session = $session;
+        $this->requestStack= $requestStack;
         $this->esLogger = $esLogger;
         parent::__construct($level, $bubble);
     }
@@ -81,7 +88,7 @@ class DatabaseHandler extends AbstractProcessingHandler
 //            /*
 //             * Data gathering
 //             */
-            $request = Request::createFromGlobals();
+            $request = $this->requestStack->getCurrentRequest();
             $url = $request->getUri();
             $ip = $request->getClientIp();
 //
