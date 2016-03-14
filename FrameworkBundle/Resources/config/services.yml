@@ -2,6 +2,10 @@ services:
 
     trinity.logger_database:
         class: Trinity\FrameworkBundle\DatabaseLogger\DatabaseHandler
+        arguments:
+          - "@doctrine"
+          - "@router"
+
         calls:
             - [ setContainer, [ "@service_container" ] ]
 

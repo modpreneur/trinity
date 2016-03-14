@@ -71,8 +71,8 @@ class DatabaseHandler extends AbstractProcessingHandler
              * Data gathering
              */
             $request = Request::createFromGlobals();
-            $url = ($request->get('request')->getUri());
-            $ip = ($request->get('request')->getClientIp());
+            $url = $request->getUri();
+            $ip = $request->getClientIp();
 
             $token = $this->_container->get('security.token_storage')->getToken();
             $user = null;
