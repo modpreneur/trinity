@@ -19,9 +19,10 @@
       "doctrine/data-fixtures": "~1",
       "doctrine/doctrine-fixtures-bundle": "~2",
       "symfony/monolog-bundle": "~2.8",
-      "trinity/settings": "dev-master",
       "aws/aws-sdk-php": "~3.11",
-      "egulias/email-validator": "~1.2"
+      "egulias/email-validator": "~1.2",
+      "trinity/settings": "dev-master",
+      "trinity/logger": "dev-master"
     },
 
     "require-dev": {

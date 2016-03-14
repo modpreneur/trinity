@@ -21,9 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 class DatabaseHandler extends AbstractProcessingHandler
 {
 
-    /** @var  EntityManagerInterface */
-    protected $em;
-
     /** @var  TokenStorageInterface */
     private $tokenStorage;
 
@@ -31,17 +28,20 @@ class DatabaseHandler extends AbstractProcessingHandler
     protected $session;
 
 
+    private $esLogger;
+
+
     /**
-     * @param EntityManagerInterface $em
      * @param int Session $session
      * @param TokenStorageInterface $tokenStorage
+     * @param $esLogger
      * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct(EntityManagerInterface $em, Session $session, TokenStorageInterface $tokenStorage, $level = Logger::DEBUG, $bubble = true)
+    public function __construct(Session $session, TokenStorageInterface $tokenStorage, $esLogger, $level = Logger::DEBUG, $bubble = true)
     {
-        $this->em = $em;
         $this->tokenStorage = $tokenStorage;
         $this->session = $session;
+        $this->esLogger = $esLogger;
         parent::__construct($level, $bubble);
     }
 
@@ -65,7 +65,6 @@ class DatabaseHandler extends AbstractProcessingHandler
             if ((int)$record['level'] >= Logger::WARNING) {
                 error_log($record['message']);
             }
-
             return;
         }
 
@@ -74,82 +73,83 @@ class DatabaseHandler extends AbstractProcessingHandler
             if (strncmp($record['message'], 'Uncaught', 8) == 0) {
                 return;
             };
-
-
-            $this->em->getConnection()->beginTransaction();
-
+//
+//
+//            $conn = $this->em->getConnection();
+//            $conn->beginTransaction();
+//
             $exception = new ExceptionLog();
-
-            /*
-             * Data gathering
-             */
+//
+//            /*
+//             * Data gathering
+//             */
             $request = Request::createFromGlobals();
             $url = $request->getUri();
             $ip = $request->getClientIp();
-
+//
             $token = $this->tokenStorage->getToken();
-            $user = null;
-
-            if ($token && $token->getUser() && !(is_string($token->getUser()))) {
-                $user = $token->getUser()->getId();
-            }
+//            $user = null;
+//
+//            if ($token && $token->getUser() && !(is_string($token->getUser()))) {
+//                $user = $token->getUser()->getId();
+//            }
             $readable = $this->getReadable($record);
-            $created = date('Y-m-d H:i:s');
+//            $created = date('Y-m-d H:i:s');
             $serverData = $record['extra']['serverData'];
-
+//
                 //sending into controller
             $this->session->set('readable', $readable);
-
-            try {
-
-                /*
-                 * Doctrine
-                 */
-                $conn->beginTransaction();
-                $stmt = $conn->prepare(
-                    'INSERT INTO exception_log(log, level, serverData, created, url, ip, user_id, readable)
-                                            VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)
-                                            RETURNING id;
-                                           '
-                );
-
-                $stmt->bindValue(1, $conn->quote($record['message']));
-                $stmt->bindValue(2, $record['level']);
-                $stmt->bindValue(3, $conn->quote($serverData));
-                $stmt->bindValue(4, $created);
-                $stmt->bindValue(5, $url);
-                $stmt->bindValue(6, $ip);
-                $stmt->bindValue(7, $user);
-                $stmt->bindValue(8, $readable);
-
-                $stmt->execute();
-                $conn->commit();
-                $row = $stmt->fetch();
-
-                if (isset($record['context']['notification']) && isset($record['context']['notificationService'])) {
-                    $notification = $record['context']['notification'];
-                    $notificationService = $record['context']['notificationService'];
-
-                    if (!is_object($notification) || !is_object($notificationService)) {
-                        throw new \Exception('Service or entity is not valid object in DatabaseHandler');
-                    }
-
-                    if (!isset($row['id'])) {
-                        throw new \Exception('No error id.');
-                    }
-
-                    $notificationService->pairLogWithEntity($row['id'], $notification);
-                }
-
-                $conn->commit();
-            } catch (\Exception $e) {
-
-                $conn->rollBack();
-
-                // php logs
-                error_log($record['message']);
-                error_log($e->getMessage());
-            }
+//
+//            try {
+//
+//                /*
+//                 * Doctrine
+//                 */
+//                $conn->beginTransaction();
+//                $stmt = $conn->prepare(
+//                    'INSERT INTO exception_log(log, level, serverData, created, url, ip, user_id, readable)
+//                                            VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)
+//                                            RETURNING id;
+//                                           '
+//                );
+//
+//                $stmt->bindValue(1, $conn->quote($record['message']));
+//                $stmt->bindValue(2, $record['level']);
+//                $stmt->bindValue(3, $conn->quote($serverData));
+//                $stmt->bindValue(4, $created);
+//                $stmt->bindValue(5, $url);
+//                $stmt->bindValue(6, $ip);
+//                $stmt->bindValue(7, $user);
+//                $stmt->bindValue(8, $readable);
+//
+//                $stmt->execute();
+//                $conn->commit();
+//                $row = $stmt->fetch();
+//
+//                if (isset($record['context']['notification']) && isset($record['context']['notificationService'])) {
+//                    $notification = $record['context']['notification'];
+//                    $notificationService = $record['context']['notificationService'];
+//
+//                    if (!is_object($notification) || !is_object($notificationService)) {
+//                        throw new \Exception('Service or entity is not valid object in DatabaseHandler');
+//                    }
+//
+//                    if (!isset($row['id'])) {
+//                        throw new \Exception('No error id.');
+//                    }
+//
+//                    $notificationService->pairLogWithEntity($row['id'], $notification);
+//                }
+//
+//                $conn->commit();
+//            } catch (\Exception $e) {
+//
+//                $conn->rollBack();
+//
+//                // php logs
+//                error_log($record['message']);
+//                error_log($e->getMessage());
+//            }
 
             /*
              * Elastic part
@@ -170,9 +170,7 @@ class DatabaseHandler extends AbstractProcessingHandler
 
 
             try {
-
-//                dump($this->_container->get('trinity.elastic.log.service')
-//                    ->writeInto('ExceptionLog',$exception));
+                dump($this->esLogger->writeInto('ExceptionLog',$exception));
 
             }catch(\InvalidArgumentException $e){
                 //For others projects that may not have trinity logger bundle

@@ -3,9 +3,9 @@ services:
     trinity.logger_database:
         class: Trinity\FrameworkBundle\DatabaseLogger\DatabaseHandler
         arguments:
-          - "@doctrine.orm.entity_manager"
           - "@session"
           - "@security.token_storage"
+          - "@trinity.elastic.log.service"
 
 
     trinity.services.price_string_generator:
