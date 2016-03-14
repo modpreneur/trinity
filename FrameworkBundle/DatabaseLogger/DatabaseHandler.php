@@ -10,6 +10,7 @@ use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Trinity\FrameworkBundle\Entity\ExceptionLog;
+use Symfony\Component\HttpFoundation\Request;
 
 
 /**
@@ -69,8 +70,9 @@ class DatabaseHandler extends AbstractProcessingHandler
             /*
              * Data gathering
              */
-            $url = ($this->_container->get('request')->getUri());
-            $ip = ($this->_container->get('request')->getClientIp());
+            $request = Request::createFromGlobals();
+            $url = ($request->get('request')->getUri());
+            $ip = ($request->get('request')->getClientIp());
 
             $token = $this->_container->get('security.token_storage')->getToken();
             $user = null;
