@@ -32,7 +32,9 @@ class DatabaseHandler extends AbstractProcessingHandler
 
 
     /**
-     * @param int $level The minimum logging level at which this handler will be triggered
+     * @param EntityManagerInterface $em
+     * @param int Session $session
+     * @param TokenStorageInterface $tokenStorage
      * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
      */
     public function __construct(EntityManagerInterface $em, Session $session, TokenStorageInterface $tokenStorage, $level = Logger::DEBUG, $bubble = true)
@@ -74,8 +76,7 @@ class DatabaseHandler extends AbstractProcessingHandler
             };
 
 
-            $conn = $em->getConnection();
-            $conn->beginTransaction();
+            $this->em->getConnection()->beginTransaction();
 
             $exception = new ExceptionLog();
 
