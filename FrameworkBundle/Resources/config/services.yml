@@ -3,11 +3,10 @@ services:
     trinity.logger_database:
         class: Trinity\FrameworkBundle\DatabaseLogger\DatabaseHandler
         arguments:
-          - "@doctrine"
-          - "@router"
+          - "@doctrine.orm.entity_manager"
+          - "@session"
+          - "@security.token_storage"
 
-        calls:
-            - [ setContainer, [ "@service_container" ] ]
 
     trinity.services.price_string_generator:
       class: Trinity\FrameworkBundle\Services\PriceStringGenerator

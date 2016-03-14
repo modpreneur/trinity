@@ -6,9 +6,11 @@
 
 namespace Trinity\FrameworkBundle\DatabaseLogger;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Trinity\FrameworkBundle\Entity\ExceptionLog;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -18,27 +20,37 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class DatabaseHandler extends AbstractProcessingHandler
 {
-    /** @var  ContainerInterface */
-    protected $_container;
+
+    /** @var  EntityManagerInterface */
+    protected $em;
+
+    /** @var  TokenStorageInterface */
+    private $tokenStorage;
+
+    /** @var  Session */
+    protected $session;
 
 
     /**
      * @param int $level The minimum logging level at which this handler will be triggered
      * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct($level = Logger::DEBUG, $bubble = true)
+    public function __construct(EntityManagerInterface $em, Session $session, TokenStorageInterface $tokenStorage, $level = Logger::DEBUG, $bubble = true)
     {
+        $this->em = $em;
+        $this->tokenStorage = $tokenStorage;
+        $this->session = $session;
         parent::__construct($level, $bubble);
     }
 
 
-    /**
-     * @param $container
-     */
-    public function setContainer($container)
-    {
-        $this->_container = $container;
-    }
+//    /**
+//     * @param $container
+//     */
+//    public function setContainer($container)
+//    {
+//        $this->_container = $container;
+//    }
 
 
     /**
@@ -61,7 +73,7 @@ class DatabaseHandler extends AbstractProcessingHandler
                 return;
             };
 
-            $em = $this->_container->get('doctrine')->getManager();
+
             $conn = $em->getConnection();
             $conn->beginTransaction();
 
@@ -74,7 +86,7 @@ class DatabaseHandler extends AbstractProcessingHandler
             $url = $request->getUri();
             $ip = $request->getClientIp();
 
-            $token = $this->_container->get('security.token_storage')->getToken();
+            $token = $this->tokenStorage->getToken();
             $user = null;
 
             if ($token && $token->getUser() && !(is_string($token->getUser()))) {
@@ -85,7 +97,7 @@ class DatabaseHandler extends AbstractProcessingHandler
             $serverData = $record['extra']['serverData'];
 
                 //sending into controller
-            $this->_container->get('session')->set('readable', $readable);
+            $this->session->set('readable', $readable);
 
             try {
 
@@ -158,8 +170,8 @@ class DatabaseHandler extends AbstractProcessingHandler
 
             try {
 
-                dump($this->_container->get('trinity.elastic.log.service')
-                    ->writeInto('ExceptionLog',$exception));
+//                dump($this->_container->get('trinity.elastic.log.service')
+//                    ->writeInto('ExceptionLog',$exception));
 
             }catch(\InvalidArgumentException $e){
                 //For others projects that may not have trinity logger bundle
