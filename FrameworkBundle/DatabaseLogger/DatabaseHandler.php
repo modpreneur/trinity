@@ -6,7 +6,6 @@
 
 namespace Trinity\FrameworkBundle\DatabaseLogger;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -26,7 +25,6 @@ class DatabaseHandler extends AbstractProcessingHandler
 
     /** @var  Session */
     protected $session;
-
 
     private $esLogger;
 
@@ -168,9 +166,8 @@ class DatabaseHandler extends AbstractProcessingHandler
             $exception->setReadable($readable);
 
 
-
             try {
-                dump($this->esLogger->writeInto('ExceptionLog',$exception));
+                $this->esLogger->writeInto('ExceptionLog', $exception);
 
             }catch(\InvalidArgumentException $e){
                 //For others projects that may not have trinity logger bundle
