@@ -71,14 +71,10 @@ class DatabaseHandler extends AbstractProcessingHandler
             if (strncmp($record['message'], 'Uncaught', 8) == 0) {
                 return;
             };
-//
-//
-//            $conn = $this->em->getConnection();
-//            $conn->beginTransaction();
-//
+
             $exception = new ExceptionLog();
-//
-//
+
+
             /** @var Request $request */
             $request = $this->requestStack->getCurrentRequest();
 
@@ -86,40 +82,15 @@ class DatabaseHandler extends AbstractProcessingHandler
             $ip = $request->getClientIp();
 //
             $token = $this->tokenStorage->getToken();
-//            $user = null;
-//
-//            if ($token && $token->getUser() && !(is_string($token->getUser()))) {
-//                $user = $token->getUser()->getId();
-//            }
+
             $readable = $this->getReadable($record);
-//            $created = date('Y-m-d H:i:s');
             $serverData = $record['extra']['serverData'];
-//
+
                 //sending into controller
             $this->session->set('readable', $readable);
-//
-//            try {
-//
-//                /*
-//                 * Doctrine
-//                 */
-//                $conn->beginTransaction();
-//                $stmt = $conn->prepare(
-//                    'INSERT INTO exception_log(log, level, serverData, created, url, ip, user_id, readable)
-//                                            VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)
-//                                            RETURNING id;
-//                                           '
-//                );
-//
-//                $stmt->bindValue(1, $conn->quote($record['message']));
-//                $stmt->bindValue(2, $record['level']);
-//                $stmt->bindValue(3, $conn->quote($serverData));
-//                $stmt->bindValue(4, $created);
-//                $stmt->bindValue(5, $url);
-//                $stmt->bindValue(6, $ip);
-//                $stmt->bindValue(7, $user);
-//                $stmt->bindValue(8, $readable);
-//
+
+
+            // notification part
 //                $stmt->execute();
 //                $conn->commit();
 //                $row = $stmt->fetch();
@@ -157,7 +128,7 @@ class DatabaseHandler extends AbstractProcessingHandler
             $exception->setLog($record['message']);
             $exception->setLevel($record['level']);
             $exception->setServerData($serverData);
-            $exception->setCreated(new \DateTime());
+            $exception->setCreated(time());
             $exception->setUrl($url);
             $exception->setIp($ip);
             if ($token && $token->getUser() && !(is_string($token->getUser()))) {

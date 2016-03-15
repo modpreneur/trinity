@@ -18,55 +18,37 @@ class ExceptionLog
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
      */
     private $log;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
      */
     private $readable;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
      */
     private $serverData;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $level;
 
     /**
-     * @ORM\Column(type="datetime")
      */
     private $created;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $url;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $ip;
 
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function setCreatedValue()
-    {
-        $this->created = new \DateTime();
-    }
 
 
     /**
@@ -188,7 +170,7 @@ class ExceptionLog
     /**
      * Get created.
      *
-     * @return \DateTime
+     * @return int
      */
     public function getCreated()
     {
@@ -197,9 +179,9 @@ class ExceptionLog
 
 
     /**
-     * Set created.
+     * Set created timestamp.
      *
-     * @param \DateTime $created
+     * @param int $created
      *
      * @return BaseSystemLog
      */
