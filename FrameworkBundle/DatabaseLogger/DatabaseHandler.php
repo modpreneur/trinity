@@ -9,6 +9,7 @@ namespace Trinity\FrameworkBundle\DatabaseLogger;
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Trinity\Bundle\LoggerBundle\Services\ElasticLogService;
@@ -27,8 +28,8 @@ class DatabaseHandler extends AbstractProcessingHandler
     /** @var  Session */
     protected $session;
 
-    /** @var RequestStack */
-    private $requestStack;
+    /** @var Request */
+    private $request;
 
     /** @var  ElasticLogService */
     private $esLogger;
@@ -39,25 +40,17 @@ class DatabaseHandler extends AbstractProcessingHandler
      * @param TokenStorageInterface $tokenStorage
      * @param RequestStack $requestStack
      * @param ElasticLogService $esLogger
+     * @param $level = Logger::DEBUG
      * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
      */
     public function __construct(Session $session, TokenStorageInterface $tokenStorage, RequestStack $requestStack, ElasticLogService $esLogger, $level = Logger::DEBUG, $bubble = true)
     {
         $this->tokenStorage = $tokenStorage;
         $this->session = $session;
-        $this->requestStack= $requestStack;
+        $this->request = $requestStack->getCurrentRequest();
         $this->esLogger = $esLogger;
         parent::__construct($level, $bubble);
     }
-
-
-//    /**
-//     * @param $container
-//     */
-//    public function setContainer($container)
-//    {
-//        $this->_container = $container;
-//    }
 
 
     /**
@@ -88,9 +81,8 @@ class DatabaseHandler extends AbstractProcessingHandler
 //            /*
 //             * Data gathering
 //             */
-            $request = $this->requestStack->getCurrentRequest();
-            $url = $request->getUri();
-            $ip = $request->getClientIp();
+            $url = $this->request->getUri();
+            $ip = $this->request->getClientIp();
 //
             $token = $this->tokenStorage->getToken();
 //            $user = null;
