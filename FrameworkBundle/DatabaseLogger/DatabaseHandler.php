@@ -28,8 +28,8 @@ class DatabaseHandler extends AbstractProcessingHandler
     /** @var  Session */
     protected $session;
 
-    /** @var Request */
-    private $request;
+    /** @var RequestStack */
+    private $requestStack;
 
     /** @var  ElasticLogService */
     private $esLogger;
@@ -47,7 +47,7 @@ class DatabaseHandler extends AbstractProcessingHandler
     {
         $this->tokenStorage = $tokenStorage;
         $this->session = $session;
-        $this->request = $requestStack->getCurrentRequest();
+        $this->requestStack = $requestStack;
         $this->esLogger = $esLogger;
         parent::__construct($level, $bubble);
     }
@@ -78,11 +78,12 @@ class DatabaseHandler extends AbstractProcessingHandler
 //
             $exception = new ExceptionLog();
 //
-//            /*
-//             * Data gathering
-//             */
-            $url = $this->request->getUri();
-            $ip = $this->request->getClientIp();
+//
+            /** @var Request $request */
+            $request = $this->requestStack->getCurrentRequest();
+
+            $url = $request->getUri();
+            $ip = $request->getClientIp();
 //
             $token = $this->tokenStorage->getToken();
 //            $user = null;
