@@ -39,7 +39,7 @@ class ExceptionLog
 
     /**
      */
-    private $created;
+    private $createdAt;
 
     /**
      */
@@ -168,26 +168,26 @@ class ExceptionLog
 
 
     /**
-     * Get created.
+     * Get createdAt.
      *
      * @return int
      */
-    public function getCreated()
+    public function getCreatedAt()
     {
-        return $this->created;
+        return $this->createdAt;
     }
 
 
     /**
-     * Set created timestamp.
+     * Set createdAt timestamp.
      *
-     * @param int $created
+     * @param int $createdAt
      *
      * @return BaseSystemLog
      */
-    public function setCreated($created)
+    public function setCreatedAt($createdAt)
     {
-        $this->created = $created;
+        $this->createdAt = $createdAt;
 
         return $this;
     }

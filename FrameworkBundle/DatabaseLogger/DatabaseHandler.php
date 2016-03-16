@@ -91,24 +91,8 @@ class DatabaseHandler extends AbstractProcessingHandler
 
 
             // notification part
-//                $stmt->execute();
-//                $conn->commit();
-//                $row = $stmt->fetch();
+
 //
-//                if (isset($record['context']['notification']) && isset($record['context']['notificationService'])) {
-//                    $notification = $record['context']['notification'];
-//                    $notificationService = $record['context']['notificationService'];
-//
-//                    if (!is_object($notification) || !is_object($notificationService)) {
-//                        throw new \Exception('Service or entity is not valid object in DatabaseHandler');
-//                    }
-//
-//                    if (!isset($row['id'])) {
-//                        throw new \Exception('No error id.');
-//                    }
-//
-//                    $notificationService->pairLogWithEntity($row['id'], $notification);
-//                }
 //
 //                $conn->commit();
 //            } catch (\Exception $e) {
@@ -128,7 +112,7 @@ class DatabaseHandler extends AbstractProcessingHandler
             $exception->setLog($record['message']);
             $exception->setLevel($record['level']);
             $exception->setServerData($serverData);
-            $exception->setCreated(time());
+            $exception->setCreatedAt(time());
             $exception->setUrl($url);
             $exception->setIp($ip);
             if ($token && $token->getUser() && !(is_string($token->getUser()))) {
@@ -138,13 +122,31 @@ class DatabaseHandler extends AbstractProcessingHandler
 
 
             try {
-                $this->esLogger->writeInto('ExceptionLog', $exception);
+                $exception->setId($this->esLogger->writeInto('ExceptionLog', $exception));
 
             }catch(\InvalidArgumentException $e){
                 //For others projects that may not have trinity logger bundle
 
                 ///('Elastic logs are not enabled. Do you have trinity logger configured?');
             }
+
+
+//            if (isset($record['context']['notification']) && isset($record['context']['notificationService'])) {
+//                    $notification = $record['context']['notification'];
+//                    $notificationService = $record['context']['notificationService'];
+//
+//                    if (!is_object($notification) || !is_object($notificationService)) {
+//                        throw new \Exception('Service or entity is not valid object in DatabaseHandler');
+//                    }
+//
+//                    if (!$exception->getId()) {
+//                        dump($exception);
+//                        die();
+//                        throw new \Exception('No error id.');
+//                    }
+//
+//                    $notificationService->pairLogWithEntity($exception->getId(), $notification);
+//                }
 
 
         }
