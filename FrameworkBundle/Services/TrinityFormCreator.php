@@ -80,7 +80,7 @@ class TrinityFormCreator
             SubmitType::class,
             [
                 'label' => $submitButtonLabel,
-                'attr' => ['class' => $submitButtonClasses]
+                'attr' => ['class' => $submitButtonClasses, 'autocomplete' => 'off']
             ]
 
         );
@@ -137,7 +137,7 @@ class TrinityFormCreator
             SubmitType::class,
             [
                 'label' => $submitButtonLabel,
-                'attr' => ['class' => $submitButtonClasses]
+                'attr' => ['class' => $submitButtonClasses, 'autocomplete' => 'off']
             ]
 
         );
@@ -196,7 +196,9 @@ class TrinityFormCreator
                 'label' => $submitButtonLabel,
                 'attr' => [
                     'class' => $submitButtonClasses,
-                    'onClick' => $submitButtonOnClick
+                    'onClick' => $submitButtonOnClick,
+                    'autocomplete' => 'off'
+
                 ]
             ]
         );
