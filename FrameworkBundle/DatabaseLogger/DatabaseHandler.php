@@ -78,9 +78,13 @@ class DatabaseHandler extends AbstractProcessingHandler
             /** @var Request $request */
             $request = $this->requestStack->getCurrentRequest();
 
-            $url = $request->getUri();
-            $ip = $request->getClientIp();
-//
+            $url = null;
+            $ip = null;
+            if($request) {
+                $url = $request->getUri();
+                $ip = $request->getClientIp();
+            }
+
             $token = $this->tokenStorage->getToken();
 
             $readable = $this->getReadable($record);
