@@ -2,11 +2,7 @@ services:
 
     trinity.logger_database:
         class: Trinity\FrameworkBundle\DatabaseLogger\DatabaseHandler
-        arguments:
-          - "@session"
-          - "@security.token_storage"
-          - "@request_stack"
-          - "@trinity.elastic.log.service"
+        autowire: true
 
 
     trinity.services.price_string_generator:
