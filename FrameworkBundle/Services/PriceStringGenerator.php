@@ -24,6 +24,10 @@ class PriceStringGenerator
         $this->locale=$locale;
     }
 
+    /**
+     * @param $billingPlan
+     * @return string
+     */
     public function generateFullPriceStr($billingPlan){
         if(!$billingPlan->getProduct()){
             return $billingPlan->getId();
@@ -32,6 +36,20 @@ class PriceStringGenerator
        return $this->generateFullPrice($billingPlan->getInitialPrice(),$billingPlan->getType(),
            $billingPlan->getRebillPrice(),$billingPlan->getRebillTimes(),$billingPlan->getFrequency());
     }
+
+    /**
+     * @param $billingPlan
+     * @return string
+     */
+    public function genProductNameAndFullPriceStr($billingPlan){
+        if(!$billingPlan->getProduct()){
+            return $billingPlan->getId();
+        }
+
+        return $billingPlan->getProduct()->getName().' : '.$this->generateFullPrice($billingPlan->getInitialPrice(),$billingPlan->getType(),
+            $billingPlan->getRebillPrice(),$billingPlan->getRebillTimes(),$billingPlan->getFrequency());
+    }
+
 
     /**
      * @param $initialPrice

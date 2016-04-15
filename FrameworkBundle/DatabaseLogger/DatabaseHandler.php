@@ -36,7 +36,7 @@ class DatabaseHandler extends AbstractProcessingHandler
 
 
     /**
-     * @param int Session $session
+     * @param Session $session
      * @param TokenStorageInterface $tokenStorage
      * @param RequestStack $requestStack
      * @param ElasticLogService $esLogger
