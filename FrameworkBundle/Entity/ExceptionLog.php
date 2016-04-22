@@ -22,35 +22,44 @@ class ExceptionLog
     private $id;
 
     /**
+     * @var string
+     * Analyzed by elasticSearch
      */
     private $log;
 
     /**
+     * @var string
+     * Analyzed by elasticSearch
      */
     private $readable;
 
     /**
+     * @var string
+     * Analyzed by elasticSearch
      */
     private $serverData;
 
     /**
+     * @var int
+     * This is MONOLOG exception level, not http response!
      */
     private $level;
 
     /**
+     * @var int timestamp
      */
     private $createdAt;
 
     /**
+     * @var string
      */
     private $url;
 
     /**
+     * @var string
      */
     private $ip;
-
-
-
+    
     /**
      * @param int $id
      */
