@@ -98,7 +98,7 @@ class DatabaseHandler extends AbstractProcessingHandler
             }
             $exception->setReadable($readable);
             try {
-                $exception->setId($this->esLogger->writeInto('ExceptionLog', $exception));
+                $this->esLogger->writeInto('ExceptionLog', $exception);
             }catch(\InvalidArgumentException $e){
                 //For others projects that may not have trinity logger bundle
                 ///('Elastic logs are not enabled. Do you have trinity logger configured?');

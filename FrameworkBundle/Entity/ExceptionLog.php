@@ -16,7 +16,7 @@ namespace Trinity\FrameworkBundle\Entity;
 class ExceptionLog
 {
     /**
-     * @var int
+     * @var str
      *
      */
     private $id;
@@ -59,11 +59,13 @@ class ExceptionLog
      * @var string
      */
     private $ip;
-    
+
+
     /**
-     * @param int $id
+     * ExceptionLog constructor.
+     * @param str $id
      */
-    public function setId($id)
+    public function __construct($id = '')
     {
         $this->id = $id;
     }
