@@ -11,13 +11,13 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\StreamOutput;
 use Trinity\FrameworkBundle\Command;
 use Trinity\FrameworkBundle\Entity\CronTask;
-use Trinity\FrameworkBundle\Utils\BaseWebTest;
+use Trinity\FrameworkBundle\Utils\AbstractWebTest;
 
 
 /**
  * Class TrinityWebTest.
  */
-class TrinityWebTest extends BaseWebTest
+class TrinityWebTest extends AbstractWebTest
 {
     /**
      * @var string Test command
