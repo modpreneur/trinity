@@ -1,15 +1,17 @@
+build_settings:
+    ignore:
+        - "vendor"
+
 setup:
     composer:
         action: "install"
-
+        prefer_dist: true
 
 test:
     php_unit:
         config:
           - "phpunit.xml"
         run_from:  "."
-        
-        
         
 
 
