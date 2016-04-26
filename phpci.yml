@@ -1,7 +1,3 @@
-build_settings:
-    ignore:
-        - "vendor"
-
 setup:
     composer:
         action: "install"
