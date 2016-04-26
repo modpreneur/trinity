@@ -54,6 +54,11 @@ security:
         pattern: ^/(_(profiler|wdt)|css|images|js)/
         security: false
 
+
+trinity_settings:
+  settings:
+
+
 trinity_logger:
   elastic_logs:
     elastic_host: 'necktie_elasticsearch_1'
