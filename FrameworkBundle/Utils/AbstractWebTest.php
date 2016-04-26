@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Trinity\FrameworkBundle\Utils;
 
 use Braincrafted\Bundle\TestingBundle\Test\WebTestCase;
@@ -12,15 +11,11 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Trinity\FrameworkBundle\Test\Entity\User;
 
-
-// trinity
-
-
 /**
- * Class BaseWebTest
+ * Class AbstractWebTest
  * @package Trinity\FrameworkBundle\Utils
  */
-abstract class BaseWebTest extends WebTestCase
+abstract class AbstractWebTest extends WebTestCase
 {
 
     /** @var  Container */
@@ -33,6 +28,9 @@ abstract class BaseWebTest extends WebTestCase
     protected $client;
 
 
+    /**
+     *  set up
+     */
     public function setUp()
     {
         parent::setUp();
@@ -42,6 +40,9 @@ abstract class BaseWebTest extends WebTestCase
     }
 
 
+    /**
+     * log in
+     */
     private function logIn()
     {
         $firewall = 'dev';
@@ -97,9 +98,10 @@ abstract class BaseWebTest extends WebTestCase
     protected function getEM($mock = false)
     {
         if ($mock) {
-            $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->setMethods(
-                ['getRepository', 'getUnitOfWork']
-            )->disableOriginalConstructor()->getMock();
+            $em = $this->getMockBuilder('Doctrine\ORM\EntityManager')->setMethods([
+                    'getRepository',
+                    'getUnitOfWork',
+                ])->disableOriginalConstructor()->getMock();
 
             $uow = $this->getMockBuilder('\Doctrine\ORM\UnitOfWork')->disableOriginalConstructor()->getMock();
 

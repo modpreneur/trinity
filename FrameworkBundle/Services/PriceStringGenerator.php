@@ -3,8 +3,8 @@
 namespace Trinity\FrameworkBundle\Services;
 
 
-use Trinity\Bundle\SettingsBundle\Manager\SettingsManager;
 use Symfony\Component\Intl\NumberFormatter\NumberFormatter;
+use Trinity\Bundle\SettingsBundle\Manager\SettingsManager;
 
 
 class PriceStringGenerator

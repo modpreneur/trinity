@@ -1,11 +1,8 @@
 <?php
 
-
 namespace Trinity\FrameworkBundle\Utils;
 
-
 use Trinity\FrameworkBundle\Exception\MemberAccessException;
-
 
 /**
  * Class ObjectMixin
@@ -13,7 +10,6 @@ use Trinity\FrameworkBundle\Exception\MemberAccessException;
  */
 class ObjectMixin
 {
-
     /**
      *
      * @param object $object
@@ -62,10 +58,8 @@ class ObjectMixin
                         break;
                     }
                 }
-                throw new MemberAccessException(
-                    "You can not call method '$name' without parameters$source. $countOfParams params is required.",
-                    E_USER_WARNING
-                );
+                throw new MemberAccessException("You can not call method '$name' without parameters$source. $countOfParams params is required.",
+                    E_USER_WARNING);
             }
 
             $reflectionMethod = new \ReflectionMethod($class, $name);
@@ -75,11 +69,7 @@ class ObjectMixin
         } else { // strict class
             $items = array_merge($properties, array_keys($methods));
             $hint = join(", ", self::getSuggestion($items, $name));
-            throw new MemberAccessException(
-                "Cannot read an undeclared property $class::\$$name or method $class::$name()".(strlen(
-                    $hint
-                ) > 1 ? ", did you mean $hint?" : '.')
-            );
+            throw new MemberAccessException("Cannot read an undeclared property $class::\$$name or method $class::$name()".(strlen($hint) > 1 ? ", did you mean $hint?" : '.'));
         }
     }
 
@@ -110,9 +100,7 @@ class ObjectMixin
     private static function getProperties($class)
     {
         $reflect = new \ReflectionClass($class);
-        $prop = $reflect->getProperties(
-            \ReflectionProperty::IS_PUBLIC | \ReflectionProperty::IS_PROTECTED | \ReflectionProperty::IS_PRIVATE
-        );
+        $prop = $reflect->getProperties(\ReflectionProperty::IS_PUBLIC | \ReflectionProperty::IS_PROTECTED | \ReflectionProperty::IS_PRIVATE);
         $properties = [];
 
         foreach ($prop as $property) {
@@ -140,13 +128,9 @@ class ObjectMixin
         $best = [];
         $min = (strlen($value) / 4 + 1) * 10 + .1;
         foreach ($items as $item) {
-            if ($item !== $value && (($len = levenshtein($item, $value, 10, 11, 10)) < $min || ($len = levenshtein(
-                            preg_replace($re, '', $item),
-                            $norm,
-                            10,
-                            11,
-                            10
-                        ) + 20) < $min)
+            if ($item !== $value && (($len = levenshtein($item, $value, 10, 11,
+                        10)) < $min || ($len = levenshtein(preg_replace($re, '', $item), $norm, 10, 11,
+                            10) + 20) < $min)
             ) {
                 $min = $len;
                 $best[] = $item;
