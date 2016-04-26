@@ -59,11 +59,13 @@ class ExceptionLog
      * @var string
      */
     private $ip;
-    
+
+
     /**
+     * ExceptionLog constructor.
      * @param int $id
      */
-    public function setId($id)
+    public function __construct($id)
     {
         $this->id = $id;
     }
