@@ -11,13 +11,15 @@ services:
 
     trinity.services.price_string_generator:
       class: Trinity\FrameworkBundle\Services\PriceStringGenerator
-      arguments: [ "@trinity.settings","%trinity.framework.locale%"]
+      arguments: [ "@trinity.settings", "%trinity.framework.locale%"]
+
 
     trinity.twig.extension.full_price:
       class: Trinity\FrameworkBundle\Twig\FullPriceExtension
       arguments: [ "@trinity.services.price_string_generator"]
       tags:
         - { name: twig.extension }
+
 
     trinity.form_creator:
       class: Trinity\FrameworkBundle\Services\TrinityFormCreator

@@ -19,6 +19,10 @@ class AppKernel extends Kernel
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Trinity\FrameworkBundle\TrinityFrameworkBundle(),
             new \Trinity\Bundle\SettingsBundle\SettingsBundle(),
+            new \Trinity\Bundle\LoggerBundle\LoggerBundle(),
+
+
+
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new \Symfony\Bundle\SecurityBundle\SecurityBundle()

@@ -10,7 +10,7 @@
         }
     ],
     "require": {
-      "php": ">=5.6",
+      "php": ">=7",
       "symfony/symfony": "~2.8 | ~3.0",
       "friendsofsymfony/user-bundle": "dev-master",
       "knplabs/doctrine-behaviors": "~1.2",
@@ -20,15 +20,15 @@
       "doctrine/doctrine-fixtures-bundle": "~2",
       "symfony/monolog-bundle": "~2.8",
       "aws/aws-sdk-php": "~3.11",
-      "egulias/email-validator": "~1.2",
-      "trinity/settings": "dev-master",
-      "trinity/logger": "dev-master"
+      "egulias/email-validator": "~1.2"
     },
 
     "require-dev": {
       "sensio/generator-bundle": "~3.0",
       "phpunit/phpunit": "~5.0",
-      "braincrafted/testing-bundle": "@stable"
+      "braincrafted/testing-bundle": "@stable",
+      "trinity/logger": "dev-master",
+      "trinity/settings": "dev-master"
     },
 
     "autoload": {
