@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ddbb9490ac365d7a8827f89ae6bab87c",
-    "content-hash": "01e4f3698cc6bfdf3ec07b947e644f59",
+    "hash": "3883bf89fdbca0509cd72d75938717ee",
+    "content-hash": "eb31c16cd79d6564d28e90f7c891d1e1",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -3579,12 +3579,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/modpreneur/trinity-logger.git",
-                "reference": "91a520bf16fb506359ccb6985246d89aafb3101f"
+                "reference": "09b91af02cd1baf40a18e245d50518f1174a24f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/modpreneur/trinity-logger/zipball/91a520bf16fb506359ccb6985246d89aafb3101f",
-                "reference": "91a520bf16fb506359ccb6985246d89aafb3101f",
+                "url": "https://api.github.com/repos/modpreneur/trinity-logger/zipball/09b91af02cd1baf40a18e245d50518f1174a24f9",
+                "reference": "09b91af02cd1baf40a18e245d50518f1174a24f9",
                 "shasum": ""
             },
             "require": {
@@ -3622,7 +3622,7 @@
                 }
             ],
             "description": "Trinity Logger bundle",
-            "time": "2016-04-22 12:14:24"
+            "time": "2016-04-26 12:39:46"
         },
         {
             "name": "trinity/settings",
@@ -3630,12 +3630,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/modpreneur/trinity-settings.git",
-                "reference": "cdea89bff5a97141f2d6947b12df59cb773975c3"
+                "reference": "281243e75cc82cb8c14d2cfdb70ac16f7e15c8c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/modpreneur/trinity-settings/zipball/cdea89bff5a97141f2d6947b12df59cb773975c3",
-                "reference": "cdea89bff5a97141f2d6947b12df59cb773975c3",
+                "url": "https://api.github.com/repos/modpreneur/trinity-settings/zipball/281243e75cc82cb8c14d2cfdb70ac16f7e15c8c3",
+                "reference": "281243e75cc82cb8c14d2cfdb70ac16f7e15c8c3",
                 "shasum": ""
             },
             "require": {
@@ -3683,7 +3683,7 @@
                 }
             ],
             "description": "Trinity Settings bundle",
-            "time": "2016-04-25 12:08:53"
+            "time": "2016-04-26 13:12:08"
         },
         {
             "name": "twig/extensions",
