@@ -32,8 +32,14 @@ class DatabaseHandler extends AbstractProcessingHandler
      * @param $level = Logger::DEBUG
      * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct(Session $session, TokenStorageInterface $tokenStorage, RequestStack $requestStack, ElasticLogService $esLogger, $level = Logger::DEBUG, $bubble = true)
-    {
+    public function __construct(
+        Session $session,
+        TokenStorageInterface $tokenStorage,
+        RequestStack $requestStack,
+        ElasticLogService $esLogger,
+        $level = Logger::DEBUG,
+        $bubble = true
+    ) {
         $this->tokenStorage = $tokenStorage;
         $this->session = $session;
         $this->requestStack = $requestStack;
@@ -45,8 +51,8 @@ class DatabaseHandler extends AbstractProcessingHandler
      */
     protected function write(array $record)
     {
-        $readable = "";
-        if ('doctrine' == $record['channel']) {
+        $readable = '';
+        if ('doctrine' === $record['channel']) {
             if ((int)$record['level'] >= Logger::WARNING) {
                 error_log($record['message']);
             }
@@ -56,22 +62,31 @@ class DatabaseHandler extends AbstractProcessingHandler
             //exception is logged twice, get rid of 'Uncaught...' version
             if (strncmp($record['message'], 'Uncaught', 8) == 0) {
                 return;
-            };
+            }
             $exception = new ExceptionLog();
             /** @var Request $request */
             $request = $this->requestStack->getCurrentRequest();
             $url = null;
             $ip = null;
-            if($request) {
+            if ($request) {
                 $url = $request->getUri();
                 $ip = $request->getClientIp();
+            } else {
+                $requestedUrl = strpos($record['extra']['serverData'], 'REQUEST_URI:');
+                $requestedUrl += strlen('REQUEST_URI: ');
+                $endLine = strpos($record['extra']['serverData'], PHP_EOL, $requestedUrl);
+                $url = substr($record['extra']['serverData'], $requestedUrl, $endLine-$requestedUrl);
+                /*
+                 * todo: get ip from extra too (which one?)
+                 */
             }
             $token = $this->tokenStorage->getToken();
             $readable = $this->getReadable($record);
             $serverData = $record['extra']['serverData'];
             //sending into controller
-            $this->session->set('readable', $readable);
-            // notification part
+
+
+                // notification part
 //
 //
 //                $conn->commit();
@@ -93,13 +108,13 @@ class DatabaseHandler extends AbstractProcessingHandler
             $exception->setCreatedAt(time());
             $exception->setUrl($url);
             $exception->setIp($ip);
-            if ($token && $token->getUser() && !(is_string($token->getUser()))) {
+            if ($token && $token->getUser() && !is_string($token->getUser())) {
                 $exception->setUser($token->getUser());
             }
             $exception->setReadable($readable);
             try {
                 $this->esLogger->writeInto('ExceptionLog', $exception);
-            }catch(\InvalidArgumentException $e){
+            } catch (\InvalidArgumentException $e) {
                 //For others projects that may not have trinity logger bundle
                 ///('Elastic logs are not enabled. Do you have trinity logger configured?');
             }
@@ -121,23 +136,34 @@ class DatabaseHandler extends AbstractProcessingHandler
 //                }
         }
     }
+
+
+    /**
+     * @param array $e
+     * @return string
+     */
     private function getReadable($e)
     {
         /*
          * https://www-304.ibm.com/support/knowledgecenter/SSEPEK_10.0.0/com.ibm.db2z10.doc.codes/src/tpc/db2z_sqlstatevalues.dita
          * Known SQL codes
          */
-        $SQLTag = "PDOException";
-        if (strncmp($e['message'], $SQLTag, strlen($SQLTag)) == 0) {
+        $sqlTag = 'PDOException';
+        if (strncmp($e['message'], $sqlTag, strlen($sqlTag)) == 0) {
             /*
              * we got some DBALException
              */
             //dump($e);
             $line = strstr($e['message'], PHP_EOL, true);
             $short = substr($line, strpos($line, 'R: ') + 4);
-            return ucfirst($short);
+            $readable =  ucfirst($short);
+            if ($readable && $this->session->isStarted()) {
+                $this->session->set('readable', $readable);
+            }
+            return $readable;
+
         }
         //readable format not supported yet
-        return "";
+        return '';
     }
 }
