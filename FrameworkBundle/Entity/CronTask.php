@@ -8,7 +8,6 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Trinity\FrameworkBundle\Entity\CronTaskRepository")
@@ -147,5 +146,5 @@ class CronTask
     {
         $this->status = $status;
     }
-
 }
+

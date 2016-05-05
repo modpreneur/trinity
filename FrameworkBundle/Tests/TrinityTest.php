@@ -95,11 +95,11 @@ class TrinityWebTest extends AbstractWebTest
      *
      * @depends testDropCreateDatabase
      */
-    public function testfindAllNullProcessingtime()
+    public function testFindAllNullProcessingTime()
     {
         $this->testInsertToDatabase();
         $repository = $this->getContainer()->get('doctrine')->getRepository('TrinityFrameworkBundle:CronTask');
-        $cronTasks = $repository->findAllNullProcessingtime();
+        $cronTasks = $repository->findAllNullProcessingTime();
         $this->assertNotEmpty($cronTasks);
     }
 

@@ -11,7 +11,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-
 /**
  * This is the class that loads and manages your bundle configuration.
  *
@@ -21,6 +20,7 @@ class TrinityFrameworkExtension extends Extension
 {
     /**
      * {@inheritdoc}
+     * @throws \Exception
      */
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -37,7 +37,7 @@ class TrinityFrameworkExtension extends Extension
             $container->setParameter('trinity.framework.aws_key', $config['dynamo_logs']['aws_key']);
             $container->setParameter('trinity.framework.aws_secret', $config['dynamo_logs']['aws_secret']);
             $container->setParameter('trinity.framework.aws_region', $config['dynamo_logs']['aws_region']);
-        }else{
+        } else {
             $container->setParameter('trinity.framework.dynamo_logs', false);
             $container->setParameter('trinity.framework.dynamo_host', null);
             $container->setParameter('trinity.framework.dynamo_port', null);

@@ -8,7 +8,6 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
 
-
 /**
  * Class CronTaskRepository
  * @package Trinity\FrameworkBundle\Entity
@@ -16,11 +15,11 @@ use Doctrine\ORM\EntityRepository;
 class CronTaskRepository extends EntityRepository
 {
     /**
-     * Get array of all CronTasks with processingtime is null.
+     * Get array of all CronTasks with processingTime is null.
      *
-     * @return CronTask[]
+     * @return array of CronTask
      */
-    public function findAllNullProcessingtime()
+    public function findAllNullProcessingTime()
     {
         $query = $this->getEntityManager()->createQuery(
             '

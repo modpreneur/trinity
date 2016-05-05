@@ -51,7 +51,7 @@ class CronTasksRunCommand extends ContainerAwareCommand
         $repository = $this->getContainer()->get('doctrine')->getRepository('TrinityFrameworkBundle:CronTask');
 
         /** @var CronTask[] $cronTasks */
-        $cronTasks = $repository->findAllNullProcessingtime();
+        $cronTasks = $repository->findAllNullProcessingTime();
 
         if ($cronTasks === null) {
             $output->writeln('<comment>No data to procesing...</comment>');

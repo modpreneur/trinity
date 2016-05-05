@@ -6,7 +6,6 @@
 
 namespace Trinity\FrameworkBundle\Entity;
 
-
 /**
  * Class ExceptionLog
  * @package Trinity\FrameworkBundle\Entity
@@ -16,7 +15,7 @@ namespace Trinity\FrameworkBundle\Entity;
 class ExceptionLog
 {
     /**
-     * @var str
+     * @var string
      *
      */
     private $id;
@@ -63,7 +62,7 @@ class ExceptionLog
 
     /**
      * ExceptionLog constructor.
-     * @param str $id
+     * @param string $id
      */
     public function __construct($id = '')
     {
@@ -74,7 +73,7 @@ class ExceptionLog
     /**
      * Get id.
      *
-     * @return int
+     * @return string
      */
     public function getId()
     {
@@ -98,6 +97,7 @@ class ExceptionLog
      *
      * @param string $log
      *
+     * @todo @GabrielBordovsky what is BaseSystemLog?
      * @return BaseSystemLog
      */
     public function setLog($log)
@@ -142,6 +142,7 @@ class ExceptionLog
      *
      * @param string $serverData
      *
+     * @todo @GabrielBordovsky what is BaseSystemLog?
      * @return BaseSystemLog
      */
     public function setServerData($serverData)
@@ -168,6 +169,7 @@ class ExceptionLog
      *
      * @param string $level
      *
+     * @todo @GabrielBordovsky what is BaseSystemLog?
      * @return BaseSystemLog
      */
     public function setLevel($level)
@@ -194,6 +196,7 @@ class ExceptionLog
      *
      * @param int $createdAt
      *
+     * @todo @GabrielBordovsky what is BaseSystemLog?
      * @return BaseSystemLog
      */
     public function setCreatedAt($createdAt)
@@ -240,12 +243,12 @@ class ExceptionLog
     }
 
     /**
-     * @var User
+     * @var BaseUser
      */
     private $user;
 
     /**
-     * @return User
+     * @return BaseUser
      */
     public function getUser()
     {
@@ -253,13 +256,16 @@ class ExceptionLog
     }
 
     /**
-     * @param User $user
+     * @param BaseUser $user
      */
     public function setUser($user)
     {
         $this->user = $user;
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return (string)$this->id;

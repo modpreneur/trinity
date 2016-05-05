@@ -5,19 +5,22 @@
 
 namespace Trinity\FrameworkBundle\Twig;
 
-
-
 use Trinity\FrameworkBundle\Services\PriceStringGenerator;
 
+/**
+ * Class FullPriceExtension
+ * @package Trinity\FrameworkBundle\Twig
+ */
 class FullPriceExtension extends \Twig_Extension
 {
     /** @var PriceStringGenerator */
     protected $generator;
 
     /**
-     * @param $generator
+     * @param PriceStringGenerator $generator
      */
-    public function __construct($generator) {
+    public function __construct(PriceStringGenerator $generator)
+    {
         $this->generator = $generator;
     }
 
@@ -25,21 +28,26 @@ class FullPriceExtension extends \Twig_Extension
     /**
      * @return array
      */
-    public function getFunctions()
+    public function getFunctions() : array
     {
-        return array(
-            new \Twig_SimpleFunction('fullPrice', array($this, 'fullPrice')),
-        );
+        return [
+            new \Twig_SimpleFunction('fullPrice', [$this, 'fullPrice']),
+        ];
     }
 
     /**
-     * @param $initialPrice
-     * @param $type
-     * @param $rebillPrice
-     * @param $rebillTimes
-     * @return mixed|string
+     * @param int $initialPrice
+     * @param string $type
+     * @param int $rebillPrice
+     * @param int $rebillTimes
+     *
+     * @return string
+     *
+     * @throws \Trinity\Bundle\SettingsBundle\Exception\PropertyNotExistsException
+     * @throws \Symfony\Component\Intl\Exception\MethodArgumentValueNotImplementedException
+     * @throws \Symfony\Component\Intl\Exception\MethodArgumentNotImplementedException
      */
-    public function fullPrice($initialPrice, $type, $rebillPrice, $rebillTimes)
+    public function fullPrice($initialPrice, $type, $rebillPrice, $rebillTimes):string
     {
         return $this->generator->generateFullPrice($initialPrice, $type, $rebillPrice, $rebillTimes);
     }
@@ -48,7 +56,7 @@ class FullPriceExtension extends \Twig_Extension
     /**
      * @return string
      */
-    public function getName()
+    public function getName():string
     {
         return 'trinity_admin_full_price_extension';
     }

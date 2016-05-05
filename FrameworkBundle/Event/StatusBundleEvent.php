@@ -8,7 +8,6 @@ namespace Trinity\FrameworkBundle\Event;
 
 use Symfony\Component\EventDispatcher\Event;
 
-
 /**
  * Class StatusBundleEvent.
  */
@@ -21,7 +20,12 @@ class StatusBundleEvent extends Event
     protected $name;
 
 
-    public function __construct($state, $name)
+    /**
+     * StatusBundleEvent constructor.
+     * @param string $state
+     * @param string $name
+     */
+    public function __construct(string $state, string $name)
     {
         $this->state = $state;
         $this->name = $name;

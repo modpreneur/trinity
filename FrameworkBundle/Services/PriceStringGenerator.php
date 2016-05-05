@@ -2,29 +2,38 @@
 
 namespace Trinity\FrameworkBundle\Services;
 
-
 use Symfony\Component\Intl\NumberFormatter\NumberFormatter;
 use Trinity\Bundle\SettingsBundle\Manager\SettingsManager;
 
-
+/**
+ * Class PriceStringGenerator
+ * @package Trinity\FrameworkBundle\Services
+ */
 class PriceStringGenerator
 {
     /** @var  SettingsManager */
     protected $settingsManager;
 
-    /** @var  locale */
+    /** @var string */
     protected $locale;
+
 
     /**
      * @param SettingsManager $settingsManager
-     * @param locale
+     * @param string $locale
      */
-    public function __construct($settingsManager,$locale) {
+    public function __construct(SettingsManager $settingsManager, string $locale)
+    {
         $this->settingsManager = $settingsManager;
         $this->locale=$locale;
     }
 
+
     /**
+     * @todo @GabrielBordovsky @TomasJancar @JakubFajkus we have problem here, we don't know Billing plan here.
+     * So add BillingPlan to trinity (@JakubFajkus) you are using bp in Venice?
+     * Or move this to necktie?
+     *
      * @param $billingPlan
      * @return string
      */
@@ -52,46 +61,55 @@ class PriceStringGenerator
 
 
     /**
-     * @param $initialPrice
-     * @param $type
-     * @param $rebillPrice
-     * @param $rebillTimes
-     * @param $frequency
+     * @param int $initialPrice
+     * @param string $type
+     * @param int $rebillPrice
+     * @param int $rebillTimes
+     * @param int $frequency
+     *
      * @return string
+     *
+     * @throws \Symfony\Component\Intl\Exception\MethodArgumentValueNotImplementedException
+     * @throws \Symfony\Component\Intl\Exception\MethodArgumentNotImplementedException
+     * @throws \Trinity\Bundle\SettingsBundle\Exception\PropertyNotExistsException
      */
-    public function generateFullPrice($initialPrice, $type='standard', $rebillPrice=0, $rebillTimes=0,$frequency=0)
-    {
+    public function generateFullPrice(
+        int $initialPrice,
+        string $type = 'standard',
+        int $rebillPrice = 0,
+        int $rebillTimes = 0,
+        int $frequency = 0
+    ):string {
         $currency = $this->settingsManager->get('currency');
 
         $formatter = new NumberFormatter($this->locale, NumberFormatter::CURRENCY);
 
-        if($type==='standard')
+        if ($type==='standard') {
             return $formatter->formatCurrency($initialPrice, $currency);
-        else {
+        } else {
             switch ($frequency) {
                 case 7:
-                    $str = "weekly";
+                    $str = 'weekly';
                     break;
                 case 14:
-                    $str = "bi-weekly";
+                    $str = 'bi-weekly';
                     break;
                 case 30:
-                    $str = "monthly";
+                    $str = 'monthly';
                     break;
                 case 91:
-                    $str = "quartaly";
+                    $str = 'quartaly';
                     break;
                 default:
-                    $str = "";
-            };
-            if ($rebillTimes == 999) {
-                return ($formatter->formatCurrency($initialPrice + 0, $currency)).' and '
+                    $str = '';
+            }
+            if ($rebillTimes === 999) {
+                return $formatter->formatCurrency($initialPrice + 0, $currency).' and '
                 .$formatter->formatCurrency($rebillPrice + 0, $currency).' '.$str;
             }
 
-            return ($formatter->formatCurrency($initialPrice+0, $currency)).' and '
-            .$rebillTimes.' times '.$formatter->formatCurrency($rebillPrice+0,
-                $currency).' '.$str;
+            return $formatter->formatCurrency($initialPrice+0, $currency).' and '
+            .$rebillTimes.' times '.$formatter->formatCurrency($rebillPrice+0, $currency).' '.$str;
         }
 
     }

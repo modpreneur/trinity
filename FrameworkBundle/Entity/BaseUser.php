@@ -6,12 +6,10 @@
 
 namespace Trinity\FrameworkBundle\Entity;
 
-
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
-
 
 /**
  * Class BaseUser.
@@ -193,7 +191,7 @@ class BaseUser extends User
     public function __construct()
     {
         parent::__construct();
-        $this->roles = array('ROLE_USER');
+        $this->roles = ['ROLE_USER'];
         $this->enabled = true;
     }
 
