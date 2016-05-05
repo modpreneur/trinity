@@ -76,9 +76,9 @@ class PriceStringGenerator
     public function generateFullPrice(
         int $initialPrice,
         string $type = 'standard',
-        int $rebillPrice = 0,
-        int $rebillTimes = 0,
-        int $frequency = 0
+        $rebillPrice = 0,
+        $rebillTimes = 0,
+        $frequency = 0
     ):string {
         $currency = $this->settingsManager->get('currency');
 
