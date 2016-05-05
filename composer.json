@@ -29,7 +29,8 @@
       "phpunit/phpunit": "~5.0",
       "braincrafted/testing-bundle": "@stable",
       "trinity/logger": "dev-master",
-      "trinity/settings": "dev-master"
+      "trinity/settings": "dev-master",
+      "trinity/search": "dev-master"
     },
 
     "autoload": {
