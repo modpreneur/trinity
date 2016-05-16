@@ -17,7 +17,7 @@ interface ClientInterface
 
 
     /** @return  boolean */
-    public function isNotificationEnabled();
+    public function isNotified();
 
 
     /** @return string */
