@@ -7,6 +7,8 @@
 namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 
 /**
  * Class CronTaskRepository
@@ -69,8 +71,6 @@ class CronTaskRepository extends EntityRepository
      *
      * @return CronTask|null
      *
-     * @throws \Doctrine\ORM\NonUniqueResultException
-     * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Doctrine\ORM\ORMInvalidArgumentException
      */
@@ -91,9 +91,14 @@ class CronTaskRepository extends EntityRepository
 		    ')->setParameter('command', $command);
         }
 
-        /** @var int $result */
-        $result = $query->getSingleScalarResult();
-
+        try {
+            /** @var int $result */
+            $result = $query->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+            return null;
+        } catch (NoResultException $e) {
+            return null;
+        }
         if ($result === 0) {
             $newJob = new CronTask();
             $newJob->setCreationTime(new \DateTime('now'));
