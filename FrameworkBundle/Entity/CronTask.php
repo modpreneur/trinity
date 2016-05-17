@@ -95,7 +95,7 @@ class CronTask
 
 
     /**
-     * @return mixed
+     * @return \DateTime
      */
     public function getCreationTime()
     {
@@ -104,7 +104,7 @@ class CronTask
 
 
     /**
-     * @param mixed $creationTime
+     * @param \DateTime $creationTime
      */
     public function setCreationTime($creationTime)
     {
@@ -147,4 +147,3 @@ class CronTask
         $this->status = $status;
     }
 }
-
