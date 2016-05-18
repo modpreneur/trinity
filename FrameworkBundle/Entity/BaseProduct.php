@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @UniqueEntity(fields="name")
  */
-class BaseProduct
+class BaseProduct implements DoctrineEntityInterface
 {
     use ORMBehaviors\Timestampable\Timestampable;
     /**

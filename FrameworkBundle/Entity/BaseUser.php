@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity(fields={"username"})
  * @UniqueEntity(fields={"email"})
  */
-class BaseUser extends User
+class BaseUser extends User implements DoctrineEntityInterface
 {
     /**
      * @ORM\Id

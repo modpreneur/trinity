@@ -8,7 +8,6 @@ namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-
 /**
  *
  * @deprecated

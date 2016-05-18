@@ -71,6 +71,8 @@ class CronTaskRepository extends EntityRepository
      *
      * @return CronTask|null
      *
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Doctrine\ORM\NoResultException
      * @throws \Doctrine\ORM\OptimisticLockException
      * @throws \Doctrine\ORM\ORMInvalidArgumentException
      */
@@ -91,14 +93,9 @@ class CronTaskRepository extends EntityRepository
 		    ')->setParameter('command', $command);
         }
 
-        try {
-            /** @var int $result */
-            $result = $query->getSingleScalarResult();
-        } catch (NonUniqueResultException $e) {
-            return null;
-        } catch (NoResultException $e) {
-            return null;
-        }
+        /** @var int $result */
+        $result = $query->getSingleScalarResult();
+
         if ($result === 0) {
             $newJob = new CronTask();
             $newJob->setCreationTime(new \DateTime('now'));

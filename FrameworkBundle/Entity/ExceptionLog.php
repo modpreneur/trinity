@@ -12,7 +12,7 @@ namespace Trinity\FrameworkBundle\Entity;
  */
 
 
-class ExceptionLog
+class ExceptionLog implements ElasticSearchEntityInterface
 {
     /**
      * @var string
