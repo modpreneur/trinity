@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @UniqueEntity(fields={"username"})
  * @UniqueEntity(fields={"email"})
  */
-class BaseUser extends User implements DoctrineEntityInterface
+class BaseUser extends User implements EntityInterface
 {
 
     /**
@@ -300,7 +300,7 @@ class BaseUser extends User implements DoctrineEntityInterface
      *
      * @return int
      */
-    public function getId() : int
+    public function getId()
     {
         return $this->id;
     }

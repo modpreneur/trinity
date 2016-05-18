@@ -12,7 +12,7 @@ namespace Trinity\FrameworkBundle\Entity;
  */
 
 
-class ExceptionLog implements ElasticSearchEntityInterface
+class ExceptionLog implements EntityInterface
 {
     /**
      * @var string
@@ -75,7 +75,7 @@ class ExceptionLog implements ElasticSearchEntityInterface
      *
      * @return string
      */
-    public function getId() : string
+    public function getId()
     {
         return $this->id;
     }

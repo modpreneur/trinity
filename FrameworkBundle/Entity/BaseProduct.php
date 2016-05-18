@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @UniqueEntity(fields="name")
  */
-class BaseProduct implements DoctrineEntityInterface
+class BaseProduct implements EntityInterface
 {
     use ORMBehaviors\Timestampable\Timestampable;
     
@@ -48,7 +48,7 @@ class BaseProduct implements DoctrineEntityInterface
      *
      * @return int
      */
-    public function getId() : int
+    public function getId()
     {
         return $this->id;
     }

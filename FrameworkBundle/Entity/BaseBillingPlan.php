@@ -37,19 +37,16 @@ class BaseBillingPlan implements DoctrineEntityInterface
      * @ORM\JoinColumn(referencedColumnName="id", onDelete="CASCADE")
      *
      * @Assert\NotBlank()
-     * @exclude
      */
     protected $product;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(type="string")
-     *
-     * @Assert\NotBlank()
-     * @Assert\Choice(choices = {"standard", "recurring"}, message = "Choose a valid type.")
-     */
-    protected $type;
+//    /**
+//     * @var string
+//     *
+//     * @Assert\NotBlank()
+//     * @Assert\Choice(choices = {"standard", "recurring"}, message = "Choose a valid type.")
+//     */
+//    protected $type;
 
     /**
      * @var float
@@ -202,7 +199,19 @@ class BaseBillingPlan implements DoctrineEntityInterface
      */
     public function getType()
     {
-        return $this->type;
+        if ($this->frequency > 0) {
+            return 'recurring';
+        } else {
+            return 'standard';
+        }
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRecurring()
+    {
+        return $this->frequency > 0;
     }
 
     /**
@@ -210,7 +219,11 @@ class BaseBillingPlan implements DoctrineEntityInterface
      */
     public function setType($type)
     {
-        $this->type = $type;
+        if ($type === 'standard') {
+            $this->frequency = null;
+            $this->rebillPrice = null;
+            $this->rebillTimes = null;
+        }
     }
 
 
@@ -219,10 +232,7 @@ class BaseBillingPlan implements DoctrineEntityInterface
      */
     public function __toString() : string
     {
-
-        if ($this->type === 'standard') {
-            return $this->type . ' ' . $this->initialPrice;
-        } else {
+        if ($this->isRecurring()) {
             switch ($this->frequency) {
                 case 7:
                     $str = 'weekly';
@@ -239,7 +249,9 @@ class BaseBillingPlan implements DoctrineEntityInterface
                 default:
                     $str = '';
             }
-            return ($this->initialPrice + 0).' and '.$this->rebillTimes. ' times '.($this->rebillPrice + 0). ' ' .$str;
+            return ($this->initialPrice + 0).' and '.$this->rebillTimes.' times '.($this->rebillPrice + 0).' '.$str;
+        } else {
+            return $this->getType() . ' ' . $this->initialPrice;
         }
     }
 }

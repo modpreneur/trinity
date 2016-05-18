@@ -16,7 +16,6 @@ interface EntityInterface
 {
     /**
      * Get id.
-     *
      */
     public function getId();
 

@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="Trinity\FrameworkBundle\Entity\CronTaskRepository")
  */
-class CronTask implements DoctrineEntityInterface
+class CronTask implements EntityInterface
 {
     /**
      * @ORM\Id
@@ -70,7 +70,7 @@ class CronTask implements DoctrineEntityInterface
     }
 
 
-    public function getId() : int
+    public function getId()
     {
         return $this->id;
     }
