@@ -1,6 +1,6 @@
 <?php
 
-namespace Necktie\AppBundle\Traits;
+namespace Trinity\FrameworkBundle\Traits;
 
 use JMS\Serializer\Annotation\PreSerialize;
 
