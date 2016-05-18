@@ -300,7 +300,7 @@ class BaseUser extends User implements DoctrineEntityInterface
      *
      * @return int
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -525,7 +525,7 @@ class BaseUser extends User implements DoctrineEntityInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->username;
     }
