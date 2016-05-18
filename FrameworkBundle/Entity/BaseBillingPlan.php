@@ -15,7 +15,7 @@ use Necktie\AppBundle\Traits\ExcludeBlameableTrait;
  * BillingPlan.
  *
  */
-class BaseBillingPlan implements DoctrineEntityInterface
+class BaseBillingPlan implements EntityInterface
 {
     use ORMBehaviors\Timestampable\Timestampable,
         ORMBehaviors\Blameable\Blameable,
