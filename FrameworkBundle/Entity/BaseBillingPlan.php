@@ -9,7 +9,8 @@ namespace Trinity\FrameworkBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
-use Necktie\AppBundle\Traits\ExcludeBlameableTrait;
+use Trinity\FrameworkBundle\Traits\ExcludeBlameableTrait;
+
 
 /**
  * BillingPlan.
