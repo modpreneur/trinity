@@ -4,6 +4,7 @@ namespace Trinity\FrameworkBundle\Services;
 
 use Symfony\Component\Intl\NumberFormatter\NumberFormatter;
 use Trinity\Bundle\SettingsBundle\Manager\SettingsManager;
+use Trinity\FrameworkBundle\Entity\BaseBillingPlan;
 
 /**
  * Class PriceStringGenerator
@@ -30,33 +31,49 @@ class PriceStringGenerator
 
 
     /**
-     * @todo @GabrielBordovsky @TomasJancar @JakubFajkus we have problem here, we don't know Billing plan here.
-     * So add BillingPlan to trinity (@JakubFajkus) you are using bp in Venice?
-     * Or move this to necktie?
-     *
-     * @param $billingPlan
+     * @param BaseBillingPlan $billingPlan
      * @return string
+     * @throws \Trinity\Bundle\SettingsBundle\Exception\PropertyNotExistsException
+     * @throws \Symfony\Component\Intl\Exception\MethodArgumentValueNotImplementedException
+     * @throws \Symfony\Component\Intl\Exception\MethodArgumentNotImplementedException
      */
-    public function generateFullPriceStr($billingPlan){
-        if(!$billingPlan->getProduct()){
-            return $billingPlan->getId();
+    public function generateFullPriceStr(BaseBillingPlan $billingPlan) : string
+    {
+        //@todo @GabrielBordovksy why we care about product?
+        if (!$billingPlan->getProduct()) {
+            return (string)$billingPlan->getId();
         }
-
-       return $this->generateFullPrice($billingPlan->getInitialPrice(),$billingPlan->getType(),
-           $billingPlan->getRebillPrice(),$billingPlan->getRebillTimes(),$billingPlan->getFrequency());
+        return $this->generateFullPrice(
+            $billingPlan->getInitialPrice(),
+            $billingPlan->getType(),
+            $billingPlan->getRebillPrice(),
+            $billingPlan->getRebillTimes(),
+            $billingPlan->getFrequency()
+        );
     }
 
+
     /**
-     * @param $billingPlan
+     * @param BaseBillingPlan $billingPlan
      * @return string
+     * @throws \Trinity\Bundle\SettingsBundle\Exception\PropertyNotExistsException
+     * @throws \Symfony\Component\Intl\Exception\MethodArgumentValueNotImplementedException
+     * @throws \Symfony\Component\Intl\Exception\MethodArgumentNotImplementedException
      */
-    public function genProductNameAndFullPriceStr($billingPlan){
-        if(!$billingPlan->getProduct()){
-            return $billingPlan->getId();
+    public function genProductNameAndFullPriceStr(BaseBillingPlan $billingPlan) : string
+    {
+        //@todo @GabrielBordovksy why we care about product?
+        if (!$billingPlan->getProduct()) {
+            return (string)$billingPlan->getId();
         }
 
-        return $billingPlan->getProduct()->getName().' : '.$this->generateFullPrice($billingPlan->getInitialPrice(),$billingPlan->getType(),
-            $billingPlan->getRebillPrice(),$billingPlan->getRebillTimes(),$billingPlan->getFrequency());
+        return $billingPlan->getProduct()->getName().' : '.$this->generateFullPrice(
+            $billingPlan->getInitialPrice(),
+            $billingPlan->getType(),
+            $billingPlan->getRebillPrice(),
+            $billingPlan->getRebillTimes(),
+            $billingPlan->getFrequency()
+        );
     }
 
 

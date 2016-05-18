@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Knp\DoctrineBehaviors\Model as ORMBehaviors;
 use Trinity\FrameworkBundle\Traits\ExcludeBlameableTrait;
 
-
 /**
  * BillingPlan.
  *
