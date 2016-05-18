@@ -75,7 +75,7 @@ class ExceptionLog implements ElasticSearchEntityInterface
      *
      * @return string
      */
-    public function getId()
+    public function getId() : string
     {
         return $this->id;
     }
@@ -266,7 +266,7 @@ class ExceptionLog implements ElasticSearchEntityInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return (string)$this->id;
     }

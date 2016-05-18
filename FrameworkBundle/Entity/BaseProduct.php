@@ -19,6 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class BaseProduct implements DoctrineEntityInterface
 {
     use ORMBehaviors\Timestampable\Timestampable;
+    
     /**
      * @var int
      *
@@ -47,7 +48,7 @@ class BaseProduct implements DoctrineEntityInterface
      *
      * @return int
      */
-    public function getId()
+    public function getId() : int
     {
         return $this->id;
     }
@@ -108,7 +109,7 @@ class BaseProduct implements DoctrineEntityInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return (string)$this->getName();
     }

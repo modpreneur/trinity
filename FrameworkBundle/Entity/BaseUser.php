@@ -21,6 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class BaseUser extends User implements DoctrineEntityInterface
 {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -193,6 +194,7 @@ class BaseUser extends User implements DoctrineEntityInterface
         parent::__construct();
         $this->roles = ['ROLE_USER'];
         $this->enabled = true;
+        parent::$email = $this->email;
     }
 
 
