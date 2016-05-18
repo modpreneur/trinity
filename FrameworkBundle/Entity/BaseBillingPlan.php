@@ -15,7 +15,7 @@ use Necktie\AppBundle\Traits\ExcludeBlameableTrait;
  * BillingPlan.
  *
  */
-class BillingPlan implements DoctrineEntityInterface
+class BaseBillingPlan implements DoctrineEntityInterface
 {
     use ORMBehaviors\Timestampable\Timestampable,
         ORMBehaviors\Blameable\Blameable,
@@ -28,7 +28,7 @@ class BillingPlan implements DoctrineEntityInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var \Trinity\FrameworkBundle\Entity\BaseProduct product
@@ -39,7 +39,7 @@ class BillingPlan implements DoctrineEntityInterface
      * @Assert\NotBlank()
      * @exclude
      */
-    private $product;
+    protected $product;
 
     /**
      * @var string
@@ -49,7 +49,7 @@ class BillingPlan implements DoctrineEntityInterface
      * @Assert\NotBlank()
      * @Assert\Choice(choices = {"standard", "recurring"}, message = "Choose a valid type.")
      */
-    private $type;
+    protected $type;
 
     /**
      * @var float
@@ -59,7 +59,7 @@ class BillingPlan implements DoctrineEntityInterface
      * @Assert\LessThan(value=100000)
      * @Assert\NotBlank()
      */
-    private $initialPrice;
+    protected $initialPrice;
 
     /**
      * @var float
@@ -68,28 +68,28 @@ class BillingPlan implements DoctrineEntityInterface
      *
      * @Assert\LessThan(value=100000)
      */
-    private $rebillPrice;
+    protected $rebillPrice;
 
     /**
      * @var int
      *
      * @ORM\Column(type="smallint", nullable=true)
      */
-    private $frequency;
+    protected $frequency;
 
     /**
      * @var int
      *
      * @ORM\Column(type="smallint", nullable=true)
      */
-    private $rebillTimes;
+    protected $rebillTimes;
 
     /**
      * @var int
      *
      * @ORM\Column(type="smallint", nullable=true)
      */
-    private $trial;
+    protected $trial;
 
     /**
      * Get id.

@@ -8,7 +8,6 @@
 
 namespace Trinity\FrameworkBundle\Entity;
 
-
 /**
  * Interface EntityInterface
  * @package Trinity\FrameworkBundle\Entity
