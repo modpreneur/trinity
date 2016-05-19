@@ -194,7 +194,6 @@ class BaseUser extends User implements EntityInterface
         parent::__construct();
         $this->roles = ['ROLE_USER'];
         $this->enabled = true;
-        parent::$email = $this->email;
     }
 
 
