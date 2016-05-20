@@ -6,7 +6,7 @@ services:
           - "@session"
           - "@security.token_storage"
           - "@request_stack"
-          - "@trinity.logger.elastic.log.service"
+          - "@trinity.logger.elastic_log_service"
 
 
     trinity.services.price_string_generator:
