@@ -1,13 +1,33 @@
 language: php
+
+
 php:
-- '7.0'
+  - '7.0'
+
+
 before_script:
-- phpenv config-add travis.ini
-- if [[ $TRAVIS_PHP_VERSION = 7.* ]] ; then pecl config-set preferred_state beta;
-  echo yes | pecl install apcu; fi;
-- composer install
-script: phpunit
+  - phpenv config-add travis.ini
+  - if [[ $TRAVIS_PHP_VERSION = 7.* ]] ; then pecl config-set preferred_state beta;
+    echo yes | pecl install apcu; fi;
+  - composer install
+
+
+script:
+  - phpunit --coverage-clover build/logs/clover.xml
+
+
 notifications:
   hipchat:
     rooms:
-      secure: Qb5VGUtlwzYkw4KJO7elumL9BauhuaMqVjTQSLkFgpKjCM1px8Jw97ZRVJudb/tPg9YfXR/MChx/wLVDoood+ewSzrI5kditKWnM110iZhPLk9reOTGZxthHar22bnGpXEwmMk/b5YWl7lU0Wh+E6EhsHr/hEY2EX+PXFPQtKNPeSolS/Sa+VpeZ3tyqTbDDu7wtSXByq8G/NF7iUo2DUAZgWFvjg04iStLZ5iZnA0XKeJ78yGEpgHt/RJQm3WHuuSa2y9TYf+3K8nEz0QhabdwQ2ERy99rwoFr2kUF4Dq382m9S+3kDLIuUA1Gp9w4ktR/KK9IAvWULFnO6bNp5faod8TnCJ4x8KVL+NiZ9Vu/xHyxWsOENEaeQGAc6WCT0pemDfgiGAOuZU7AXJFRbFmwF7DJLn7b9GR7VoCI2oxcmPHlqBID77nRIXSM6aSEcQVUCxc6qmJ71SmuOWKlUVt+XKL8qnDOWcpg2VpTlCFg4hg2aPN+x1XgpKTyhCMWPzUlf2JPjDhxmEQLoc1QVO+AYCaxob3qde42hFpay0yQiVj8cIoJ3oN38BmKl/q8S4jHaRrE3a55j433eXQxRepmF42IkEXatMW/HfrGsypcO3pAtI0tnt1mYNVI1kYjKD0MG1K6yPnk+KXlrAHNF3Qlk7H+tx2h0jMr8TBTWoww=
+      secure: yVWQc8vFHmzpIQsRzXVUlrb0oBOy8HHeax7Ftwr/2HwMRqDoiu0RZjt9Vg8S73xOiNc99bz1pECLY95nAqU+4ARRMyJdhqG6lWEGhsZdkDOd2SsN0/G3oHRxbEyarrLfQvn2UUYmeiaxtli01WUWIZ5aWxvdPnnna4+K6cutPH/c/nVT7p99g9gfUy5qb1zmJW3o7WY6DRrSPAA00m/7zMw0Ud+uKBgZiBNQFRJha6hkJ9/Bt7AkcXjamZypZdpLo+xdwON+IfdaIFIBztq5l6UKxGR1+ig3FoikkQLw3xbPOINo1oIshpfeQEhxw7FU04SwqaKGNJPfkfFfINivnpmeewPaRYmM4Hhk8p0ocwNW4Xh6wnFw9eLdDsjNsshEHTbvt6qF31CpBYyPxvLcDoRncR62px+IVv4l2EzFXJdom5LX54XBJiG0uKLBeeRzt+6bVoYX0IHNKcwynWY1fw7mHr3PzX+oho+SG9MVayODK+aKKJzcdkatltSVEziBUXG2RIniRlM0txMtIRKJdfky1arnqhKF5V0j+cN4WgfxKw1ICeTtgtCOZC3vSreXBJCI4R4QSFed3wxCxkd2IbvManfQEA63XxAEO5DHoOSOgGi5DE8sIf+EZbilCZJfvyoHs4KGVHhUZWfm+zocXXN6+PpKY1f3YHv6NAShLEA=
+    on_success: never
+    on_failure: always
+
+
+after_success:
+  - sh -c 'php vendor/bin/coveralls -v'
+
+
+cache:
+    directories:
+        - $HOME/.composer/cache
