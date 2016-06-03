@@ -39,10 +39,6 @@ class PriceStringGenerator
      */
     public function generateFullPriceStr(BaseBillingPlan $billingPlan) : string
     {
-        //@todo @GabrielBordovksy why we care about product?
-        if (!$billingPlan->getProduct()) {
-            return (string)$billingPlan->getId();
-        }
         return $this->generateFullPrice(
             $billingPlan->getInitialPrice(),
             $billingPlan->getType(),
@@ -62,12 +58,8 @@ class PriceStringGenerator
      */
     public function genProductNameAndFullPriceStr(BaseBillingPlan $billingPlan) : string
     {
-        //@todo @GabrielBordovksy why we care about product?
-        if (!$billingPlan->getProduct()) {
-            return (string)$billingPlan->getId();
-        }
-
-        return $billingPlan->getProduct()->getName().' : '.$this->generateFullPrice(
+        $name = $billingPlan->getProduct() ?  $billingPlan->getProduct()->getName().' : ' :'';
+        return $name.$this->generateFullPrice(
             $billingPlan->getInitialPrice(),
             $billingPlan->getType(),
             $billingPlan->getRebillPrice(),

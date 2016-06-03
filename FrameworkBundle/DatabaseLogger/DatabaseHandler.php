@@ -3,6 +3,7 @@
  * This file is part of the Trinity project.
  */
 namespace Trinity\FrameworkBundle\DatabaseLogger;
+
 use Monolog\Handler\AbstractProcessingHandler;
 use Monolog\Logger;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Trinity\Bundle\LoggerBundle\Services\ElasticLogService;
 use Trinity\FrameworkBundle\Entity\ExceptionLog;
+
 /**
  * Class DatabaseHandler.
  */
@@ -60,7 +62,7 @@ class DatabaseHandler extends AbstractProcessingHandler
         }
         if ((int)$record['level'] >= Logger::ERROR) {
             //exception is logged twice, get rid of 'Uncaught...' version
-            if (strncmp($record['message'], 'Uncaught', 8) == 0) {
+            if (strpos($record['message'], 'Uncaught', 8) === 0) {
                 return;
             }
             $exception = new ExceptionLog();
@@ -161,7 +163,6 @@ class DatabaseHandler extends AbstractProcessingHandler
                 $this->session->set('readable', $readable);
             }
             return $readable;
-
         }
         //readable format not supported yet
         return '';

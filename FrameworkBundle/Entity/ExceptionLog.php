@@ -10,8 +10,6 @@ namespace Trinity\FrameworkBundle\Entity;
  * Class ExceptionLog
  * @package Trinity\FrameworkBundle\Entity
  */
-
-
 class ExceptionLog implements EntityInterface
 {
     /**
@@ -97,8 +95,7 @@ class ExceptionLog implements EntityInterface
      *
      * @param string $log
      *
-     * @todo @GabrielBordovsky what is BaseSystemLog?
-     * @return BaseSystemLog
+     * @return ExceptionLog
      */
     public function setLog($log)
     {
@@ -109,7 +106,7 @@ class ExceptionLog implements EntityInterface
 
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getReadable()
     {
@@ -118,7 +115,7 @@ class ExceptionLog implements EntityInterface
 
 
     /**
-     * @param mixed $readable
+     * @param string $readable
      */
     public function setReadable($readable)
     {
@@ -142,8 +139,7 @@ class ExceptionLog implements EntityInterface
      *
      * @param string $serverData
      *
-     * @todo @GabrielBordovsky what is BaseSystemLog?
-     * @return BaseSystemLog
+     * @return ExceptionLog
      */
     public function setServerData($serverData)
     {
@@ -169,8 +165,7 @@ class ExceptionLog implements EntityInterface
      *
      * @param string $level
      *
-     * @todo @GabrielBordovsky what is BaseSystemLog?
-     * @return BaseSystemLog
+     * @return ExceptionLog
      */
     public function setLevel($level)
     {
@@ -196,8 +191,7 @@ class ExceptionLog implements EntityInterface
      *
      * @param int $createdAt
      *
-     * @todo @GabrielBordovsky what is BaseSystemLog?
-     * @return BaseSystemLog
+     * @return ExceptionLog
      */
     public function setCreatedAt($createdAt)
     {
@@ -208,7 +202,7 @@ class ExceptionLog implements EntityInterface
 
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getUrl()
     {
@@ -217,7 +211,7 @@ class ExceptionLog implements EntityInterface
 
 
     /**
-     * @param mixed $url
+     * @param string $url
      */
     public function setUrl($url)
     {
@@ -226,7 +220,7 @@ class ExceptionLog implements EntityInterface
 
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getIp()
     {
@@ -235,7 +229,7 @@ class ExceptionLog implements EntityInterface
 
 
     /**
-     * @param mixed $ip
+     * @param string $ip
      */
     public function setIp($ip)
     {
