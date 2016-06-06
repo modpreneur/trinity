@@ -62,7 +62,7 @@ class DatabaseHandler extends AbstractProcessingHandler
         }
         if ((int)$record['level'] >= Logger::ERROR) {
             //exception is logged twice, get rid of 'Uncaught...' version
-            if (strpos($record['message'], 'Uncaught', 8) === 0) {
+            if (strpos($record['message'], 'Uncaught') === 0) {
                 return;
             }
             $exception = new ExceptionLog();
