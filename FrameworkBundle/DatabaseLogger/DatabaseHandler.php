@@ -114,28 +114,7 @@ class DatabaseHandler extends AbstractProcessingHandler
                 $exception->setUser($token->getUser());
             }
             $exception->setReadable($readable);
-            try {
-                $this->esLogger->writeInto('ExceptionLog', $exception);
-            } catch (\InvalidArgumentException $e) {
-                //For others projects that may not have trinity logger bundle
-                ///('Elastic logs are not enabled. Do you have trinity logger configured?');
-            }
-//            if (isset($record['context']['notification']) && isset($record['context']['notificationService'])) {
-//                    $notification = $record['context']['notification'];
-//                    $notificationService = $record['context']['notificationService'];
-//
-//                    if (!is_object($notification) || !is_object($notificationService)) {
-//                        throw new \Exception('Service or entity is not valid object in DatabaseHandler');
-//                    }
-//
-//                    if (!$exception->getId()) {
-//                        dump($exception);
-//                        die();
-//                        throw new \Exception('No error id.');
-//                    }
-//
-//                    $notificationService->pairLogWithEntity($exception->getId(), $notification);
-//                }
+            $this->esLogger->writeInto('ExceptionLog', $exception);
         }
     }
 
