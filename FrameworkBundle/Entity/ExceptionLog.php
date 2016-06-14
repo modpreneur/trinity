@@ -6,17 +6,14 @@
 
 namespace Trinity\FrameworkBundle\Entity;
 
+use Trinity\Bundle\LoggerBundle\Entity\BaseElasticLog;
+
 /**
  * Class ExceptionLog
  * @package Trinity\FrameworkBundle\Entity
  */
-class ExceptionLog implements EntityInterface
+class ExceptionLog extends BaseElasticLog implements EntityInterface
 {
-    /**
-     * @var string
-     *
-     */
-    private $id;
 
     /**
      * @var string
@@ -43,11 +40,6 @@ class ExceptionLog implements EntityInterface
     private $level;
 
     /**
-     * @var int timestamp
-     */
-    private $createdAt;
-
-    /**
      * @var string
      */
     private $url;
@@ -56,28 +48,6 @@ class ExceptionLog implements EntityInterface
      * @var string
      */
     private $ip;
-
-
-    /**
-     * ExceptionLog constructor.
-     * @param string $id
-     */
-    public function __construct($id = '')
-    {
-        $this->id = $id;
-    }
-
-
-    /**
-     * Get id.
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
 
     /**
      * Get log.
@@ -170,32 +140,6 @@ class ExceptionLog implements EntityInterface
     public function setLevel($level)
     {
         $this->level = $level;
-
-        return $this;
-    }
-
-
-    /**
-     * Get createdAt.
-     *
-     * @return int
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-
-    /**
-     * Set createdAt timestamp.
-     *
-     * @param int $createdAt
-     *
-     * @return ExceptionLog
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
 
         return $this;
     }
