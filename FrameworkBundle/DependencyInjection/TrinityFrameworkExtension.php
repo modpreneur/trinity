@@ -30,22 +30,11 @@ class TrinityFrameworkExtension extends Extension
         if (array_key_exists('locale', $config) && isset($config['locale'])) {
             $container->setParameter('trinity.framework.locale', $config['locale']);
         }
-        if (array_key_exists('dynamo_logs', $config) && isset($config['dynamo_logs'])) {
-            $container->setParameter('trinity.framework.dynamo_logs', true);
-            $container->setParameter('trinity.framework.dynamo_host', $config['dynamo_logs']['dynamo_host']);
-            $container->setParameter('trinity.framework.dynamo_port', $config['dynamo_logs']['dynamo_port']);
-            $container->setParameter('trinity.framework.aws_key', $config['dynamo_logs']['aws_key']);
-            $container->setParameter('trinity.framework.aws_secret', $config['dynamo_logs']['aws_secret']);
-            $container->setParameter('trinity.framework.aws_region', $config['dynamo_logs']['aws_region']);
+        if (array_key_exists('exception_ttl', $config) && isset($config['exception_ttl'])) {
+            $container->setParameter('trinity.framework.exception_ttl', $config['exception_ttl']);
         } else {
-            $container->setParameter('trinity.framework.dynamo_logs', false);
-            $container->setParameter('trinity.framework.dynamo_host', null);
-            $container->setParameter('trinity.framework.dynamo_port', null);
-            $container->setParameter('trinity.framework.aws_key', null);
-            $container->setParameter('trinity.framework.aws_secret', null);
-            $container->setParameter('trinity.framework.aws_region', null);
+            $container->setParameter('trinity.framework.exception_ttl', 0);
         }
-
 
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));

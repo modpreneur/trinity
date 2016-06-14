@@ -26,11 +26,14 @@ class DatabaseHandler extends AbstractProcessingHandler
     private $requestStack;
     /** @var  ElasticLogService */
     private $esLogger;
+    /** @var int */
+    private $logTtl;
     /**
      * @param Session $session
      * @param TokenStorageInterface $tokenStorage
      * @param RequestStack $requestStack
      * @param ElasticLogService $esLogger
+     * @param int $logTtl
      * @param $level = Logger::DEBUG
      * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
      */
@@ -39,6 +42,7 @@ class DatabaseHandler extends AbstractProcessingHandler
         TokenStorageInterface $tokenStorage,
         RequestStack $requestStack,
         ElasticLogService $esLogger,
+        int $logTtl = 0,
         $level = Logger::DEBUG,
         $bubble = true
     ) {
@@ -46,6 +50,7 @@ class DatabaseHandler extends AbstractProcessingHandler
         $this->session = $session;
         $this->requestStack = $requestStack;
         $this->esLogger = $esLogger;
+        $this->logTtl = $logTtl;
         parent::__construct($level, $bubble);
     }
     /**
@@ -114,7 +119,7 @@ class DatabaseHandler extends AbstractProcessingHandler
                 $exception->setUser($token->getUser());
             }
             $exception->setReadable($readable);
-            $this->esLogger->writeInto('ExceptionLog', $exception);
+            $this->esLogger->writeInto('ExceptionLog', $exception, $this->logTtl);
         }
     }
 

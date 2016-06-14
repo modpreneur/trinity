@@ -30,13 +30,8 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue('en')
                 ->end()->end()//end locale
             ->children()
-                ->arrayNode('dynamo_logs')
-                ->children()
-                    ->scalarNode('dynamo_host')->isRequired()->cannotBeEmpty()->end()
-                    ->scalarNode('dynamo_port')->isRequired()->cannotBeEmpty()->end()
-                    ->scalarNode('aws_key')->isRequired()->cannotBeEmpty()->end()
-                    ->scalarNode('aws_secret')->isRequired()->cannotBeEmpty()->end()
-                    ->scalarNode('aws_region')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('exception_ttl')
+
             ->end();
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for
