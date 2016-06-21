@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Knp\DoctrineBehaviors\Model\Timestampable\Timestampable;
 
 /**
  * Class BaseUser.
