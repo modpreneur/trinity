@@ -21,7 +21,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class BaseUser extends User implements EntityInterface
 {
-
+    use Timestampable;
+    
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
