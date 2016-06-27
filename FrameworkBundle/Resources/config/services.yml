@@ -11,7 +11,7 @@ services:
 
 
     trinity.services.price_string_generator:
-      class: Trinity\Component\Utils\TwigExtensions\PriceStringGenerator
+      class: Trinity\Component\Utils\Services\PriceStringGenerator
       arguments: [ "@trinity.settings", "%trinity.framework.locale%"]
 
 

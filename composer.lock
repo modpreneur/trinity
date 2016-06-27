@@ -3184,12 +3184,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/modpreneur/trinity-utils.git",
-                "reference": "cdeb6434e727f73926aaff507e1aaca51fb7d15b"
+                "reference": "d44f2e4c3da73c9140ed329ca19f2e4a38c9e460"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/modpreneur/trinity-utils/zipball/cdeb6434e727f73926aaff507e1aaca51fb7d15b",
-                "reference": "cdeb6434e727f73926aaff507e1aaca51fb7d15b",
+                "url": "https://api.github.com/repos/modpreneur/trinity-utils/zipball/d44f2e4c3da73c9140ed329ca19f2e4a38c9e460",
+                "reference": "d44f2e4c3da73c9140ed329ca19f2e4a38c9e460",
                 "shasum": ""
             },
             "require": {
@@ -3230,7 +3230,7 @@
                 }
             ],
             "description": "Trinity Utils bundle",
-            "time": "2016-06-27 11:12:17"
+            "time": "2016-06-27 11:22:13"
         },
         {
             "name": "twig/extensions",
