@@ -7,7 +7,7 @@
 namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Trinity\Component\EntityCore\Entity\EntityInterface;
+use Trinity\Component\Core\Interfaces\EntityInterface;
 
 /**
  * @ORM\Entity

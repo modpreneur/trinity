@@ -7,7 +7,7 @@
 namespace Trinity\FrameworkBundle\Entity;
 
 use Trinity\Bundle\LoggerBundle\Entity\BaseElasticLog;
-use Trinity\Component\EntityCore\Entity\EntityInterface;
+use Trinity\Component\Core\Interfaces\EntityInterface;
 
 /**
  * Class ExceptionLog
