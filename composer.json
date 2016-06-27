@@ -25,7 +25,6 @@
 
       "trinity/core-entities": "dev-master",
       "trinity/core-interfaces": "dev-master",
-      "trinity/twig-extensions": "dev-master",
       "trinity/settings": "dev-master",
       "trinity/logger": "dev-master",
       "trinity/search": "dev-master",

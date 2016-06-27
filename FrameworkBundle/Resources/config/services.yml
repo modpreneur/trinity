@@ -11,12 +11,12 @@ services:
 
 
     trinity.services.price_string_generator:
-      class: Trinity\Component\TwigExtensions\PriceStringGenerator
+      class: Trinity\Component\Utils\TwigExtensions\PriceStringGenerator
       arguments: [ "@trinity.settings", "%trinity.framework.locale%"]
 
 
     trinity.twig.extension.full_price:
-      class: Trinity\Component\TwigExtensions\Twig\FullPriceExtension
+      class: Trinity\Component\Utils\Twig\FullPriceExtension
       arguments: [ "@trinity.services.price_string_generator"]
       tags:
         - { name: twig.extension }

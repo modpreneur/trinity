@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d028165416b8362ceb8c8d3cb1c6252f",
-    "content-hash": "73bb487c2502539da15ed1c961fd2b8a",
+    "hash": "9a978037e4b250148ac6bd9b0a466b40",
+    "content-hash": "02e4e574694b87b8e252a36f0cc9bc9a",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -3179,67 +3179,17 @@
             "time": "2016-06-24 08:37:16"
         },
         {
-            "name": "trinity/twig-extensions",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/modpreneur/trinity-twig-extensions.git",
-                "reference": "cddbbc1632756e8a38ce892f4da0b9a218950950"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/modpreneur/trinity-twig-extensions/zipball/cddbbc1632756e8a38ce892f4da0b9a218950950",
-                "reference": "cddbbc1632756e8a38ce892f4da0b9a218950950",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~5.0",
-                "symfony/intl": "~3",
-                "trinity/core-interfaces": "dev-master",
-                "trinity/settings": "dev-master"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Trinity\\Component\\TwigExtensions\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "ME",
-                    "email": "info@modpreneur.com"
-                }
-            ],
-            "description": "Trinity Framework",
-            "time": "2016-06-27 10:08:11"
-        },
-        {
             "name": "trinity/utils",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/modpreneur/trinity-utils.git",
-                "reference": "eda3922312188284cb350caa02e6a14ceb65bbf0"
+                "reference": "cdeb6434e727f73926aaff507e1aaca51fb7d15b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/modpreneur/trinity-utils/zipball/eda3922312188284cb350caa02e6a14ceb65bbf0",
-                "reference": "eda3922312188284cb350caa02e6a14ceb65bbf0",
+                "url": "https://api.github.com/repos/modpreneur/trinity-utils/zipball/cdeb6434e727f73926aaff507e1aaca51fb7d15b",
+                "reference": "cdeb6434e727f73926aaff507e1aaca51fb7d15b",
                 "shasum": ""
             },
             "require": {
@@ -3249,7 +3199,11 @@
                 "doctrine/annotations": "~1.2",
                 "phpunit/phpunit": "~5.0",
                 "satooshi/php-coveralls": "~1.0",
-                "symfony/http-kernel": "~2.8|~3.0"
+                "symfony/http-kernel": "~2.8|~3.0",
+                "symfony/intl": "~3",
+                "trinity/core-interfaces": "dev-master",
+                "trinity/settings": "dev-master",
+                "twig/twig": "~1"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -3276,7 +3230,7 @@
                 }
             ],
             "description": "Trinity Utils bundle",
-            "time": "2016-06-16 18:43:11"
+            "time": "2016-06-27 11:12:17"
         },
         {
             "name": "twig/extensions",
@@ -4784,7 +4738,6 @@
         "friendsofsymfony/user-bundle": 20,
         "trinity/core-entities": 20,
         "trinity/core-interfaces": 20,
-        "trinity/twig-extensions": 20,
         "trinity/settings": 20,
         "trinity/logger": 20,
         "trinity/search": 20,
