@@ -19,6 +19,7 @@ class TrinityFormCreator
     /** @var  RouterInterface */
     protected $router;
 
+
     /**
      * FormFactory constructor.
      *
@@ -28,7 +29,7 @@ class TrinityFormCreator
     public function __construct(FormFactoryInterface $formFactory, RouterInterface $router)
     {
         $this->formFactory = $formFactory;
-        $this->router = $router;
+        $this->router      = $router;
     }
 
 
@@ -66,13 +67,14 @@ class TrinityFormCreator
         string $submitButtonLabel = 'Update',
         string $submitButtonClasses = 'button button-success button-save'
 
-    ):FormInterface {
+    ):FormInterface
+    {
         $routeParameters['id'] = $entity->getId();
 
         // If the input arrays have the same string keys, then the later value for that key will overwrite the previous one
         $options = array_merge(
             [
-                'action' => $this->router->generate($urlPrefix.$urlPostfix, $routeParameters),
+                'action' => $this->router->generate($urlPrefix . $urlPostfix, $routeParameters),
                 'method' => 'PUT',
                 'attr' => ['class' => 'edit-form'],
             ],
@@ -96,6 +98,7 @@ class TrinityFormCreator
 
         return $form;
     }
+
 
     /**
      * Creates a form to create entity.
@@ -130,12 +133,13 @@ class TrinityFormCreator
         string $submitButtonName = 'submit',
         string $submitButtonLabel = 'Create',
         string $submitButtonClasses = 'button button-success button-save'
-    ):FormInterface {
+    ):FormInterface
+    {
 
         // If the input arrays have the same string keys, then the later value for that key will overwrite the previous one
         $options = array_merge(
             [
-                'action' => $this->router->generate($urlPrefix.$urlPostfix, $routeParameters),
+                'action' => $this->router->generate($urlPrefix . $urlPostfix, $routeParameters),
                 'method' => 'POST',
                 'attr' => ['class' => "new-form"],
             ],
@@ -193,13 +197,14 @@ class TrinityFormCreator
         string $submitButtonLabel = "Delete",
         string $submitButtonClasses = "button button-danger button-remove",
         string $submitButtonOnClick = "return confirm('Are you sure?')"
-    ):FormInterface {
+    ):FormInterface
+    {
         $routeParameters['id'] = $id;
 
         // If the input arrays have the same string keys, then the later value for that key will overwrite the previous one
         $options = array_merge(
             [
-                'action' => $this->router->generate($urlPrefix.$urlPostfix, $routeParameters),
+                'action' => $this->router->generate($urlPrefix . $urlPostfix, $routeParameters),
                 'method' => 'DELETE',
                 'attr' => ['class' => 'delete-form'],
             ],
