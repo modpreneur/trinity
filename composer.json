@@ -21,16 +21,21 @@
       "doctrine/doctrine-fixtures-bundle": "~2",
       "symfony/monolog-bundle": "~2.8",
       "aws/aws-sdk-php": "~3.11",
-      "egulias/email-validator": "~1.2"
+      "egulias/email-validator": "~1.2",
+
+      "trinity/core-entities": "dev-master",
+      "trinity/core-interfaces": "dev-master",
+      "trinity/twig-extensions": "dev-master",
+      "trinity/settings": "dev-master",
+      "trinity/logger": "dev-master",
+      "trinity/search": "dev-master",
+      "trinity/utils": "dev-master"
     },
 
     "require-dev": {
       "sensio/generator-bundle": "~3.0",
       "phpunit/phpunit": "~5.0",
-      "braincrafted/testing-bundle": "@stable",
-      "trinity/logger": "dev-master",
-      "trinity/settings": "dev-master",
-      "trinity/search": "dev-master"
+      "braincrafted/testing-bundle": "@stable"
     },
 
     "autoload": {

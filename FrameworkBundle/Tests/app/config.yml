@@ -16,6 +16,12 @@ parameters:
     debug_redirects: false
     use_assetic_controller: true
 
+    trinity.logger.elastic_managed_index: ~
+    trinity.logger.base.entities.path: ~
+
+
+
+
 # Doctrine Configuration
 doctrine:
     dbal:
@@ -55,14 +61,6 @@ security:
         pattern: ^/(_(profiler|wdt)|css|images|js)/
         security: false
 
-
-trinity_settings:
-  settings:
-
-
-trinity_logger:
-  elastic_logs:
-    elastic_host: 'necktie_elasticsearch_1'
-
+trinity_settings: ~
 
 services:

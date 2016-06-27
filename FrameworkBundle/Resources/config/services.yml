@@ -9,13 +9,14 @@ services:
           - "@trinity.logger.elastic_log_service"
           - "%trinity.framework.exception_ttl%"
 
+
     trinity.services.price_string_generator:
-      class: Trinity\FrameworkBundle\Services\PriceStringGenerator
+      class: Trinity\Component\TwigExtensions\PriceStringGenerator
       arguments: [ "@trinity.settings", "%trinity.framework.locale%"]
 
 
     trinity.twig.extension.full_price:
-      class: Trinity\FrameworkBundle\Twig\FullPriceExtension
+      class: Trinity\Component\TwigExtensions\Twig\FullPriceExtension
       arguments: [ "@trinity.services.price_string_generator"]
       tags:
         - { name: twig.extension }

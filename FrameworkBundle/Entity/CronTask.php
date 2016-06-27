@@ -7,6 +7,7 @@
 namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Trinity\Component\EntityCore\Entity\EntityInterface;
 
 /**
  * @ORM\Entity
@@ -146,6 +147,7 @@ class CronTask implements EntityInterface
     {
         $this->status = $status;
     }
+
 
     /**
      * @return string
