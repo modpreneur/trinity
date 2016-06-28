@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9a978037e4b250148ac6bd9b0a466b40",
+    "hash": "e694da43941f7a9a88baf698fb062a4d",
     "content-hash": "02e4e574694b87b8e252a36f0cc9bc9a",
     "packages": [
         {
@@ -1880,7 +1880,7 @@
             ],
             "authors": [
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 }
             ],
@@ -2949,12 +2949,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/modpreneur/trinity-core-interfaces.git",
-                "reference": "f8dd586340a70214f2eef1449f99ce2b2a49f6c1"
+                "reference": "8e32f94cd1060777987867d9d7c4ce8c130cf01c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/modpreneur/trinity-core-interfaces/zipball/f8dd586340a70214f2eef1449f99ce2b2a49f6c1",
-                "reference": "f8dd586340a70214f2eef1449f99ce2b2a49f6c1",
+                "url": "https://api.github.com/repos/modpreneur/trinity-core-interfaces/zipball/8e32f94cd1060777987867d9d7c4ce8c130cf01c",
+                "reference": "8e32f94cd1060777987867d9d7c4ce8c130cf01c",
                 "shasum": ""
             },
             "require": {
@@ -2988,7 +2988,7 @@
                 }
             ],
             "description": "Trinity Framework",
-            "time": "2016-06-27 11:41:12"
+            "time": "2016-06-27 14:39:23"
         },
         {
             "name": "trinity/logger",
@@ -2996,12 +2996,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/modpreneur/trinity-logger.git",
-                "reference": "474c7bb0d7e8756e4f6e6412dd2cc3c81d66e189"
+                "reference": "bd93db93704bfcfc5767fcabae26f49df5ef3bd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/modpreneur/trinity-logger/zipball/474c7bb0d7e8756e4f6e6412dd2cc3c81d66e189",
-                "reference": "474c7bb0d7e8756e4f6e6412dd2cc3c81d66e189",
+                "url": "https://api.github.com/repos/modpreneur/trinity-logger/zipball/bd93db93704bfcfc5767fcabae26f49df5ef3bd7",
+                "reference": "bd93db93704bfcfc5767fcabae26f49df5ef3bd7",
                 "shasum": ""
             },
             "require": {
@@ -3042,7 +3042,7 @@
                 }
             ],
             "description": "Trinity Logger bundle",
-            "time": "2016-06-16 11:23:40"
+            "time": "2016-06-27 12:03:46"
         },
         {
             "name": "trinity/search",

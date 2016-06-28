@@ -34,7 +34,7 @@ class DatabaseHandler extends AbstractProcessingHandler
      * @param RequestStack $requestStack
      * @param ElasticLogService $esLogger
      * @param int $logTtl
-     * @param $level = Logger::DEBUG
+     * @param int $level = Logger::DEBUG
      * @param Boolean $bubble Whether the messages that are handled can bubble up the stack or not
      */
     public function __construct(
@@ -135,7 +135,7 @@ class DatabaseHandler extends AbstractProcessingHandler
          * Known SQL codes
          */
         $sqlTag = 'PDOException';
-        if (strncmp($e['message'], $sqlTag, strlen($sqlTag)) == 0) {
+        if (strncmp($e['message'], $sqlTag, strlen($sqlTag)) === 0) {
             /*
              * we got some DBALException
              */

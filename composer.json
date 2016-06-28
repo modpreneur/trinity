@@ -4,10 +4,11 @@
     "type": "symfony-bundle",
     "license": "MIT",
     "authors": [
-        {
-            "name": "ME",
-            "email": "info@modpreneur.com"
-        }
+      {
+        "name": "Tomáš Jančar",
+        "email": "jancar@modpreneur.com",
+        "role": "Lead Developer"
+      }
     ],
     "require": {
       "php": ">=7",

@@ -6,6 +6,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Trinity\Component\Core\Interfaces\EntityInterface;
 
 /**
  * Class TrinityFormCreator
@@ -36,7 +37,7 @@ class TrinityFormCreator
     /**
      * Creates a form to edit entity.
      *
-     * @param object $entity The entity
+     * @param EntityInterface $entity The entity
      * @param string $entityTypeString
      * @param string $urlPrefix The entity url name
      * @param array $routeParameters Array of params required to generate URL
@@ -66,11 +67,8 @@ class TrinityFormCreator
         string $submitButtonName = 'submit',
         string $submitButtonLabel = 'Update',
         string $submitButtonClasses = 'button button-success button-save'
-
-    ):FormInterface
-    {
+    ):FormInterface {
         $routeParameters['id'] = $entity->getId();
-
         // If the input arrays have the same string keys, then the later value for that key will overwrite the previous one
         $options = array_merge(
             [
@@ -103,7 +101,7 @@ class TrinityFormCreator
     /**
      * Creates a form to create entity.
      *
-     * @param object $entity The entity
+     * @param EntityInterface $entity The entity
      * @param string $entityTypeString
      * @param string $urlPrefix The entity url name
      * @param string[] $routeParameters Array of params required to generate URL
@@ -133,15 +131,13 @@ class TrinityFormCreator
         string $submitButtonName = 'submit',
         string $submitButtonLabel = 'Create',
         string $submitButtonClasses = 'button button-success button-save'
-    ):FormInterface
-    {
-
+    ):FormInterface {
         // If the input arrays have the same string keys, then the later value for that key will overwrite the previous one
         $options = array_merge(
             [
                 'action' => $this->router->generate($urlPrefix . $urlPostfix, $routeParameters),
                 'method' => 'POST',
-                'attr' => ['class' => "new-form"],
+                'attr' => ['class' => 'new-form'],
             ],
             $formOptions
         );
@@ -192,13 +188,12 @@ class TrinityFormCreator
         int $id,
         array $routeParameters = [],
         array $formOptions = [],
-        string $urlPostfix = "_delete",
-        string $submitButtonName = "submit",
-        string $submitButtonLabel = "Delete",
-        string $submitButtonClasses = "button button-danger button-remove",
+        string $urlPostfix = '_delete',
+        string $submitButtonName = 'submit',
+        string $submitButtonLabel = 'Delete',
+        string $submitButtonClasses = 'button button-danger button-remove',
         string $submitButtonOnClick = "return confirm('Are you sure?')"
-    ):FormInterface
-    {
+    ):FormInterface {
         $routeParameters['id'] = $id;
 
         // If the input arrays have the same string keys, then the later value for that key will overwrite the previous one
