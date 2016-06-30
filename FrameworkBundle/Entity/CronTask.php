@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Trinity\Component\Core\Interfaces\EntityInterface;
 
 /**
- * @ORM\Entity
+ * @ORM\Table(name="cron_task")
  * @ORM\Entity(repositoryClass="Trinity\FrameworkBundle\Entity\CronTaskRepository")
  */
 class CronTask implements EntityInterface
