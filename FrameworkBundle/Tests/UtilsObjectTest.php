@@ -2,8 +2,7 @@
 namespace Trinity\FrameworkBundle\Tests;
 
 use Trinity\FrameworkBundle\Tests\data\EntityObject;
-use Trinity\FrameworkBundle\Utils\ObjectMixin;
-
+use Trinity\Component\Utils\Utils\ObjectMixin;
 
 /**
  * Class UtilsObjectTest

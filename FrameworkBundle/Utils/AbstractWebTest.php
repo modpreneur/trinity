@@ -9,7 +9,7 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Trinity\FrameworkBundle\Test\Entity\User;
+use Trinity\Component\EntityCore\Entity\BaseUser as User;
 
 /**
  * Class AbstractWebTest

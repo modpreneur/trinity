@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6b401c12ef733ad6dfe1492c5498eb64",
-    "content-hash": "11fb64084e6773681db9e7e965d74b53",
+    "hash": "44b4c69b67426946487de1d95214df86",
+    "content-hash": "db1b37785bc1efb96befd22ce9c71948",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.18.39",
+            "version": "3.19.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "85f1fddaeb40b95106b2a2764268e9c89fc258ce"
+                "reference": "204337efe872a0207781089833de0f8594fc5fd7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/85f1fddaeb40b95106b2a2764268e9c89fc258ce",
-                "reference": "85f1fddaeb40b95106b2a2764268e9c89fc258ce",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/204337efe872a0207781089833de0f8594fc5fd7",
+                "reference": "204337efe872a0207781089833de0f8594fc5fd7",
                 "shasum": ""
             },
             "require": {
@@ -85,7 +85,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2016-08-11 16:40:35"
+            "time": "2016-08-16 20:55:18"
         },
         {
             "name": "behat/transliterator",
@@ -3012,12 +3012,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/modpreneur/trinity-logger.git",
-                "reference": "3057c7db025790ecfc4b9bdb48851edd4f399b47"
+                "reference": "4d656e24169e1bdb980abe6b1539cd02f7647466"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/modpreneur/trinity-logger/zipball/3057c7db025790ecfc4b9bdb48851edd4f399b47",
-                "reference": "3057c7db025790ecfc4b9bdb48851edd4f399b47",
+                "url": "https://api.github.com/repos/modpreneur/trinity-logger/zipball/4d656e24169e1bdb980abe6b1539cd02f7647466",
+                "reference": "4d656e24169e1bdb980abe6b1539cd02f7647466",
                 "shasum": ""
             },
             "require": {
@@ -3028,7 +3028,8 @@
                 "symfony/dependency-injection": "~2.8|~3.0",
                 "symfony/http-kernel": "~2.8|~3.0",
                 "trinity/search": "dev-master",
-                "trinity/settings": "~1.1"
+                "trinity/settings": "~1.1",
+                "trinity/utils": "dev-master"
             },
             "require-dev": {
                 "symfony/var-dumper": "~3.0"
@@ -3058,7 +3059,7 @@
                 }
             ],
             "description": "Trinity Logger bundle",
-            "time": "2016-07-12 12:18:05"
+            "time": "2016-08-17 09:38:10"
         },
         {
             "name": "trinity/search",
@@ -4076,16 +4077,16 @@
         },
         {
             "name": "phpunit/phpunit-mock-objects",
-            "version": "3.2.3",
+            "version": "3.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit-mock-objects.git",
-                "reference": "b13d0d9426ced06958bd32104653526a6c998a52"
+                "reference": "4e83390f64e7ce04fcaec2ce95cd72823b431d19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/b13d0d9426ced06958bd32104653526a6c998a52",
-                "reference": "b13d0d9426ced06958bd32104653526a6c998a52",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit-mock-objects/zipball/4e83390f64e7ce04fcaec2ce95cd72823b431d19",
+                "reference": "4e83390f64e7ce04fcaec2ce95cd72823b431d19",
                 "shasum": ""
             },
             "require": {
@@ -4131,7 +4132,7 @@
                 "mock",
                 "xunit"
             ],
-            "time": "2016-06-12 07:37:26"
+            "time": "2016-08-17 09:33:51"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
