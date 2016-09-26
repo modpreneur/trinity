@@ -210,4 +210,30 @@ class ExceptionLog extends BaseElasticLog implements EntityInterface
     {
         return (string)$this->id;
     }
+
+
+//          {#ERROR (400):
+//              Runtime errors that do not require immediate action but should typically be logged and monitored.
+//          #}
+//
+//        {#CRITICAL (500): Critical conditions. Example: Application component unavailable, unexpected exception.#}
+//
+//        {#ALERT (550):
+//              Action must be taken immediately. Example: Entire website down, database unavailable, etc.
+//              This should trigger the SMS alerts and wake you up.
+//          #}
+//
+//        {#EMERGENCY (600): Emergency: system is unusable.#}
+    /**
+     * @return array
+     */
+    public static function getPossibleLevels() :array
+    {
+        return [
+            400 => 'Error',
+            500 => 'Critical',
+            550 => 'Alert',
+            600 => 'Emergency',
+        ];
+    }
 }
