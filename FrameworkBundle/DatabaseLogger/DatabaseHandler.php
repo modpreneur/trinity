@@ -10,8 +10,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Trinity\Bundle\LoggerBundle\Entity\ExceptionLog;
 use Trinity\Bundle\LoggerBundle\Services\ElasticLogService;
-use Trinity\FrameworkBundle\Entity\ExceptionLog;
 
 /**
  * Class DatabaseHandler.
@@ -20,12 +20,16 @@ class DatabaseHandler extends AbstractProcessingHandler
 {
     /** @var  TokenStorageInterface */
     private $tokenStorage;
+
     /** @var  Session */
     protected $session;
+
     /** @var RequestStack */
     private $requestStack;
+
     /** @var  ElasticLogService */
     private $esLogger;
+
     /** @var int */
     private $logTtl;
     /**
