@@ -1,15 +1,5 @@
 services:
 
-    trinity.logger_database:
-        class: Trinity\FrameworkBundle\DatabaseLogger\DatabaseHandler
-        arguments:
-          - "@session"
-          - "@security.token_storage"
-          - "@request_stack"
-          - "@trinity.logger.elastic_log_service"
-          - "%trinity.framework.exception_ttl%"
-
-
     trinity.services.price_string_generator:
       class: Trinity\Component\Utils\Services\PriceStringGenerator
       arguments: [ "@trinity.settings", "%trinity.framework.locale%"]
