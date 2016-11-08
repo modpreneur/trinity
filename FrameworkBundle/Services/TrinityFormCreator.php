@@ -104,7 +104,7 @@ class TrinityFormCreator
      * @throws \Symfony\Component\Form\Exception\AlreadySubmittedException
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException
      * @throws \Symfony\Component\Routing\Exception\RouteNotFoundException
-     * @throws \Symfony\Component\Rout$routeParameters['id'] = $entity->getId();ing\Exception\MissingMandatoryParametersException
+     * @throws \Symfony\Component\Routing\Exception\MissingMandatoryParametersException
      * @throws \Symfony\Component\Routing\Exception\InvalidParameterException
      */
     public function createNamedEditForm(
@@ -175,12 +175,13 @@ class TrinityFormCreator
         string $submitButtonLabel = 'Create',
         string $submitButtonClasses = 'button button-success button-save'
     ):FormInterface {
-        // If the input arrays have the same string keys, then the later value for that key will overwrite the previous one
+        // If the input arrays have the same string keys, 
+        // then the later value for that key will overwrite the previous one
         return $this->createNamedCreateForm(
             $entity,
             $entityTypeString,
             $urlPrefix,
-            '', // DONT FUCK WITH ME GIT!
+            '',
             $routeParameters,
             $formOptions,
             $urlPostfix,
@@ -292,7 +293,7 @@ class TrinityFormCreator
         );
 
         $form = null;
-        if($formName === ''){
+        if ($formName === '') {
             $form = $this->formFactory->create(
                 $entityTypeString,
                 $entity,
@@ -405,7 +406,8 @@ class TrinityFormCreator
     ):FormInterface {
         $routeParameters['id'] = $id;
 
-        // If the input arrays have the same string keys, then the later value for that key will overwrite the previous one
+        // If the input arrays have the same string keys, 
+        // then the later value for that key will overwrite the previous one
         $options = Utils::mergeArraysDeep(
             [
                 'action' => $this->router->generate($urlPrefix . $urlPostfix, $routeParameters),
@@ -416,7 +418,7 @@ class TrinityFormCreator
         );
 
         $form = null;
-        if($formName === '') {
+        if ($formName === '') {
             $form = $this->formFactory->create(
                 'Symfony\Component\Form\Extension\Core\Type\FormType',
                 null,
