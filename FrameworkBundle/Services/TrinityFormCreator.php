@@ -302,7 +302,7 @@ class TrinityFormCreator
         );
 
         $form = null;
-        if ($formName) {
+        if ($formName === '') {
             $form = $this->formFactory->create(
                 $entityTypeString,
                 $entity,
