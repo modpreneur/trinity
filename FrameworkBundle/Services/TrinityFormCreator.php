@@ -67,12 +67,12 @@ class TrinityFormCreator
         $entity,
         string $entityTypeString,
         string $urlPrefix,
-        array $routeParameters,
-        array $formOptions,
-        string $urlPostfix,
-        string $submitButtonName,
-        string $submitButtonLabel,
-        string $submitButtonClasses
+        array $routeParameters = [],
+        array $formOptions = [],
+        string $urlPostfix = '_update',
+        string $submitButtonName = 'submit',
+        string $submitButtonLabel = 'Update',
+        string $submitButtonClasses = 'button button-success'
     ):FormInterface {
         return $this->createNamedEditForm(
             $entity,
@@ -116,9 +116,9 @@ class TrinityFormCreator
         $entity,
         string $entityTypeString,
         string $urlPrefix,
-        string $formName,
-        array $routeParameters,
-        array $formOptions,
+        string $formName = '',
+        array $routeParameters = [],
+        array $formOptions = [],
         string $urlPostfix = '_update',
         string $submitButtonName = 'submit',
         string $submitButtonLabel = 'Update',
@@ -175,12 +175,12 @@ class TrinityFormCreator
         $entity,
         string $entityTypeString,
         string $urlPrefix,
-        array $routeParameters,
-        array $formOptions,
-        string $urlPostfix,
-        string $submitButtonName,
-        string $submitButtonLabel,
-        string $submitButtonClasses
+        array $routeParameters = [],
+        array $formOptions = [],
+        string $urlPostfix = '_create',
+        string $submitButtonName = 'submit',
+        string $submitButtonLabel = 'Create',
+        string $submitButtonClasses = 'button button-success button-save'
     ):FormInterface {
         // If the input arrays have the same string keys,
         // then the later value for that key will overwrite the previous one
