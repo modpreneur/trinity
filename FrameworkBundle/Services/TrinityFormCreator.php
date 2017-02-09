@@ -6,7 +6,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Translation\IdentityTranslator;
+use Symfony\Component\Translation\TranslatorInterface;
 use Trinity\Component\Core\Interfaces\EntityInterface;
 use Trinity\FrameworkBundle\Utils\Utils;
 
@@ -22,7 +22,7 @@ class TrinityFormCreator
     /** @var  RouterInterface */
     protected $router;
 
-    /** @var  IdentityTranslator */
+    /** @var  TranslatorInterface */
     protected $trs;
 
     /**
@@ -30,9 +30,9 @@ class TrinityFormCreator
      *
      * @param FormFactoryInterface $formFactory
      * @param RouterInterface $router
-     * @param IdentityTranslator $trs
+     * @param TranslatorInterface $trs
      */
-    public function __construct(FormFactoryInterface $formFactory, RouterInterface $router, IdentityTranslator $trs)
+    public function __construct(FormFactoryInterface $formFactory, RouterInterface $router, TranslatorInterface $trs)
     {
         $this->formFactory = $formFactory;
         $this->router      = $router;
