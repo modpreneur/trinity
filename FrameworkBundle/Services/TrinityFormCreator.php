@@ -6,6 +6,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Translation\IdentityTranslator;
 use Trinity\Component\Core\Interfaces\EntityInterface;
 use Trinity\FrameworkBundle\Utils\Utils;
 
@@ -21,17 +22,21 @@ class TrinityFormCreator
     /** @var  RouterInterface */
     protected $router;
 
+    /** @var  IdentityTranslator */
+    protected $trs;
 
     /**
      * FormFactory constructor.
      *
      * @param FormFactoryInterface $formFactory
      * @param RouterInterface $router
+     * @param IdentityTranslator $trs
      */
-    public function __construct(FormFactoryInterface $formFactory, RouterInterface $router)
+    public function __construct(FormFactoryInterface $formFactory, RouterInterface $router, IdentityTranslator $trs)
     {
         $this->formFactory = $formFactory;
         $this->router      = $router;
+        $this->trs      = $trs;
     }
 
 
@@ -62,12 +67,12 @@ class TrinityFormCreator
         $entity,
         string $entityTypeString,
         string $urlPrefix,
-        array $routeParameters = [],
-        array $formOptions = [],
-        string $urlPostfix = '_update',
-        string $submitButtonName = 'submit',
-        string $submitButtonLabel = 'Update',
-        string $submitButtonClasses = 'button button-success button-save'
+        array $routeParameters,
+        array $formOptions,
+        string $urlPostfix,
+        string $submitButtonName,
+        string $submitButtonLabel,
+        string $submitButtonClasses
     ):FormInterface {
         return $this->createNamedEditForm(
             $entity,
@@ -111,16 +116,18 @@ class TrinityFormCreator
         $entity,
         string $entityTypeString,
         string $urlPrefix,
-        string $formName = '',
-        array $routeParameters = [],
-        array $formOptions = [],
+        string $formName,
+        array $routeParameters,
+        array $formOptions,
         string $urlPostfix = '_update',
         string $submitButtonName = 'submit',
         string $submitButtonLabel = 'Update',
         string $submitButtonClasses = 'button button-success button-save'
     ):FormInterface {
         $routeParameters['id'] = $entity->getId();
-        return $this->__createNamedForm(
+        $submitButtonLabel =
+            $submitButtonLabel === 'Create' ? $this->trs->trans('trinity_framework.form.update') : $submitButtonLabel;
+        return $this->createNamedForm(
             $entity,
             $entityTypeString,
             $urlPrefix,
@@ -168,14 +175,14 @@ class TrinityFormCreator
         $entity,
         string $entityTypeString,
         string $urlPrefix,
-        array $routeParameters = [],
-        array $formOptions = [],
-        string $urlPostfix = '_create',
-        string $submitButtonName = 'submit',
-        string $submitButtonLabel = 'Create',
-        string $submitButtonClasses = 'button button-success button-save'
+        array $routeParameters,
+        array $formOptions,
+        string $urlPostfix,
+        string $submitButtonName,
+        string $submitButtonLabel,
+        string $submitButtonClasses
     ):FormInterface {
-        // If the input arrays have the same string keys, 
+        // If the input arrays have the same string keys,
         // then the later value for that key will overwrite the previous one
         return $this->createNamedCreateForm(
             $entity,
@@ -228,7 +235,9 @@ class TrinityFormCreator
         string $submitButtonLabel = 'Create',
         string $submitButtonClasses = 'button button-success button-save'
     ):FormInterface {
-        return $this->__createNamedForm(
+        $submitButtonLabel =
+            $submitButtonLabel === 'Create' ? $this->trs->trans('trinity_framework.form.create') : $submitButtonLabel;
+        return $this->createNamedForm(
             $entity,
             $entityTypeString,
             $urlPrefix,
@@ -273,17 +282,17 @@ class TrinityFormCreator
      * @throws \Symfony\Component\Routing\Exception\MissingMandatoryParametersException
      * @throws \Symfony\Component\Routing\Exception\InvalidParameterException
      */
-    private function __createNamedForm(
+    private function createNamedForm(
         $entity,
         string $entityTypeString,
         string $urlPrefix,
-        string $formName = '',
-        array $routeParameters = [],
-        array $formOptions = [],
-        string $urlPostfix = '_create',
-        string $submitButtonName = 'submit',
-        string $submitButtonLabel = 'Create',
-        string $submitButtonClasses = 'button button-success button-save'
+        string $formName,
+        array $routeParameters,
+        array $formOptions,
+        string $urlPostfix,
+        string $submitButtonName,
+        string $submitButtonLabel,
+        string $submitButtonClasses
     ):FormInterface {
         $options = Utils::mergeArraysDeep(
             [
@@ -293,7 +302,7 @@ class TrinityFormCreator
         );
 
         $form = null;
-        if ($formName === '') {
+        if ($formName) {
             $form = $this->formFactory->create(
                 $entityTypeString,
                 $entity,

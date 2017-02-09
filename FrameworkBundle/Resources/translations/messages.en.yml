@@ -1,0 +1,5 @@
+trinity_framework:
+  form:
+    create: Create
+    update: Update
+
