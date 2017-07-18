@@ -21,9 +21,9 @@
       "doctrine/doctrine-fixtures-bundle": "~2",
       "symfony/monolog-bundle": "~2.8 | ~3.0",
       "aws/aws-sdk-php": "~3.11",
-      "egulias/email-validator": "~1.8 | ~2.0",
-      "trinity/core-entities": "dev-master",
-      "trinity/core-interfaces": "dev-master",
+      "egulias/email-validator": "~2.0",
+      "trinity/core-entities": "~1.0",
+      "trinity/core-interfaces": "~1.0",
       "trinity/settings": "~1.2",
       "trinity/search": "dev-master",
       "trinity/utils": "dev-master"
@@ -32,7 +32,7 @@
     "require-dev": {
       "sensio/generator-bundle": "~3.0",
       "phpunit/phpunit": "~5.0",
-      "braincrafted/testing-bundle": "@stable"
+      "braincrafted/testing-bundle": "~0.4"
     },
 
     "autoload": {

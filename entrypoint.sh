@@ -4,4 +4,6 @@ composer update
 
 phpunit
 
-#while true; do sleep 1000; done
+phpstan analyse FrameworkBundle --level=4
+
+#tail -f /dev/null
