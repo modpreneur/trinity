@@ -11,7 +11,7 @@
       }
     ],
     "require": {
-      "php": ">=7",
+      "php": ">=7.1",
       "symfony/symfony": "~2.8 | ~3.0",
       "symfony/form" : "~3.0",
       "knplabs/doctrine-behaviors": "~1.2",
