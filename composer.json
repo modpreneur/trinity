@@ -32,7 +32,8 @@
     "require-dev": {
       "sensio/generator-bundle": "~3.0",
       "phpunit/phpunit": "~5.0",
-      "braincrafted/testing-bundle": "~0.4"
+      "braincrafted/testing-bundle": "~0.4",
+      "phpstan/phpstan": "~0.7"
     },
 
     "autoload": {
