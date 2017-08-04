@@ -26,7 +26,7 @@
       "trinity/core-interfaces": "~1.0",
       "trinity/settings": "~1.2",
       "trinity/search": "dev-master",
-      "trinity/utils": "dev-master"
+      "trinity/utils": "~1.0"
     },
 
     "require-dev": {
