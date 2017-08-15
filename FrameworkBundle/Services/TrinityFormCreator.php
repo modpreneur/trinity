@@ -18,10 +18,8 @@ class TrinityFormCreator
 {
     /** @var  FormFactoryInterface */
     protected $formFactory;
-
     /** @var  RouterInterface */
     protected $router;
-
     /** @var  TranslatorInterface */
     protected $trs;
 
@@ -36,9 +34,8 @@ class TrinityFormCreator
     {
         $this->formFactory = $formFactory;
         $this->router      = $router;
-        $this->trs      = $trs;
+        $this->trs         = $trs;
     }
-
 
     /**
      * Creates a form to edit entity.
@@ -73,7 +70,7 @@ class TrinityFormCreator
         string $submitButtonName = 'submit',
         string $submitButtonLabel = 'Update',
         string $submitButtonClasses = 'button button-success'
-    ):FormInterface {
+    ): FormInterface {
         return $this->createNamedEditForm(
             $entity,
             $entityTypeString,
@@ -123,10 +120,11 @@ class TrinityFormCreator
         string $submitButtonName = 'submit',
         string $submitButtonLabel = 'Update',
         string $submitButtonClasses = 'button button-success button-save'
-    ):FormInterface {
+    ): FormInterface {
         $routeParameters['id'] = $entity->getId();
-        $submitButtonLabel =
+        $submitButtonLabel     =
             $submitButtonLabel === 'Create' ? $this->trs->trans('trinity_framework.form.update') : $submitButtonLabel;
+
         return $this->createNamedForm(
             $entity,
             $entityTypeString,
@@ -136,7 +134,7 @@ class TrinityFormCreator
             Utils::mergeArraysDeep(
                 [
                     'method' => 'PUT',
-                    'attr' => ['class' => 'edit-form'],
+                    'attr'   => ['class' => 'edit-form'],
                 ],
                 $formOptions
             ),
@@ -146,7 +144,6 @@ class TrinityFormCreator
             $submitButtonClasses
         );
     }
-
 
     /**
      * Creates a form to create entity.
@@ -181,7 +178,7 @@ class TrinityFormCreator
         string $submitButtonName = 'submit',
         string $submitButtonLabel = 'Create',
         string $submitButtonClasses = 'button button-success button-save'
-    ):FormInterface {
+    ): FormInterface {
         // If the input arrays have the same string keys,
         // then the later value for that key will overwrite the previous one
         return $this->createNamedCreateForm(
@@ -197,7 +194,6 @@ class TrinityFormCreator
             $submitButtonClasses
         );
     }
-
 
     /**
      * Creates a form to create entity.
@@ -234,9 +230,10 @@ class TrinityFormCreator
         string $submitButtonName = 'submit',
         string $submitButtonLabel = 'Create',
         string $submitButtonClasses = 'button button-success button-save'
-    ):FormInterface {
+    ): FormInterface {
         $submitButtonLabel =
             $submitButtonLabel === 'Create' ? $this->trs->trans('trinity_framework.form.create') : $submitButtonLabel;
+
         return $this->createNamedForm(
             $entity,
             $entityTypeString,
@@ -246,7 +243,7 @@ class TrinityFormCreator
             Utils::mergeArraysDeep(
                 [
                     'method' => 'POST',
-                    'attr' => ['class' => 'new-form'],
+                    'attr'   => ['class' => 'new-form'],
                 ],
                 $formOptions
             ),
@@ -256,7 +253,6 @@ class TrinityFormCreator
             $submitButtonClasses
         );
     }
-
 
     /**
      * Creates a form to Edit or Create entity
@@ -293,7 +289,7 @@ class TrinityFormCreator
         string $submitButtonName,
         string $submitButtonLabel,
         string $submitButtonClasses
-    ):FormInterface {
+    ): FormInterface {
         $options = Utils::mergeArraysDeep(
             [
                 'action' => $this->router->generate($urlPrefix . $urlPostfix, $routeParameters)
@@ -322,14 +318,12 @@ class TrinityFormCreator
             SubmitType::class,
             [
                 'label' => $submitButtonLabel,
-                'attr' => ['class' => $submitButtonClasses, 'autocomplete' => 'off']
+                'attr'  => ['class' => $submitButtonClasses, 'autocomplete' => 'off']
             ]
         );
 
         return $form;
     }
-
-
 
     /**
      * Creates a form to delete entity by id.
@@ -343,6 +337,7 @@ class TrinityFormCreator
      * @param string $submitButtonLabel
      * @param string $submitButtonClasses
      * @param string $submitButtonOnClick
+     *
      * @return FormInterface The form
      * @throws \Symfony\Component\Form\Exception\UnexpectedTypeException
      * @throws \Symfony\Component\Form\Exception\LogicException
@@ -362,7 +357,7 @@ class TrinityFormCreator
         string $submitButtonLabel = 'Delete',
         string $submitButtonClasses = 'button button-danger button-remove',
         string $submitButtonOnClick = "return confirm('Are you sure?')"
-    ):FormInterface {
+    ): FormInterface {
         return $this->createNamedDeleteForm(
             $urlPrefix,
             $id,
@@ -377,8 +372,6 @@ class TrinityFormCreator
         );
     }
 
-
-
     /**
      * Creates a form to delete entity by id.
      *
@@ -392,6 +385,7 @@ class TrinityFormCreator
      * @param string $submitButtonLabel
      * @param string $submitButtonClasses
      * @param string $submitButtonOnClick
+     *
      * @return FormInterface The form
      * @throws \Symfony\Component\Form\Exception\UnexpectedTypeException
      * @throws \Symfony\Component\Form\Exception\LogicException
@@ -412,7 +406,7 @@ class TrinityFormCreator
         string $submitButtonLabel = 'Delete',
         string $submitButtonClasses = 'button button-danger button-remove',
         string $submitButtonOnClick = "return confirm('Are you sure?')"
-    ):FormInterface {
+    ): FormInterface {
         $routeParameters['id'] = $id;
 
         // If the input arrays have the same string keys, 
@@ -421,7 +415,7 @@ class TrinityFormCreator
             [
                 'action' => $this->router->generate($urlPrefix . $urlPostfix, $routeParameters),
                 'method' => 'DELETE',
-                'attr' => ['class' => 'delete-form'],
+                'attr'   => ['class' => 'delete-form'],
             ],
             $formOptions
         );
@@ -447,9 +441,9 @@ class TrinityFormCreator
             SubmitType::class,
             [
                 'label' => $submitButtonLabel,
-                'attr' => [
-                    'class' => $submitButtonClasses,
-                    'onClick' => $submitButtonOnClick,
+                'attr'  => [
+                    'class'        => $submitButtonClasses,
+                    'onClick'      => $submitButtonOnClick,
                     'autocomplete' => 'off'
 
                 ]
@@ -458,5 +452,4 @@ class TrinityFormCreator
 
         return $form;
     }
-
 }

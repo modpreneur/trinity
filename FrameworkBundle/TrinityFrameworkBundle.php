@@ -8,7 +8,6 @@ namespace Trinity\FrameworkBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-
 /**
  * Class TrinityFrameworkBundle.
  */

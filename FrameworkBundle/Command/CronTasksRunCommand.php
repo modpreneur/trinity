@@ -25,7 +25,6 @@ class CronTasksRunCommand extends ContainerAwareCommand
     /** @var Output */
     private $output;
 
-
     /**
      * Set up command.
      */
@@ -33,7 +32,6 @@ class CronTasksRunCommand extends ContainerAwareCommand
     {
         $this->setName('trinity:jobs:run')->setDescription('Runs Cron Tasks');
     }
-
 
     /**
      * @param InputInterface $input
@@ -48,7 +46,7 @@ class CronTasksRunCommand extends ContainerAwareCommand
         $output->writeln('<comment>Running Cron Tasks...</comment>');
 
         $this->output = $output;
-        $repository = $this->getContainer()->get('doctrine')->getRepository('TrinityFrameworkBundle:CronTask');
+        $repository   = $this->getContainer()->get('doctrine')->getRepository('TrinityFrameworkBundle:CronTask');
 
         /** @var CronTask[] $cronTasks */
         $cronTasks = $repository->findAllNullProcessingTime();
@@ -85,7 +83,6 @@ class CronTasksRunCommand extends ContainerAwareCommand
         }
     }
 
-
     /**
      * Run command in console.
      *
@@ -103,7 +100,7 @@ class CronTasksRunCommand extends ContainerAwareCommand
         $application = $this->getApplication();
         $application->setAutoExit(false);
 
-        $input = new StringInput($command);
+        $input      = new StringInput($command);
         $returnCode = $application->run($input, $output);
 
         return $returnCode;

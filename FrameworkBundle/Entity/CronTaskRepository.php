@@ -7,8 +7,6 @@
 namespace Trinity\FrameworkBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 
 /**
  * Class CronTaskRepository
@@ -32,7 +30,6 @@ class CronTaskRepository extends EntityRepository
 
         return $query->getResult();
     }
-
 
     /**
      * Get array of all CronTasks where command is command.
@@ -60,7 +57,6 @@ class CronTaskRepository extends EntityRepository
             return $result;
         }
     }
-
 
     /**
      * Insert unique Job to db
@@ -103,6 +99,7 @@ class CronTaskRepository extends EntityRepository
             $em = $this->getEntityManager();
             $em->persist($newJob);
             $em->flush();
+
             return $newJob;
         } else {
             return null;

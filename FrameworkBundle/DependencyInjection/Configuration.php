@@ -23,15 +23,14 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('trinity_framework');
+        $rootNode    = $treeBuilder->root('trinity_framework');
         $rootNode
             ->children()
-                ->scalarNode('locale')
-                    ->defaultValue('en')
-                ->end()->end()//end locale
+            ->scalarNode('locale')
+            ->defaultValue('en')
+            ->end()->end()//end locale
             ->children()
-                ->scalarNode('exception_ttl')
-
+            ->scalarNode('exception_ttl')
             ->end();
         // Here you should define the parameters that are allowed to
         // configure your bundle. See the documentation linked above for

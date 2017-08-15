@@ -21,37 +21,31 @@ class CronTask implements EntityInterface
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $id;
-
     /**
      * @var string Command Cron Task
      * @ORM\Column(type="string")
      */
     private $command;
-
     /**
      * @var \DateTime Creation time of Cron Task
      * @ORM\Column(type="datetime")
      */
     private $creationTime;
-
     /**
      * @var \DateTime Processing time of Cron Task
      * @ORM\Column(type="datetime", nullable = true)
      */
     private $processingTime;
-
     /**
      * @var int Priority of Cron task
      * @ORM\Column(type="integer",name = "priority")
      */
     private $priority = 0;
-
     /**
      * @var string
      * @ORM\Column(type="string", nullable=true)
      */
     private $status;
-
 
     /**
      * @return mixed
@@ -61,7 +55,6 @@ class CronTask implements EntityInterface
         return $this->processingTime;
     }
 
-
     /**
      * @param mixed $processingTime
      */
@@ -70,12 +63,10 @@ class CronTask implements EntityInterface
         $this->processingTime = $processingTime;
     }
 
-
     public function getId()
     {
         return $this->id;
     }
-
 
     /**
      * @return mixed
@@ -85,7 +76,6 @@ class CronTask implements EntityInterface
         return $this->command;
     }
 
-
     /**
      * @param mixed $command
      */
@@ -93,7 +83,6 @@ class CronTask implements EntityInterface
     {
         $this->command = $command;
     }
-
 
     /**
      * @return \DateTime
@@ -103,7 +92,6 @@ class CronTask implements EntityInterface
         return $this->creationTime;
     }
 
-
     /**
      * @param \DateTime $creationTime
      */
@@ -111,7 +99,6 @@ class CronTask implements EntityInterface
     {
         $this->creationTime = $creationTime;
     }
-
 
     /**
      * @return int
@@ -121,7 +108,6 @@ class CronTask implements EntityInterface
         return $this->priority;
     }
 
-
     /**
      * @param int $priority
      */
@@ -129,7 +115,6 @@ class CronTask implements EntityInterface
     {
         $this->priority = $priority;
     }
-
 
     /**
      * @return string
@@ -139,7 +124,6 @@ class CronTask implements EntityInterface
         return $this->status;
     }
 
-
     /**
      * @param string $status
      */
@@ -148,11 +132,10 @@ class CronTask implements EntityInterface
         $this->status = $status;
     }
 
-
     /**
      * @return string
      */
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->command;
     }
