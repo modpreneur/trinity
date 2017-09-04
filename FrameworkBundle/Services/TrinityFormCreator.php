@@ -313,12 +313,18 @@ class TrinityFormCreator
             );
         }
 
+        $style = (
+            \array_key_exists('attr', $formOptions) &&
+            \array_key_exists('disabled', $formOptions['attr']) &&
+            $formOptions['attr']['disabled']
+        ) ? 'display:none' : '';
+
         $form->add(
             $submitButtonName,
             SubmitType::class,
             [
                 'label' => $submitButtonLabel,
-                'attr'  => ['class' => $submitButtonClasses, 'autocomplete' => 'off']
+                'attr' => ['class' => $submitButtonClasses, 'autocomplete' => 'off', 'style' => $style]
             ]
         );
 
