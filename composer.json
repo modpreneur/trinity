@@ -25,7 +25,7 @@
       "trinity/core-entities": "~1.0",
       "trinity/core-interfaces": "~1.0",
       "trinity/settings": "~1.2",
-      "trinity/search": "dev-master",
+      "trinity/search": "~1.0",
       "trinity/utils": "~1.0"
     },
 
